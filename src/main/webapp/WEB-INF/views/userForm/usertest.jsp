@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix = "c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<%@ page session="false" %>
+
 <html>
 
 <head>
@@ -15,6 +15,11 @@
 	<h2><a href = "/userForm/cardinfo/cardinfoForm">카드등록</a></h2>
 	<h2><a href = "/userForm/user/register">회원가입</a></h2>
 	<h2><a href = "/userForm/user/loginpage">로그인</a></h2>
-
+	<div class = "te">
+		<c:if test="${login != null }">						
+				<p>${login.member_id}님 환영 합니다.</p>
+				<button type="button" onclick="location.href='/logout' ">로그아웃</button>
+		</c:if>      	
+	</div>
 </body>
 </html>

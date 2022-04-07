@@ -55,7 +55,7 @@ public class MemberController {
 			log.info("실패");
 			return "redirect:/userForm/user/loginpage";
 		}		
-		return "redirect:/";		
+		return "/userForm/usertest";		
 	}
 	@GetMapping("/logout")
 	public String logout(HttpServletRequest request) {
@@ -64,7 +64,7 @@ public class MemberController {
 		HttpSession session = request.getSession();
 		session.invalidate();
 				
-		return "redirect:/testuser";
+		return "/userForm/user/loginpage";
 	}
 	 @GetMapping("/userForm/user/userlist")
      public void registerlist(Model model) {          

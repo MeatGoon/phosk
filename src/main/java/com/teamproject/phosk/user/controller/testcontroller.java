@@ -17,7 +17,11 @@ public class testcontroller {
 		log.info("qna 페이지");
 	}
 	@GetMapping("/userForm/usertest")
-	public void usertest(){
-		log.info("qna 페이지");
+	public String home() {
+		log.info("a");
+		
+	
+		
+		return "/userForm/usertest";
 	}
 }
