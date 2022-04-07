@@ -35,7 +35,7 @@
 					</label>
 		        </div>
 		        <span class="login_find">
-		        	<a href="/usertest" class="link_find">아이디</a> / <a href="/usertest" class="link_find">비밀번호 찾기</a>
+		        	<a href="/userForm/usertest" class="link_find">아이디</a> / <a href="/userForm/usertest" class="link_find">비밀번호 찾기</a>
 		        </span>
 	      	</div>
 	      	</c:if>

@@ -103,7 +103,7 @@
 			<div>
 				<div class="register_but">
 					<input class= "regist_btn" type="submit" value="회원가입" />
-					<input type="button" value="취소" onClick = "location.href='/usertest'" />
+					<input type="button" value="취소" onClick = "location.href='/userForm/usertest'" />
 				</div>
 			</div>
 		</form>

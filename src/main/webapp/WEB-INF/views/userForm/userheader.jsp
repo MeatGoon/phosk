@@ -69,7 +69,7 @@ nav li{
  
         <header>
             <div id="header_logo" >
-                <a href="/">PHOSK</a>
+                <a href="/userForm/usertest">PHOSK</a>
             </div>
  
             <div id="header_log">
@@ -79,7 +79,7 @@ nav li{
 					    <li><a href="/userForm/user/register" role="button">회원가입</a></li>
 			        </c:if>
 			        <c:if test= "${login != null}">
-				        <li><a href="/usertest" role="button">로그아웃</a></li>
+				        <li><a href="/userForm/usertest" role="button">로그아웃</a></li>
 				        <li><a href="/userForm/user/updateuser" role="button">내 정보</a></li>
 			        </c:if>
             </div>

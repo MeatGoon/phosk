@@ -12,11 +12,11 @@ import lombok.extern.log4j.Log4j;
 
 public class testcontroller {
 	
-	@GetMapping("/userQNA")
+	@GetMapping("/userForm/userQNA")
 	public void qnaGET(){
 		log.info("qna 페이지");
 	}
-	@GetMapping("/usertest")
+	@GetMapping("/userForm/usertest")
 	public void usertest(){
 		log.info("qna 페이지");
 	}
