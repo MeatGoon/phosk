@@ -73,10 +73,17 @@ public class MemberController {
          model.addAttribute("register", register);
 
      }
-		/*
-		 * @PostMapping("/user/updateuser") public String updatemember(MemberVO
-		 * membervo) { log.info("회원정보수정"); memberservice.updatemember(membervo); return
-		 * "/user/list"; }
-		 */
+	 @GetMapping("/userForm/user/updateuser")
+		public void updatemember(){
+			log.info("수정 페이지");
+		}
+		
+		@PostMapping("/userForm/user/updateuser")
+		public String updatemember(MemberVO membervo) { 
+		log.info("회원정보수정");
+		memberservice.updatemember(membervo);
+		return "redirect:/userForm/user/updateuser";
+		}
+		 
 	
 }

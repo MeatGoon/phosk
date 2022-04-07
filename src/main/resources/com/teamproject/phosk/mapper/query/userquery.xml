@@ -26,8 +26,11 @@
 	</insert> 
 	
 	<update id = "updatemember">
-		update phosk_member set  member_id=#{member_id}
-		where member_nic=#{member_nic} and member_pwd=#{member_pwd}
-	
+		update phosk_member
+		set
+			member_nic=#{member_nic}
+			member_pwd=#{member_pwd}
+		where
+			member_id=#{member_id}			
 	</update>
 </mapper>

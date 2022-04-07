@@ -33,15 +33,7 @@ public class MemberServiceImpl implements MemberService{
 
 	@Override
 	public void updatemember(MemberVO membervo) {
-		
-		try {
-			memberdao.updatemember(membervo);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	
+		memberdao.updatemember(membervo);
 	}
-
-
-
+		
 }

@@ -15,6 +15,7 @@
 	<h2><a href = "/userForm/cardinfo/cardinfoForm">카드등록</a></h2>
 	<h2><a href = "/userForm/user/register">회원가입</a></h2>
 	<h2><a href = "/userForm/user/loginpage">로그인</a></h2>
+	<h2><a href = "/userForm/user/userlist">회원정보조회*삭제</a></h2>
 	<div class = "te">
 		<c:if test="${login != null }">						
 				<p>${login.member_id}님 환영 합니다.</p>
