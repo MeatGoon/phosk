@@ -34,6 +34,9 @@ public class MemberServiceImpl implements MemberService{
 	@Override
 	public void updatemember(MemberVO membervo) {
 		memberdao.updatemember(membervo);
+		
+		System.out.println(membervo.getMember_nic());
+		System.out.println(membervo.getMember_pwd());
 	}
 		
 }

@@ -79,7 +79,7 @@ nav li{
 					    <li><a href="/userForm/user/register" role="button">회원가입</a></li>
 			        </c:if>
 			        <c:if test= "${login != null}">
-				        <li><a href="/userForm/usertest" role="button">로그아웃</a></li>
+				        <li><a href="/logout" role="button">로그아웃</a></li>
 				        <li><a href="/userForm/user/updateuser" role="button">내 정보</a></li>
 			        </c:if>
             </div>

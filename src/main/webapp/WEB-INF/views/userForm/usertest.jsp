@@ -10,8 +10,9 @@
 		<jsp:include page="./userheader.jsp"/>
 
 </head>
-<body>
 
+<body>
+		
 	<h2><a href = "/userForm/cardinfo/cardinfoForm">카드등록</a></h2>
 	<h2><a href = "/userForm/user/register">회원가입</a></h2>
 	<h2><a href = "/userForm/user/loginpage">로그인</a></h2>

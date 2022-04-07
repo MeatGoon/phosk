@@ -48,13 +48,13 @@
 			<div class= "test">
 				<input type="text" name="member_nic" id ="member_nic" maxlength="10" placeholder="닉네임" />											
 			</div>	
-				<input type="button"  class='as' style="float: right;" id="check_button" value="check" onclick="checkid();">	
+				<input type="button"  class='as' id="check_button" value="check" onclick="checkid();">	
 		
 			<br>			
 			<div class= "test">
 				<input  type="text" name="member_id" id ="member_id" maxlength="11" placeholder="아이디 입력 (5~11자)" />							
 			</div>
-				<input type="button"  class='as' style="float: right;" id="check_button" value="check" onclick="checkid();">
+				<input type="button"  class='as' id="check_button" value="check" onclick="checkid();">
 			<br>
 			<div class= "test">
 				<input  class="form-control" type="password"  name="member_pwd" id ="member_pwd" maxlength="20"
@@ -93,7 +93,7 @@
 							<tr><th>번호</th><th>은행사</th><th>카드주</th></tr>						
 							<c:forEach items="${cardinfoForm}" var = "list">
 								<tr>	
-									<td><c:out value="${list.cardinfo_no}" /></td>						
+									<td><c:out value="1" />1</td>						
 									<td><c:out value="${list.cardinfo_bank}" /></td>								
 									<td><c:out value="${list.cardinfo_holderName}" /></td>													
 								</tr>

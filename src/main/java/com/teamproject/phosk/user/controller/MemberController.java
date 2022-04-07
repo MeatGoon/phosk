@@ -64,7 +64,7 @@ public class MemberController {
 		HttpSession session = request.getSession();
 		session.invalidate();
 				
-		return "/userForm/user/loginpage";
+		return "/userForm/usertest";
 	}
 	 @GetMapping("/userForm/user/userlist")
      public void registerlist(Model model) {          
@@ -79,10 +79,11 @@ public class MemberController {
 		}
 		
 		@PostMapping("/userForm/user/updateuser")
-		public String updatemember(MemberVO membervo) { 
+		public String updatemember(MemberVO membervo, HttpSession session) { 
 		log.info("회원정보수정");
 		memberservice.updatemember(membervo);
-		return "redirect:/userForm/user/updateuser";
+		session.invalidate();
+		return "redirect:/userForm/usertest";
 		}
 		 
 	

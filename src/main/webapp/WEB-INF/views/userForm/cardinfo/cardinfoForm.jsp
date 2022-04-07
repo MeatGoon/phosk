@@ -36,19 +36,19 @@
 						<td><input class="form" type="text" id = "cardinfo_holderName" name ="cardinfo_holderName"  placeholder="사용자이름" maxLength="50"/></td>
 					</tr>
 					<tr>
-						<td><input class="form" type="text" id = "cardinfo_cardNum" name =cardinfo_cardNum  placeholder="카드번호" maxLength="19"/></td>
+						<td><input class="form" type="number" id = "cardinfo_cardNum" name =cardinfo_cardNum  placeholder="카드번호" maxLength="19"/></td>
 					</tr>
 					<tr>
-						<td><input class="form" type="text" id = "cardinfo_dealine" name ="cardinfo_dealine" placeholder="만기일" maxLength="5"/></td>
+						<td><input class="form" type="number" id = "cardinfo_dealine" name ="cardinfo_dealine" placeholder="만기일" maxLength="5"/></td>
 					</tr>
 					<tr>
-						<td><input class="form" type="text" id = "cardinfo_cardCVC" name ="cardinfo_cardCVC"  placeholder="cvc" maxLength="3"/></td>
+						<td><input class="form" type="number" id = "cardinfo_cardCVC" name ="cardinfo_cardCVC"  placeholder="cvc" maxLength="3"/></td>
 					</tr>	
 					<tr>
-						<td><input class="form" type="text" id = "cardinfo_accountpwd" name ="cardinfo_accountpwd"  placeholder="어플비밀번호" maxLength="6"/></td>
+						<td><input class="form" type="number" id = "cardinfo_accountpwd" name ="cardinfo_accountpwd"  placeholder="어플비밀번호" maxLength="6"/></td>
 					</tr>
 					<tr>
-						<td><input class="form" type="text" id = "cardinfo_cardpwd" name ="cardinfo_cardpwd"  placeholder="카드비밀번호" maxLength="4"/></td>
+						<td><input class="form" type="number" id = "cardinfo_cardpwd" name ="cardinfo_cardpwd"  placeholder="카드비밀번호" maxLength="4"/></td>
 					</tr>
 																		
 				</tbody>

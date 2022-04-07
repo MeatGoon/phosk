@@ -27,7 +27,7 @@
 									<td><c:out value="${list.member_id}" /></td>								
 									<td><c:out value="${list.member_pwd}" /></td>													
 								</tr>
-								<input id="testbnt " type="button" value="정보수정"  onClick = 'localocation.href = "/userForm/user/updateuser"'/>
+								<input id="testbnt " type="button" value="정보수정"   onclick="location.href='/userForm/user/updateuser'"/>
 							</c:forEach>
 												
 			</table>
