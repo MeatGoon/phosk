@@ -55,7 +55,8 @@
 				<tfoot  class="cardinfo_btn">
 					<tr>
 						<td>  
-					        <input class="cardinfo_btn1" type="button" value="취소" onClick= "location.href='/usertest'">
+							<script>function goBack() {window.history.back();}</script>
+					        <input class="cardinfo_btn1" type="button" value="취소" onClick= "goBack();">
 					        <input class="cardinfo_btn2" type="submit" value="카드등록">   
 	  					</td>
 	  					
