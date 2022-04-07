@@ -9,5 +9,7 @@
 		<typeAlias type="com.teamproject.phosk.branch.menu.vo.CategoryVO" alias="cateVO"/>
 		<typeAlias type="com.teamproject.phosk.branch.menu.vo.MenueVO" alias="meVO"/>
 		<typeAlias type="com.teamproject.phosk.branch.menu.vo.CateMenuInfo" alias="allVO"/>
+		<typeAlias type="com.teamproject.phosk.user.vo.MemberVO" alias="usermem"/>
+		<typeAlias type="com.teamproject.phosk.user.vo.CardinfoVO" alias="usercard"/>
 	</typeAliases>
 </configuration>
