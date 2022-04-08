@@ -7,8 +7,8 @@
 		<typeAlias type="com.teamproject.phosk.branch.login.vo.BranchLoginVO" alias="branchLogin"/>
 		<typeAlias type="com.teamproject.phosk.branch.info.vo.BranchInfoVO" alias="branchInfo"/>
 		<typeAlias type="com.teamproject.phosk.branch.menu.vo.CategoryVO" alias="cateVO"/>
-		<typeAlias type="com.teamproject.phosk.branch.menu.vo.MenueVO" alias="meVO"/>
-		<typeAlias type="com.teamproject.phosk.branch.menu.vo.CateMenuInfo" alias="allVO"/>
+		<typeAlias type="com.teamproject.phosk.branch.menu.vo.ItemVO" alias="itemVO"/>
+		<typeAlias type="com.teamproject.phosk.branch.menu.vo.BranchItemInfo" alias="branchMenuInfo"/>
 		<typeAlias type="com.teamproject.phosk.user.vo.MemberVO" alias="usermem"/>
 		<typeAlias type="com.teamproject.phosk.user.vo.CardinfoVO" alias="usercard"/>
 	</typeAliases>

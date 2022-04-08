@@ -26,7 +26,7 @@ public class BranchInfoVO extends BranchLoginVO {
 	private String branch_openTime;
 	private String branch_closeTime;
 	private String branch_foundationDate;
-	private String branch_regDate;
+	private String branch_regiDate;
 	private String branch_image;
 	
 	

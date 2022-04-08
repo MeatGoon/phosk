@@ -10,7 +10,7 @@
 	<select id="branchChoiceBranch" parameterType="String" resultType="branchInfo">
 		select ph.branch_num , po.oner_id , po.oner_pwd , po.oner_phone , po.oner_email , ph.branch_name,
 		ph.branch_phone, ph.branch_leadername, ph.branch_addr, ph.branch_detail, ph.branch_type, ph.branch_opentime, ph.branch_closetime,
-		ph.branch_foundationdate, ph.branch_regdate, ph.branch_image
+		ph.branch_foundationdate, ph.branch_regidate, ph.branch_image
 		from phosk_branch ph 
 		inner join phosk_oner po 
 		on (ph.oner_id = po.oner_id) 
