@@ -1,13 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix = "c" uri="http://java.sun.com/jsp/jstl/core" %>
+ 
 <!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset= UTF-8">
 	<jsp:include page="../userheader.jsp"/>	
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-	<!-- 부가적인 테마 -->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
-	 	
+
 	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 		<title>회원 정보수정</title>
 </head>
@@ -23,18 +22,13 @@
 					alert("비밀번호를 입력해주세요.");
 					$("#member_pwd").focus();
 					return false;
-				}
-				if($("#member_nic").val()==""){
-					alert("성명을 입력해주세요.");
-					$("#member_nic").focus();
-					return false;
-				}
+				}			
 			});
 		
 		})
 	</script>
 	<body>
-		<section id="container">
+		<div id="container">
 			<form action="/userForm/user/updateuser" method="post">
 						
 			
@@ -45,16 +39,9 @@
 					<label class="control" for="member_pwd">패스워드</label>
 					<input class="forml" type="password" id="member_pwd" name="member_pwd" />
 				</div>
-				<div class="form-groupk">
-				기존닉네임
-				</div>
 				<div class="form-group">
-					<label class="control" for="member_nic">닉네임</label>
-					<input class="form" type="text" id="member_nic" name="member_nic" value="${login.member_nic} "/>
-				</div>
-					<div class="form-group">
 					<label class="control" for="member_id" >아이디</label>
-					<input class="form" type="text" id="member_id" name="member_id" value="${login.member_id}" readonly="readonly"/>
+					<input class="form" type="text" id="member_id" name="member_id" value="${login.member_id}" style=' color:red;' readonly="readonly"/>
 				</div>
 
 				<div class="form-group">
@@ -62,8 +49,21 @@
 					<button class="cencle" type="button">취소</button>
 				</div>
 			</form>
-		
-		</section>
+			<div>
+				<p>카드정보</p>
+				<table style ='border : 1px solid red;'>
+							<tr><th>번호</th><th>은행사</th><th>카드주</th></tr>						
+							<c:forEach items="${cardinfoForm}" var = "list">
+								<tr>	
+									<td><c:out value="1" />1</td>						
+									<td><c:out value="${list.cardinfo_bank}" /></td>								
+									<td><c:out value="${list.cardinfo_holderName}" /></td>													
+								</tr>
+								<input type="button" class="cc" value="카드등록" onClick = "location.href='/userForm/cardinfo/cardinfoForm'"><br>
+							</c:forEach>					
+				</table>
+			</div>
+		</div>
 		
 	</body>
 	
