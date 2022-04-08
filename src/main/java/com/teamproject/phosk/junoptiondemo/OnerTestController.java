@@ -8,26 +8,22 @@ import lombok.extern.log4j.Log4j;
 
 
 @Controller
-@RequestMapping(value="/*")
+@RequestMapping(value="/jundemo/*")
 @Log4j
 public class OnerTestController {
 	@RequestMapping("")
-	public void basic() {	
-		log.info("test.....");
+	public void jundemo() {	
+		log.info("jundemo.....");
 	}
 	
 	
-	@RequestMapping(value = "/test/*")
-	public void viewtest() {
-		log.info("viewtest.....");
-	}
-	
-
-	@RequestMapping(value = "/test/menueditpopup/*")
+	@RequestMapping(value = "/menueditpopup/*")
 	public void menueditpopup() {
 		log.info("menueditpopup.....");
 	}
 	
+
+
 	
 	
 	
