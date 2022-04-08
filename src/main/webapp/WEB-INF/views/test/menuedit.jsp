@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 <link rel="stylesheet" href="${path}/resources/css/onerHeader.css">
 <script language="javascript">
-	function showmenueditPopup() { window.open("./menueditpopup/menuEditPopup", "", "width=400, height=600, left=100, top=50"); }
+	function showmenueditPopup() { window.open("./test/menueditpopup/menuEditPopup", "", "width=400, height=600, left=100, top=50"); }
 </script>
 </head>
 <body class = "menueditbody">
