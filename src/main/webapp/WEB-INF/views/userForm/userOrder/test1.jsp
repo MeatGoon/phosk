@@ -32,9 +32,15 @@
 <div class="testContents">
 <div class="left">
 <h1>가게사진</h1>
+<p>qr로 읽은 branch정보에서 사진 불러오기</p>
 </div>
 <div class="right">
 <h1>미니장바구니</h1>
+<p> qr테이블 생성(더미 branch생성으로 위치잡은상태)<br>
+	푸터에 더미용 음식정보파일 1개 생성<br>
+	이후 더미 1파일을 이용해서 장바구니 구현
+	
+</p>
 </div>
 
 </div>
