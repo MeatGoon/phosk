@@ -1,0 +1,45 @@
+@charset "UTF-8";
+
+#optionmodal{
+	display : none;
+	z-index : 1;
+	background-color: rgba(0,0,0,.3);
+	position:fixed;
+	left:0;
+	top: 0;
+	width:100%;
+	height:100%;
+	
+}
+#optionmodal>#content{
+	width:300px;
+	margin:100px auto;
+	padding:20px;
+	position: relative;
+	background-color:#fff;
+	overflow:scroll; height:400px;
+	overflow-X:hidden
+}
+
+#optionmodal .optionclosept{
+	position:absolute;
+	top:4px;
+	right:4px;	
+	font-size:20px;
+	border:0;
+	background-color: #fff;
+}
+
+#optionmodal .optionclosept:hover,
+#optionmodal .optionclosept:focus {
+  color : #000;
+  text-decoration: none;
+  cursor :pointer;
+
+
+
+
+
+
+
+

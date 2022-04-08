@@ -1,0 +1,79 @@
+@charset "UTF-8";
+
+
+header {
+  background: rgb(125, 225, 165);
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+}
+
+
+nav {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.headul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+}
+
+
+
+.logo {
+  display: inline-block;
+  vertical-align: middle;
+  color: black;
+  margin: 0.5rem;
+  font-size: 30px;
+  padding: 0;
+}
+
+.middle{
+	background:rgb(52, 152, 219);
+  color:white;
+  border:none;
+  border-radius: 12px;
+  font-size:1.2em;
+  width: 150px;
+  margin: 0.9rem;
+  cursor:pointer;
+  
+}
+
+
+.last{
+	text-decoration: none;
+	display: inline-block;
+  vertical-align: middle;
+  color: white;
+  margin: 1rem;
+  padding: 0;
+}
+
+
+
+
+
+/*---------------- 바디부분 ------------------------------------------*/
+
+
+.left{
+	background-color: #c0c0c0;
+}
+
+.right{
+	background-color: #c0c0c0;
+}
+
+
+
+
+
+
+
+
+
