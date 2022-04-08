@@ -31,7 +31,7 @@ public class ItemController {
 
 	@GetMapping("/test")
 	public void test(BranchItemInfo itemInfo, String branch_num, Model model, HttpServletRequest request, NowPage nowPage) {
-		log.info("cate List .....");
+		log.info("test List .....");
 
 		List<CategoryVO> cateList = testService.cateList(branch_num);
 		model.addAttribute("cateList", cateList);
@@ -162,6 +162,7 @@ public class ItemController {
 		rttr.addFlashAttribute("result", "deleteChk success");
 		return "redirect:/test/menueManage?cateTest="+ nowCate;
 	}
+	
 	
 	
 }
