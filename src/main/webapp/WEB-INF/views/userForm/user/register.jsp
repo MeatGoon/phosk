@@ -93,7 +93,7 @@
 							<tr><th>번호</th><th>은행사</th><th>카드주</th></tr>						
 							<c:forEach items="${cardinfoForm}" var = "list">
 								<tr>	
-									<td><c:out value="1" />1</td>						
+									<td><c:out value="1" /></td>						
 									<td><c:out value="${list.cardinfo_bank}" /></td>								
 									<td><c:out value="${list.cardinfo_holderName}" /></td>													
 								</tr>
