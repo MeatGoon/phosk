@@ -35,9 +35,12 @@
 					name="category_name" readonly="readonly"
 					value='<c:out value="${meList.category_num}" />' />
 			</div>
-			<div class="menue_box"><!-- name명 수정 필요 -->
-				<label>음식명 : </label> <input class="menue_info" type="text" name="test_menue_name" readonly="readonly" value="${meList.menue_name}" />
-					<input class="menue_info" type="hidden" name="menue_name" value="${meList.menue_name}" />
+			<div class="menue_box">
+				<!-- name명 수정 필요 -->
+				<label>음식명 : </label> <input class="menue_info" type="text"
+					name="test_menue_name" readonly="readonly"
+					value="${meList.menue_name}" /> <input class="menue_info"
+					type="hidden" name="menue_name" value="${meList.menue_name}" />
 			</div>
 			<div class="menue_box">
 				<label>음식 가격 : </label> <input class="menue_info" type="text"
@@ -50,44 +53,47 @@
 			</div>
 		</form>
 	</div>
+	
 	<script>
 		let form = $("#updateForm");
+		let moveForm = $("#moveForm");
 
 		$("#modify_btn").on("click", function() {
 			$(".menue_info").attr("readonly", false);
-			$("#modify_btn").attr('hidden', 'hidden');
-			$("#accpt_btn").attr('hidden', false);
-			$("#delete_btn").attr('hidden', false);
+			$("#modify_btn").attr("hidden", "hidden");
+			$("#accpt_btn").attr("hidden", false);
+			$("#delete_btn").attr("hidden", false);
 		});
 
- 		$("#accpt_btn").on("click", function() {
+		$("#accpt_btn").on("click", function() {
 			form.attr("action", "/test/modify");
 			form.submit();
-  			/* $(".menue_info").attr("readonly", "readonly"); */
+			/* $(".menue_info").attr("readonly", "readonly"); */
 		});
- 		
- 		$("#delete_btn").on("click", function() {
+
+		$("#delete_btn").on("click", function() {
 			form.attr("action", "/test/delete");
 			form.submit();
 		});
-		
-		$("#list_btn").on("click", function() {
-			if($("#accpt_btn").is(":hidden")){
-				window.location.href = "/test/cateList"
-				
-			}else if (confirm("이전에 입력한 데이터는 저장되지 않습니다.\n목록으로 이동 하시겠습니까???") == true){    //확인
-				window.location.href = "/test/cateList"
+		function moveList() {
+			location.href = "/test/cateList?cateTest=" + ${meList.category_num};
+		}
+		$("#list_btn")
+				.on(
+						"click",
+						function() {
+							if ($("#accpt_btn").is(":hidden")) {
+								moveList();
+							} else if (confirm("이전에 입력한 데이터는 저장되지 않습니다.\n목록으로 이동 하시겠습니까???") == true) { //확인
+								moveList();
 
-			}else{   //취소
+							} else { //취소
 
-			    return;
+								return;
 
-			}
-			
-			
+							}
 
-		});
-
+						});
 	</script>
 
 </body>
