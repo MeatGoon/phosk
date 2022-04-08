@@ -51,7 +51,7 @@
 							<p>카드정보</p>
 					<table style ='border : 1px solid red;'>
 						<tr><th>번호</th><th>은행사</th><th>카드주</th></tr>						
-						<c:forEach items="${cardinfoForm}" var = "list">
+						<c:forEach items="${mycard}" var = "list">
 							<tr>	
 							<td><c:out value="1" /></td>						
 							<td><c:out value="${list.cardinfo_bank}" /></td>								

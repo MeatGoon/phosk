@@ -43,4 +43,11 @@ public class CardinfoController {
 	          model.addAttribute("cardinfoForm", cardinfoForm);
 
 	      }
+		 @GetMapping("/userForm/user/updateuser")
+	      public void mycarlist(Model model) {          
+	          log.info("회원정보");
+	          List<CardinfoVO> cardinfoForm = cardinfoservice.cardinfoForm();
+	          model.addAttribute("mycard", cardinfoForm);
+
+	      }
 }
