@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.teamproject.phosk.branch.menu.dao.ItemDAO">
+	<sql id="itemAllInfo">
+		select pc.branch_num, pc.category_num, pc.category_name,
+		pi.item_num, pi.item_name, pi.item_image, pi.item_info,
+		pi.item_lastDate, pi.item_regiDate,
+		pb.basic_option1, pb.basic_option2,
+		pb.basic_option3, pb.basic_option4, pb.basic_price1, pb.basic_price2,
+		pb.basic_price3, pb.basic_price4,
+		pa.add_option1, pa.add_option2,
+		pa.add_option3, pa.add_option4, pa.add_option5, pa.add_price1,
+		pa.add_price2, pa.add_price3, pa.add_price4, pa.add_price5
+		from
+		phosk_category pc, phosk_item pi, phosk_basicoption pb,
+		phosk_addoption pa
+		WHERE pc.category_num = pi.category_num and
+		pi.item_num = pb.item_num and pi.item_num = pa.item_num
+	</sql>
+	<sql id="itemShorInfo">
+		select pi.item_num, pi.item_name, pi.item_image,
+		pi.item_info, pi.item_lastDate, pi.item_regiDate,
+		pb.basic_option1,
+		pb.basic_price1 from phosk_item pi, phosk_basicoption pb
+		WHERE
+		pi.item_num = pb.item_num
+	</sql>
+	<select id="cateList" resultType="cateVO">
+		select * from phosk_category
+		<if test="branch_num != null">
+			where branch_num = #{branch_num}
+		</if>
+	</select>
+	<update id="updateTest">
+		DECLARE
+		BEGIN
+
+		Update phosk_category set category_name = #{category_name} where category_num = #{category_num};
+		
+		update phosk_item set item_name = #{item_name} where category_num = #{category_num}	AND item_num = #{item_num};
+		update phosk_basicoption set basic_option1 = #{basic_option1} where item_num = #{item_num};
+
+		END;
+		<!-- 작동은 하나 SQL 부적합한 열유형뜸 -->
+	</update>
+	<select id="itemDetailInfo" resultType="branchItemInfo">
+		<include refid="itemAllInfo" />
+		and pc.branch_num = #{branch_num} and pc.category_num =
+		#{category_num} and pi.item_num = #{item_num}
+	</select>
+	<select id="itemShorInfo" resultType="ItemVO">
+
+	</select>
+</mapper>
