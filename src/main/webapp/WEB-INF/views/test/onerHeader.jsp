@@ -37,7 +37,7 @@
 	
 	
 	<footer>
-		<jsp:include page="./testFooter.jsp"/>
+
 	</footer>
 	
 	
