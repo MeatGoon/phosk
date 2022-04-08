@@ -42,7 +42,7 @@ public class ItemController {
 	public String updateTest(BranchItemInfo itemInfo) {
 		System.out.println(itemInfo);
 		testService.testupdate(itemInfo);
-		return "redirect:/test/test";
+		return "redirect:/test/test?branch_num=123-45-67890&category_num=2&item_num=1";
 	}
 	
 	@GetMapping("/cateList")

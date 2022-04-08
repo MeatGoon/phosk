@@ -45,7 +45,7 @@
 		END;
 		<!-- 작동은 하나 SQL 부적합한 열유형뜸 -->
 	</update>
-	<select id="itemDetailInfo" resultType="branchMenuInfo">
+	<select id="itemDetailInfo" resultType="branchItemInfo">
 		<include refid="itemAllInfo" />
 		and pc.branch_num = #{branch_num} and pc.category_num =
 		#{category_num} and pi.item_num = #{item_num}
