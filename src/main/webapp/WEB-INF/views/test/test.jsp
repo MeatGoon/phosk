@@ -38,6 +38,11 @@
 			<label for="add_price4">추가가격4</label>		<input type="text" name="add_price4" value="${cateTest.add_price4}"/><br />
 			<label for="add_price5">추가가격5</label>		<input type="text" name="add_price5" value="${cateTest.add_price5}"/><br />
 		</c:forEach>
+		테스트<input type="text" name="testArr" />
+		테스트<input type="text" name="testArr" />
+		테스트<input type="text" name="testArr" />
+		테스트<input type="text" name="testArr" />
+		테스트<input type="text" name="testArr" />
 		<button type="submit">수정</button>
 	</form>
 </body>

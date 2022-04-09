@@ -39,9 +39,17 @@ public class ItemController {
 
 	}
 	@PostMapping("/testUpdate")
-	public String updateTest(BranchItemInfo itemInfo) {
+	public String updateTest(BranchItemInfo itemInfo, String testArr) {
 		System.out.println(itemInfo);
+		System.out.println(testArr);
 		testService.testupdate(itemInfo);
+		
+		return "redirect:/test/test?branch_num=123-45-67890&category_num=2&item_num=1";
+	}
+	@PostMapping("/testDel")
+	public String testDel() {
+		testService.testDel();
+		
 		return "redirect:/test/test?branch_num=123-45-67890&category_num=2&item_num=1";
 	}
 	

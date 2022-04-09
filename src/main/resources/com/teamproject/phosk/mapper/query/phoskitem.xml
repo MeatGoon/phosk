@@ -27,10 +27,33 @@
 		WHERE
 		pi.item_num = pb.item_num
 	</sql>
-	<sql id="operItem">
-		<choose>
-		
-		</choose>
+	<sql id="basicOption">
+		<if test="basic_option2 != null">
+			, basic_option2 = #{basic_option2} , basic_price2 = #{basic_price2}
+		</if>
+		<if test="basic_option3 != null">
+			, basic_option3 = #{basic_option3} , basic_price3 = #{basic_price3}
+		</if>
+		<if test="basic_option4 != null">
+			, basic_option4 = #{basic_option4} , basic_price4 = #{basic_price4}
+		</if>
+		<if test="basic_option5 != null">
+			, basic_option5 = #{basic_option5} , basic_price5 = #{basic_price5}
+		</if>
+	</sql>
+	<sql id="addOption">
+		<if test="add_option2 != null">
+			, add_option2 = #{add_option2} , add_price2 = #{add_price2}
+		</if>
+		<if test="add_option3 != null">
+			, add_option3 = #{add_option3} , add_price3 = #{add_price3}
+		</if>
+		<if test="add_option4 != null">
+			, add_option4 = #{add_option4} , add_price4 = #{add_price4}
+		</if>
+		<if test="add_option5 != null">
+			, add_option5 = #{add_option5} , add_price5 = #{add_price5}
+		</if>
 	</sql>
 	<select id="cateList" resultType="cateVO">
 		select * from phosk_category
@@ -38,32 +61,43 @@
 			where branch_num = #{branch_num}
 		</if>
 	</select>
-	<update id="updateTest">
+	
+	<update id="categoryUpdate">
+		update phosk_category set category_name = #{category_name}
+	</update>
+	
+	<update id="itemUpdate">
 		DECLARE
 		BEGIN
 
-		update phosk_category set category_name = #{category_name} where category_num = #{category_num};
-		update phosk_item set item_name = #{item_name} where category_num = #{category_num}	AND item_num = #{item_num};
-		update phosk_basicoption set basic_option1 = #{basic_option1} where item_num = #{item_num};
+		update phosk_item set item_name = #{item_name}, item_info = #{item_info} item_lastDate = #{item_lastDate}
+		<if test="item_image != null">
+			item_image = #{item_image}
+		</if>
+		where category_num = #{category_num}	AND item_num = #{item_num};
+		update phosk_basicoption set basic_option1 = #{basic_option1}, basic_price1 = #{basic_price1}
+		<include refid="basicOption"/>
+		where item_num = #{item_num};
 		<if test="add_option1 != null">
 			update phosk_addoption set add_option1 = #{add_option1}, add_price1 = #{add_price1}
-				<if test="add_option2 != null">
-					, add_option2 = #{add_option2} , add_price2 = #{add_price2}
-				</if>
-				<if test="add_option3 != null">
-					, add_option3 = #{add_option3} , add_price3 = #{add_price3}
-				</if>
-				<if test="add_option4 != null">
-					, add_option4 = #{add_option4} , add_price4 = #{add_price4}
-				</if>
-				<if test="add_option5 != null">
-					, add_option5 = #{add_option5} , add_price5 = #{add_price5}
-				</if>
-				<!-- 시간이 많이 남는다면 데이터 갈아엎어서 option부분을 하나의 값으로 List로 받아와서 foreach문으로 반복 wheb문 사용 -->
+			<include refid="addOption"/>
+				<!-- 시간이 많이 남는다면 데이터 갈아엎어서 option부분을 하나의 값으로 List로 받아와서 foreach문으로 반복 when문 사용 -->
 			where item_num = #{item_num};
 		</if>
 		END;
 	</update>
+	<update id="deleteOption">
+		update
+		<choose>
+			<when test="basic_option2 == null || basic_option2 == ''">
+				phosk_basicoption set basic_option2 = null, basic_price1 = null 
+			</when>
+			<when test="add_option1">
+			</when>
+		</choose>
+		where branch_num = #{branch_num} AND category_num = #{category_num} AND item_num = #{item_num}
+	</update>
+	
 	<select id="itemDetailInfo" resultType="branchItemInfo">
 		<include refid="itemAllInfo" />
 		and pc.branch_num = #{branch_num} and pc.category_num =
