@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.teamproject.phosk.branch.menu.vo.BranchItemInfo;
 import com.teamproject.phosk.branch.menu.vo.CategoryVO;
+import com.teamproject.phosk.branch.menu.vo.ItemOptionVO;
 import com.teamproject.phosk.branch.menu.vo.ItemVO;
 
 public interface ItemService {
@@ -36,7 +37,9 @@ public interface ItemService {
 
 	public int addBestMenu(String menueVO);
 
-	public List<ItemVO> testquery(BranchItemInfo itemInfo);
+	public BranchItemInfo testquery(BranchItemInfo itemInfo);
 
 	public int testupdate(BranchItemInfo itemInfo);
+
+	public List<ItemOptionVO> getBOption(BranchItemInfo itemInfo);
 }

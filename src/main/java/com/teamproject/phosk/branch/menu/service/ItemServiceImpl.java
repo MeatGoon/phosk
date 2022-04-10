@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.teamproject.phosk.branch.menu.dao.ItemDAO;
 import com.teamproject.phosk.branch.menu.vo.BranchItemInfo;
 import com.teamproject.phosk.branch.menu.vo.CategoryVO;
+import com.teamproject.phosk.branch.menu.vo.ItemOptionVO;
 import com.teamproject.phosk.branch.menu.vo.ItemVO;
 
 @Service
@@ -91,13 +92,18 @@ public class ItemServiceImpl implements ItemService {
 	}
 
 	@Override
-	public List<ItemVO> testquery(BranchItemInfo itemInfo) {
+	public BranchItemInfo testquery(BranchItemInfo itemInfo) {
 		return testMapper.testquery(itemInfo);
 	}
 
 	@Override
 	public int testupdate(BranchItemInfo itemInfo) {
 		return testMapper.testupdate(itemInfo);
+	}
+
+	@Override
+	public List<ItemOptionVO> getBOption(BranchItemInfo itemInfo) {
+		return testMapper.getBOption(itemInfo);
 	}
 
 }

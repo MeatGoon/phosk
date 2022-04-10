@@ -4,20 +4,10 @@
 
 <mapper namespace="com.teamproject.phosk.branch.menu.dao.ItemDAO">
 	<sql id="itemAllInfo">
-		select pc.branch_num, pc.category_num, pc.category_name,
-		pi.item_num, pi.item_name, pi.item_image, pi.item_info,
-		pi.item_lastDate, pi.item_regiDate,
-		pb.basic_option1, pb.basic_option2,
-		pb.basic_option3, pb.basic_option4, pb.basic_price1, pb.basic_price2,
-		pb.basic_price3, pb.basic_price4,
-		pa.add_option1, pa.add_option2,
-		pa.add_option3, pa.add_option4, pa.add_option5, pa.add_price1,
-		pa.add_price2, pa.add_price3, pa.add_price4, pa.add_price5
-		from
-		phosk_category pc, phosk_item pi, phosk_basicoption pb,
-		phosk_addoption pa
-		WHERE pc.category_num = pi.category_num and
-		pi.item_num = pb.item_num and pi.item_num = pa.item_num
+		select pb.branch_num, pc.category_num, pc.category_name,
+		pi.item_num, pi.item_name, pi.item_image, pi.item_info, pi.item_lastdate, pi.item_regidate
+		from phosk_branch pb INNER JOIN phosk_category pc on (pb.branch_num = pc.branch_num)
+		INNER JOIN phosk_item pi on(pc.category_num = pi.category_num)
 	</sql>
 	<sql id="itemShorInfo">
 		select pi.item_num, pi.item_name, pi.item_image,
@@ -99,11 +89,14 @@
 	</update>
 	
 	<select id="itemDetailInfo" resultType="branchItemInfo">
+		
 		<include refid="itemAllInfo" />
-		and pc.branch_num = #{branch_num} and pc.category_num =
+		where pb.branch_num = #{branch_num} and pc.category_num =
 		#{category_num} and pi.item_num = #{item_num}
 	</select>
-	<select id="itemShorInfo" resultType="ItemVO">
-
+	<select id="DetailItemOption" resultType="itemOption">
+			select basic_option, basic_price 
+			from phosk_basicoption where branch_num = #{branch_num} and
+			category_num = #{category_num} and item_num = #{item_num}
 	</select>
 </mapper>

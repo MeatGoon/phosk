@@ -19,24 +19,13 @@ public class BranchItemInfo {
 	private String item_regiDate;
 	
 	//phosk_basicoption
-	private String basic_option1;//not null
-	private String basic_option2;
-	private String basic_option3;
-	private String basic_option4;
-	private int basic_price1;//not null
-	private int basic_price2;
-	private int basic_price3;
-	private int basic_price4;
+	private String basic_option;//not null
+	private int basic_price;//not null
+	
+	private String change_basic_option;
 	
 	//phosk_addoption
-	private String add_option1;//not null
-	private String add_option2;
-	private String add_option3;
-	private String add_option4;
-	private String add_option5;
-	private int add_price1;//not null
-	private int add_price2;
-	private int add_price3;
-	private int add_price4;
-	private int add_price5;
+	private String add_option;//not null
+	private int add_price;
+
 }

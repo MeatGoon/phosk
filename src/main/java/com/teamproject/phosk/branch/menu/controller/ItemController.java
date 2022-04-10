@@ -36,19 +36,25 @@ public class ItemController {
 		List<CategoryVO> cateList = testService.cateList(branch_num);
 		model.addAttribute("cateList", cateList);
 		model.addAttribute("cateTest", testService.testquery(itemInfo));
+		model.addAttribute("Options", testService.getBOption(itemInfo));
 
 	}
 	@PostMapping("/testUpdate")
 	public String updateTest(BranchItemInfo itemInfo, String testArr) {
 		System.out.println(itemInfo);
 		System.out.println(testArr);
-		testService.testupdate(itemInfo);
+		String[] ArrStr = testArr.split(",");
+		System.out.println(ArrStr[0]);
+		System.out.println(ArrStr[1]);
+		System.out.println(ArrStr[2]);
+		System.out.println(ArrStr[3]);
+		/* 테스트 하는 이유는 입력부분에서 하나의 문자열로 받와서 배열로 나눈후 입렵하는 방식을 사용할 예정 */
 		
 		return "redirect:/test/test?branch_num=123-45-67890&category_num=2&item_num=1";
 	}
 	@PostMapping("/testDel")
 	public String testDel() {
-		testService.testDel();
+
 		
 		return "redirect:/test/test?branch_num=123-45-67890&category_num=2&item_num=1";
 	}

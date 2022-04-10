@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import com.teamproject.phosk.branch.menu.vo.BranchItemInfo;
 import com.teamproject.phosk.branch.menu.vo.CategoryVO;
+import com.teamproject.phosk.branch.menu.vo.ItemOptionVO;
 import com.teamproject.phosk.branch.menu.vo.ItemVO;
 
 @Repository
@@ -89,13 +90,18 @@ public class ItemDAOImpl implements ItemDAO {
 	}
 
 	@Override
-	public List<ItemVO> testquery(BranchItemInfo itemInfo) {
-		return session.selectList("itemDetailInfo",itemInfo);
+	public BranchItemInfo testquery(BranchItemInfo itemInfo) {
+		return session.selectOne("itemDetailInfo",itemInfo);
 	}
 
 	@Override
 	public int testupdate(BranchItemInfo itemInfo) {
 		return session.update("updateTest", itemInfo);
+	}
+
+	@Override
+	public List<ItemOptionVO> getBOption(BranchItemInfo itemInfo) {
+		return session.selectList("DetailItemOption",itemInfo);
 	}
 
 }
