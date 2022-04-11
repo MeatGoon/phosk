@@ -11,4 +11,5 @@ import lombok.Data;
 		private int cardinfo_cardCVC;
 		private String cardinfo_accountpwd;
 		private int cardinfo_cardpwd;
+		private String member_id;
 	}

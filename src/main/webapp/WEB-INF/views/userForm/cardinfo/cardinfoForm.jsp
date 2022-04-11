@@ -1,15 +1,62 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page session="false" %>
+<%@ taglib prefix = "c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <head>
-		<jsp:include page="../userheader.jsp"/>
+	<title>카드정보 등록</title>
 </head>
+<header>
+			<jsp:include page="../userheader.jsp"/>
+</header>
+<script type="text/javascript">
+		
+	$(function(){		
+	$(".cardinfo_btn2").on("click", function(){
+					if(card.cardinfo_bank.value== "은행선택"){
+						alert("은행을 선택해주세요.");
+						card.cardinfo_bank.focus();
+						return false;
+					}
+					if($("#cardinfo_holderName").val()==""){
+						alert("이름을 입력해주세요.");
+						$("#cardinfo_holderName").focus();
+						return false;
+					}
+					if($("#cardinfo_cardNum").val()==""){
+						alert("카드번호를 입력해주세요.");
+						$("#cardinfo_cardNum").focus();
+						return false;
+					}
+					if($("#cardinfo_dealine").val()==""){
+						alert("종료날짜를 입력해주세요.");
+						$("#cardinfo_dealine").focus();
+						return false;
+					}
+					if($("#cardinfo_cardCVC").val()==""){
+						alert("CVC을 입력해주세요.");
+						$("#cardinfo_cardCVC").focus();
+						return false;
+					}
+					if($("#cardinfo_accountpwd").val()==""){
+						alert("비밀번호를 입력해주세요.");
+						$("#cardinfo_accountpwd").focus();
+						return false;
+					}
+					if($("#cardinfo_cardpwd").val()==""){
+						alert("카드비밀번호를 입력해주세요.");
+						$("#cardinfo_cardpwd").focus();
+						return false;
+					}
+		});
+	
+	});
+	</script>
 <body>
 	<div class="container">
-		<form method= "post" action="/userForm/cardinfo/cardinfoForm">
+		<form method= "post" action="/userForm/cardinfo/cardinfoForm" name= "card">
+		<c:if test="${login != null }">	
 			<table class= "cardinfo_insert" >
 				<thead>
 					<tr>
@@ -31,7 +78,9 @@
 							</select>
 						</th> 
 					</tr> 
-									
+					<tr>
+						<td><input class="form" type="text" id="member_id" name="member_id" value="${login.member_id}" style=' color:red;' readonly="readonly"/></td>
+					</tr>
 					<tr>
 						<td><input class="form" type="text" id = "cardinfo_holderName" name ="cardinfo_holderName"  placeholder="사용자이름" maxLength="50"/></td>
 					</tr>
@@ -63,6 +112,10 @@
   					</tr>
   				</tfoot>	
 			</table>
+		</c:if>
+		<c:if test="${login == null}">
+		 <h2>로그인을 실행해주세요</h2>
+		</c:if>
 		</form>
 	</div>	
 </body>

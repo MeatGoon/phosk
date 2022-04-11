@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix = "c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page session="false" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <!DOCTYPE html>
 <html>
@@ -9,10 +9,11 @@
 	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 
 <head>
-	<jsp:include page="../userheader.jsp"/>
 	<title>회원가입창</title>
 </head>
-
+<header>
+			<jsp:include page="../userheader.jsp"/>
+</header>
 <body>	
 <script type="text/javascript">
 		
@@ -89,16 +90,17 @@
 			<br>
 			<div>
 				<input type="button" class="cc" value="카드등록" onClick = "location.href='/userForm/cardinfo/cardinfoForm'"><br>
-				<table  style ='width:250px; border : 1px solid red;'>
-							<tr><th>번호</th><th>은행사</th><th>카드주</th></tr>						
+				<p>회원가입이후 내정보등록에서 이용가능합니다</p>
+				<%-- <table  style ='width:250px; border : 1px solid red;'>
+							<tr><th>회원아이디</th><th>은행사</th><th>카드주</th></tr>						
 							<c:forEach items="${cardinfoForm}" var = "list">
 								<tr>	
-									<td><c:out value="1" /></td>						
+									<td><c:out value="${list.member_id}" /></td>						
 									<td><c:out value="${list.cardinfo_bank}" /></td>								
 									<td><c:out value="${list.cardinfo_holderName}" /></td>													
 								</tr>
 							</c:forEach>					
-				</table>
+				</table> --%>
 			</div>		
 			<div>
 				<div class="register_but">

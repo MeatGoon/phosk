@@ -4,8 +4,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-		<jsp:include page="../userheader.jsp"/>
+		<title>로그인페이지</title>
 </head>
+<header>
+			<jsp:include page="../userheader.jsp"/>
+</header>
 	<body>	
 
     	<fieldset class="logForm" >

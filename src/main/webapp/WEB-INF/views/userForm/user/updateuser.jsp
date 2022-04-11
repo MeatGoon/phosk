@@ -1,16 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix = "c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
  
 <!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset= UTF-8">
-	<jsp:include page="../userheader.jsp"/>	
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 	<script src="js/bootstrap.js"></script>
 	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 		<title>회원 정보수정</title>
 </head>
+<header>
+			<jsp:include page="../userheader.jsp"/>
+</header>
 	<script type="text/javascript">
 		$(document).ready(function(){
 			// 취소
@@ -32,14 +35,14 @@
 		<div id="container">
 			<form action="/userForm/user/updateuser" method="post">						
 				<div class="form-group">
-					<label class="control" for="member_id" >아이디</label>
-					<input class="form" type="text" id="member_id" name="member_id" value="${login.member_id}" style=' color:red;' readonly="readonly"/>
+					<label class="control" for="member_id" ></label>
+					<input class="form" type="hidden" id="member_id" name="member_id" value="${login.member_id}"  readonly="readonly"/>
 				</div>		
 				<div class="form-groupk">
-				기존페스워드
+				비밀번호번경
 				</div>
 				<div class="form-groupk">
-					<label class="control" for="member_pwd">패스워드</label>
+					<label class="control" for="member_pwd"></label>
 					<input class="forml" type="password" id="member_pwd" name="member_pwd" />
 				</div>		
 				<div class="form-group">
@@ -48,17 +51,20 @@
 				</div>
 				</form>
 				<div>
-							<p>카드정보</p>
-					<table style ='border : 1px solid red;'>
-						<tr><th>번호</th><th>은행사</th><th>카드주</th></tr>						
-						<c:forEach items="${mycard}" var = "list">
-							<tr>	
-							<td><c:out value="1" /></td>						
-							<td><c:out value="${list.cardinfo_bank}" /></td>								
-							<td><c:out value="${list.cardinfo_holderName}" /></td>													
-							</tr>
-						</c:forEach>	
-					</table>
+					<c:if test="${login != null }" >
+						<table style ='border : 1px solid red;'>
+									<tr><th>회원아이디</th><th>은행사</th><th>카드주</th></tr>		
+							<c:forEach items="${mycard}" var = "list">
+								<c:if test="${list.member_id eq login.member_id}" >													
+									<tr>	
+									<td><c:out value="${list.member_id} " /></td>						
+									<td><c:out value="${list.cardinfo_bank}" /></td>								
+									<td><c:out value="${list.cardinfo_holderName}" /></td>													
+									</tr>
+								</c:if>	
+							</c:forEach>
+						</table>
+					</c:if>
 						<input type="button" class="cc" value="카드등록" onClick = "location.href='/userForm/cardinfo/cardinfoForm'"><br>															
 				</div>
 		</div>
