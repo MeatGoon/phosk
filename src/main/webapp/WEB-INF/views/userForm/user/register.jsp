@@ -42,6 +42,7 @@
 		});
 	
 	});
+	
 	</script>
 
     <div class = "register_main">

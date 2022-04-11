@@ -35,8 +35,13 @@ public class MemberServiceImpl implements MemberService{
 	public void updatemember(MemberVO membervo) {
 		memberdao.updatemember(membervo);
 		
-		System.out.println(membervo.getMember_nic());
-		System.out.println(membervo.getMember_pwd());
+
+	}
+	
+	@Override
+	public int idchk(MemberVO membervo) {
+		int result = memberdao.idchk(membervo);
+		return result;
 	}
 		
 }

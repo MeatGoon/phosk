@@ -11,6 +11,14 @@
 	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 		<title>회원 정보수정</title>
 </head>
+<style>
+	.update_userlist{
+		text-align: center;
+	}
+	.user_card{
+		text-align: center;
+	}
+</style>
 <header>
 			<jsp:include page="../userheader.jsp"/>
 </header>
@@ -33,15 +41,13 @@
 	</script>
 	<body>
 		<div id="container">
-			<form action="/userForm/user/updateuser" method="post">						
+			<form action="/userForm/user/updateuser" method="post" class= "update_userlist">						
 				<div class="form-group">
 					<label class="control" for="member_id" ></label>
 					<input class="form" type="hidden" id="member_id" name="member_id" value="${login.member_id}"  readonly="readonly"/>
 				</div>		
 				<div class="form-groupk">
-				비밀번호번경
-				</div>
-				<div class="form-groupk">
+					<p>비밀번호변경</p><br>
 					<label class="control" for="member_pwd"></label>
 					<input class="forml" type="password" id="member_pwd" name="member_pwd" />
 				</div>		
@@ -50,10 +56,10 @@
 					<button class="cencle" type="button">취소</button>
 				</div>
 				</form>
-				<div>
+				<div class= "user_card">
 					<c:if test="${login != null }" >
 						<table style ='border : 1px solid red;'>
-									<tr><th>회원아이디</th><th>은행사</th><th>카드주</th></tr>		
+									<tr><th>id</th><th>은행사</th><th>카드주</th></tr>		
 							<c:forEach items="${mycard}" var = "list">
 								<c:if test="${list.member_id eq login.member_id}" >													
 									<tr>	
@@ -65,7 +71,7 @@
 							</c:forEach>
 						</table>
 					</c:if>
-						<input type="button" class="cc" value="카드등록" onClick = "location.href='/userForm/cardinfo/cardinfoForm'"><br>															
+						<input type="button" value="카드등록" onClick = "location.href='/userForm/cardinfo/cardinfoForm'"><br>															
 				</div>
 		</div>
 		

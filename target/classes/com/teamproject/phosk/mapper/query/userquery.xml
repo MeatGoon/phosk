@@ -15,7 +15,10 @@
 		 WHERE member_id = #{member_id}
 		   AND member_pwd = #{member_pwd}   
 	</select>
-	
+	<select id ="idchk" resultType="int">
+		select count(*) from phosk_member
+		where member_id = #{member_id}
+	</select>
 	<insert id="insertMember">
 		insert into phosk_member(member_nic,member_id,member_pwd)
 		values(#{member_nic},#{member_id},#{member_pwd})	

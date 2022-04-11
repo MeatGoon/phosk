@@ -13,5 +13,7 @@ public interface MemberDAO {
 	List<MemberVO> register();
 	
 	public void updatemember(MemberVO membervo);
+	
+	public int idchk(MemberVO membervo);
 
 }

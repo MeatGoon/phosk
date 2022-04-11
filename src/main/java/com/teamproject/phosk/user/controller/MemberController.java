@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.teamproject.phosk.user.service.MemberService;
@@ -34,7 +35,8 @@ public class MemberController {
 		memberservice.insertMember(membervo);
 		return "/userForm/user/loginpage";
 		
-	}
+	} 
+
 
 	@GetMapping("/userForm/user/loginpage")
 	public void loginpageGET(){
@@ -66,6 +68,7 @@ public class MemberController {
 				
 		return "/userForm/usertest";
 	}
+	
 	 @GetMapping("/userForm/user/userlist")
      public void registerlist(Model model) {          
          log.info("회원정보조회");
@@ -81,5 +84,10 @@ public class MemberController {
 		return "redirect:/userForm/usertest";
 		}
 		 
-	
+		@ResponseBody
+		@PostMapping("/idchk")
+		public void idchk(MemberVO membervo) {
+			log.info("id 중복체크");
+
+		}   
 }
