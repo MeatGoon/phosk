@@ -42,4 +42,6 @@ public interface ItemService {
 	public int testupdate(BranchItemInfo itemInfo);
 
 	public List<ItemOptionVO> getBOption(BranchItemInfo itemInfo);
+
+	public List<ItemOptionVO> getAOption(BranchItemInfo itemInfo);
 }

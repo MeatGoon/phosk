@@ -106,4 +106,9 @@ public class ItemServiceImpl implements ItemService {
 		return testMapper.getBOption(itemInfo);
 	}
 
+	@Override
+	public List<ItemOptionVO> getAOption(BranchItemInfo itemInfo) {
+		return testMapper.getAOption(itemInfo);
+	}
+
 }

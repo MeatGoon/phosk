@@ -101,7 +101,12 @@ public class ItemDAOImpl implements ItemDAO {
 
 	@Override
 	public List<ItemOptionVO> getBOption(BranchItemInfo itemInfo) {
-		return session.selectList("DetailItemOption",itemInfo);
+		return session.selectList("basicItemOption",itemInfo);
+	}
+
+	@Override
+	public List<ItemOptionVO> getAOption(BranchItemInfo itemInfo) {
+		return session.selectList("addItemOption",itemInfo);
 	}
 
 }

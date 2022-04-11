@@ -3,6 +3,7 @@ package com.teamproject.phosk.branch.menu.controller;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -33,23 +34,35 @@ public class ItemController {
 	public void test(BranchItemInfo itemInfo, String branch_num, Model model, HttpServletRequest request, NowPage nowPage) {
 		log.info("test List .....");
 
-		List<CategoryVO> cateList = testService.cateList(branch_num);
-		model.addAttribute("cateList", cateList);
 		model.addAttribute("cateTest", testService.testquery(itemInfo));
-		model.addAttribute("Options", testService.getBOption(itemInfo));
+		model.addAttribute("bOptions", testService.getBOption(itemInfo));
+		model.addAttribute("aOptions", testService.getAOption(itemInfo));
 
 	}
 	@PostMapping("/testUpdate")
-	public String updateTest(BranchItemInfo itemInfo, String testArr) {
+	public String updateTest(BranchItemInfo itemInfo, String testArr, String addArr) {
 		System.out.println(itemInfo);
 		System.out.println(testArr);
+		System.out.println(addArr);
+		String[] testaddArr = testArr.split(",");
 		String[] ArrStr = testArr.split(",");
-		System.out.println(ArrStr[0]);
-		System.out.println(ArrStr[1]);
-		System.out.println(ArrStr[2]);
-		System.out.println(ArrStr[3]);
-		/* 테스트 하는 이유는 입력부분에서 하나의 문자열로 받와서 배열로 나눈후 입렵하는 방식을 사용할 예정 */
-		
+		for (int i = 0; i < ArrStr.length; i++) {
+			System.out.println(ArrStr[i] + " 테스트");
+			/* 이방식처럼 basic, add 나눠서 if문으로 보낸다.
+			 * 왜냐하면 배열로 나뉠수도 있고 아닐수도 있으니
+			 * testService.updateItem(itemInfo);
+			 * testService.updateBOption(itemInfo);
+			 * testService.updateAOption(itemInfo);
+			 */
+		} /* addoption 은 null이 아닐경우 */
+		if(testaddArr != null) {
+			for (int i = 0; i < testaddArr.length; i++) {
+				System.out.println(testaddArr[i] + " 분리완료");
+			}
+		}else {
+			System.out.println("분리실패");
+		}
+
 		return "redirect:/test/test?branch_num=123-45-67890&category_num=2&item_num=1";
 	}
 	@PostMapping("/testDel")

@@ -9,94 +9,31 @@
 		from phosk_branch pb INNER JOIN phosk_category pc on (pb.branch_num = pc.branch_num)
 		INNER JOIN phosk_item pi on(pc.category_num = pi.category_num)
 	</sql>
-	<sql id="itemShorInfo">
-		select pi.item_num, pi.item_name, pi.item_image,
-		pi.item_info, pi.item_lastDate, pi.item_regiDate,
-		pb.basic_option1,
-		pb.basic_price1 from phosk_item pi, phosk_basicoption pb
-		WHERE
-		pi.item_num = pb.item_num
-	</sql>
-	<sql id="basicOption">
-		<if test="basic_option2 != null">
-			, basic_option2 = #{basic_option2} , basic_price2 = #{basic_price2}
-		</if>
-		<if test="basic_option3 != null">
-			, basic_option3 = #{basic_option3} , basic_price3 = #{basic_price3}
-		</if>
-		<if test="basic_option4 != null">
-			, basic_option4 = #{basic_option4} , basic_price4 = #{basic_price4}
-		</if>
-		<if test="basic_option5 != null">
-			, basic_option5 = #{basic_option5} , basic_price5 = #{basic_price5}
-		</if>
-	</sql>
-	<sql id="addOption">
-		<if test="add_option2 != null">
-			, add_option2 = #{add_option2} , add_price2 = #{add_price2}
-		</if>
-		<if test="add_option3 != null">
-			, add_option3 = #{add_option3} , add_price3 = #{add_price3}
-		</if>
-		<if test="add_option4 != null">
-			, add_option4 = #{add_option4} , add_price4 = #{add_price4}
-		</if>
-		<if test="add_option5 != null">
-			, add_option5 = #{add_option5} , add_price5 = #{add_price5}
-		</if>
-	</sql>
-	<select id="cateList" resultType="cateVO">
-		select * from phosk_category
-		<if test="branch_num != null">
-			where branch_num = #{branch_num}
-		</if>
-	</select>
-	
-	<update id="categoryUpdate">
-		update phosk_category set category_name = #{category_name}
-	</update>
-	
-	<update id="itemUpdate">
-		DECLARE
-		BEGIN
-
-		update phosk_item set item_name = #{item_name}, item_info = #{item_info} item_lastDate = #{item_lastDate}
-		<if test="item_image != null">
-			item_image = #{item_image}
-		</if>
-		where category_num = #{category_num}	AND item_num = #{item_num};
-		update phosk_basicoption set basic_option1 = #{basic_option1}, basic_price1 = #{basic_price1}
-		<include refid="basicOption"/>
-		where item_num = #{item_num};
-		<if test="add_option1 != null">
-			update phosk_addoption set add_option1 = #{add_option1}, add_price1 = #{add_price1}
-			<include refid="addOption"/>
-				<!-- 시간이 많이 남는다면 데이터 갈아엎어서 option부분을 하나의 값으로 List로 받아와서 foreach문으로 반복 when문 사용 -->
-			where item_num = #{item_num};
-		</if>
-		END;
-	</update>
-	<update id="deleteOption">
-		update
-		<choose>
-			<when test="basic_option2 == null || basic_option2 == ''">
-				phosk_basicoption set basic_option2 = null, basic_price1 = null 
-			</when>
-			<when test="add_option1">
-			</when>
-		</choose>
-		where branch_num = #{branch_num} AND category_num = #{category_num} AND item_num = #{item_num}
-	</update>
-	
+	<!-- 아이템까지의 값 불러오기 -->
 	<select id="itemDetailInfo" resultType="branchItemInfo">
-		
 		<include refid="itemAllInfo" />
 		where pb.branch_num = #{branch_num} and pc.category_num =
 		#{category_num} and pi.item_num = #{item_num}
 	</select>
-	<select id="DetailItemOption" resultType="itemOption">
-			select basic_option, basic_price 
-			from phosk_basicoption where branch_num = #{branch_num} and
-			category_num = #{category_num} and item_num = #{item_num}
+	<!-- 해당 아이템의 기본 가격 불러오기 -->
+	<select id="basicItemOption" resultType="itemOption">
+		select basic_option, basic_price 
+		from phosk_basicoption where branch_num = #{branch_num} and
+		category_num = #{category_num} and item_num = #{item_num}
 	</select>
+	<!-- 해당 아이템의 추가옵션들 불러오기 -->
+	<select id="addItemOption" resultType="itemOption">
+		select add_option, add_price 
+		from phosk_addoption where branch_num = #{branch_num} and
+		category_num = #{category_num} and item_num = #{item_num}
+	</select>
+<!-- 	<insert id="insertItem">
+		insert into phosk_item VALUES(#{}, #{}, #{}, #{}, #{}, #{}, sysdate, sysdate)
+	</insert>
+	<insert id="insertBOption">
+		insert into phosk_basicOption VALUES(#{}, #{}, #{}, #{}, #{})
+	</insert>
+	<insert id="insertAOption">
+		insert into phosk_addOption values(#{}, #{}, #{}, #{}, #{})
+	</insert> -->
 </mapper>
