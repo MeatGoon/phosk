@@ -39,9 +39,12 @@ public class MemberServiceImpl implements MemberService{
 	}
 	
 	@Override
-	public int idchk(MemberVO membervo) {
-		int result = memberdao.idchk(membervo);
-		return result;
+	public MemberVO idchk(String member_id) {
+		return memberdao.idchk(member_id);
+	}
+	@Override
+	public MemberVO nicchk(String member_nic) {
+		return memberdao.nicchk(member_nic);
 	}
 		
 }
