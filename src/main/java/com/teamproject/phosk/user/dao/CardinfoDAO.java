@@ -9,4 +9,7 @@ public interface CardinfoDAO {
 	void insertCard(CardinfoVO cardinfovo);
 
 	List<CardinfoVO> cardinfoForm();
+	
+	//카드삭제
+	public void  writecard(CardinfoVO cardninfovo);
 }

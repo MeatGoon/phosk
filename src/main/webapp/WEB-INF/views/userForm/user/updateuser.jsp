@@ -65,8 +65,9 @@
 									<tr>	
 									<td><c:out value="${list.member_id} " /></td>						
 									<td><c:out value="${list.cardinfo_bank}" /></td>								
-									<td><c:out value="${list.cardinfo_holderName}" /></td>													
-									</tr>
+									<td><c:out value="${list.cardinfo_holderName}" /></td>	
+									<td><button type="submit" >카드삭제</button></td>												
+									</tr>	
 								</c:if>	
 							</c:forEach>
 						</table>

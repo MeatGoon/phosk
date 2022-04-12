@@ -24,5 +24,9 @@ public class CardinfoServiceImpl implements CardinfoService{
 		
 		return cardinfodao.cardinfoForm();
 	}
+	@Override
+	public void writecard(CardinfoVO cardinfovo) {
+		cardinfodao.writecard(cardinfovo);
+	}
 
 }
