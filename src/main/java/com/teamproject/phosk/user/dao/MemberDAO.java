@@ -14,6 +14,8 @@ public interface MemberDAO {
 	
 	public void updatemember(MemberVO membervo);
 	
-	public int idchk(MemberVO membervo);
+	public MemberVO idchk(String member_id);
+	
+	public MemberVO nicchk(String member_nic);
 
 }

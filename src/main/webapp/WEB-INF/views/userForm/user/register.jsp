@@ -7,6 +7,7 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 	<script src="js/bootstrap.js"></script>
 	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+	<script src='https://code.jquery.com/jquery-3.3.1.min.js'></script>
 
 <head>
 	<title>회원가입창</title>
@@ -43,20 +44,77 @@
 	
 	});
 	
-	</script>
+</script>
 
     <div class = "register_main">
 		<form action="/userForm/user/register" method="POST">				
 			<div class= "test">
 				<input type="text" name="member_nic" id ="member_nic" maxlength="10" placeholder="닉네임" />											
 			</div>	
-				<input type="button"  class='as' id="check_button" value="check" onclick="checkid();">	
+				<button type="button"  class="nicchk"  >중복확인</button>
+				<p class = "result2">
+					<span class = "msg2">nic중복을 확인해주세요</span>
+				</p>
 		
 			<br>			
 			<div class= "test">
-				<input  type="text" name="member_id" id ="member_id" maxlength="11" placeholder="아이디 입력 (5~11자)" />							
-			</div>
-				<input type="button"  class='as' id="check_button" value="check" onclick="checkid();">
+				<input  type="text" name="member_id" id ="member_id" maxlength="11" placeholder="아이디 입력 (5~11자)"/>							
+			</div>			
+				<button type="button"  class="idchk"  >중복확인</button>
+				<p class = "result">
+					<span class = "msg">id중복을 확인해주세요</span>
+				</p>
+				<script>
+				//중복체크
+				$(".idchk").click(function(){ 
+
+					var query = {member_id : $("#member_id").val()};
+					
+					$.ajax({
+						  url : "/idchk",
+						  type : "post",
+						  data : query,
+						  success : function(data) {
+						  
+						   if(data == 1) {
+						    $(".result .msg").text("사용 불가");
+						    $(".result .msg").attr("style", "color:#f00");  
+						    
+						    $("#regist_btn").attr("disabled", "disabled");
+						   } else {
+						    $(".result .msg").text("사용 가능");
+						    $(".result .msg").attr("style", "color:#00f");
+						    
+						    $("#regist_btn").removeAttr("disabled");
+						}
+					}
+					});
+				});	
+				$(".nicchk").click(function(){ 
+
+					var query = {member_nic : $("#member_nic").val()};
+					
+					$.ajax({
+						  url : "/nicchk",
+						  type : "post",
+						  data : query,
+						  success : function(data) {
+						  
+						   if(data == 1) {
+						    $(".result2 .msg2").text("사용 불가");
+						    $(".result2 .msg2").attr("style", "color:#f00");  
+						    
+						    $("#regist_btn").attr("disabled", "disabled2");
+						   } else {
+						    $(".result2 .msg2").text("사용 가능");
+						    $(".result2 .msg2").attr("style", "color:#00f");
+						    
+						    $("#regist_btn").removeAttr("disabled2");
+						}
+					}
+					});
+				});	
+				</script>
 			<br>
 			<div class= "test">
 				<input  class="form-control" type="password"  name="member_pwd" id ="member_pwd" maxlength="20"
@@ -105,7 +163,7 @@
 			</div>		
 			<div>
 				<div class="register_but">
-					<input class= "regist_btn" type="submit" value="회원가입" />
+					<input class= "regist_btn" id = "regist_btn" type="submit"  value="회원가입" disabled = "disabled","disabled2"/>
 					<input type="button" value="취소" onClick = "location.href='/userForm/usertest'" />
 				</div>
 			</div>

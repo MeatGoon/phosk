@@ -1,8 +1,11 @@
 package com.teamproject.phosk.user.controller;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,7 +46,9 @@ public class MemberController {
 		log.info("로그인 페이지");
 	}
 	@PostMapping("/userForm/user/loginpage")
-	public String login(MemberVO membervo,HttpServletRequest req, RedirectAttributes rttr) {
+	public String login(MemberVO membervo,HttpServletRequest req,HttpServletResponse response, RedirectAttributes rttr ) throws IOException {	 
+		
+
 		log.info("로그인 post");
 		
 		HttpSession session = req.getSession();
@@ -53,9 +58,13 @@ public class MemberController {
 			session.setAttribute("login", login);
 			log.info("성공");
 		}else {
-
-			log.info("실패");
-			return "redirect:/userForm/user/loginpage";
+			PrintWriter out = response.getWriter();
+			response.setContentType("text/html; charset=UTF-8");
+			out.println("<script>alert('정보가 틀립니다'); </script>");
+			out.flush();
+			log.info("실패");			
+			return "/userForm/user/loginpage";
+			
 		}		
 		return "/userForm/usertest";		
 	}
@@ -86,8 +95,32 @@ public class MemberController {
 		 
 		@ResponseBody
 		@PostMapping("/idchk")
-		public void idchk(MemberVO membervo) {
-			log.info("id 중복체크");
-
-		}   
+		public int idchk(HttpServletRequest req) {
+			log.info("id중복체크");
+			
+			String member_id = req.getParameter("member_id");
+			MemberVO idchk = memberservice.idchk(member_id);
+				
+			int result = 0;
+			
+			if(idchk != null) {
+				result = 1;
+			}
+			return result;
+		} 
+		@ResponseBody
+		@PostMapping("/nicchk")
+		public int nicchk(HttpServletRequest req) {
+			log.info("nic중복체크");
+			
+			String member_nic = req.getParameter("member_nic");
+			MemberVO nicchk = memberservice.idchk(member_nic);
+			
+			int result = 0;
+			
+			if(nicchk != null) {
+				result = 1;
+			}
+			return result;
+		} 
 }

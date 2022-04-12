@@ -50,4 +50,9 @@ public class CardinfoController {
 	          model.addAttribute("mycard", cardinfoForm);
 
 	      }
+		 //카드정보 삭제
+		 @GetMapping("/writecard")
+		 public void writecard() {
+			 log.info("카드정보삭제");
+		 }
 }

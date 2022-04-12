@@ -9,4 +9,6 @@ public interface CardinfoService {
 	public void insertCard(CardinfoVO cardinfovo);
 	
 	List<CardinfoVO> cardinfoForm();
+	
+	public void  writecard(CardinfoVO cardninfovo);
 }
