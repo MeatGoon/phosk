@@ -52,6 +52,14 @@
 		});
 	
 	});
+	 function maxLengthCheck(object){
+		    if (object.value.length > object.maxLength){
+		      //object.maxLength : 매게변수 오브젝트의 maxlength 속성 값입니다.
+		      //숫자가 maxlength에 먹히지않아 추가	
+		      object.value = object.value.slice(0, object.maxLength);
+		    }    
+		  }
+		  
 	</script>
 <body>
 	<div class="container">
@@ -82,22 +90,22 @@
 						<td><input class="form" type="text" id="member_id" name="member_id" value="${login.member_id}" style=' color:red;' readonly="readonly"/></td>
 					</tr>
 					<tr>
-						<td><input class="form" type="text" id = "cardinfo_holderName" name ="cardinfo_holderName"  placeholder="사용자이름" maxLength="50"/></td>
+						<td><input class="form" type="text" id = "cardinfo_holderName" name ="cardinfo_holderName"  placeholder="사용자이름" maxLength="50" oninput="maxLengthCheck(this)"/></td>
+					</tr>
+					<tr> 
+						<td><input class="form" type="number" id = "cardinfo_cardNum" name =cardinfo_cardNum  placeholder="카드번호" maxLength="19" oninput="maxLengthCheck(this)"/></td>
 					</tr>
 					<tr>
-						<td><input class="form" type="number" id = "cardinfo_cardNum" name =cardinfo_cardNum  placeholder="카드번호" maxLength="19"/></td>
+						<td><input class="form" type="number" id = "cardinfo_dealine" name ="cardinfo_dealine" placeholder="만기일" maxLength="5" oninput="maxLengthCheck(this)"/></td>
 					</tr>
 					<tr>
-						<td><input class="form" type="number" id = "cardinfo_dealine" name ="cardinfo_dealine" placeholder="만기일" maxLength="5"/></td>
-					</tr>
-					<tr>
-						<td><input class="form" type="number" id = "cardinfo_cardCVC" name ="cardinfo_cardCVC"  placeholder="cvc" maxLength="3"/></td>
+						<td><input class="form" type="number" id = "cardinfo_cardCVC" name ="cardinfo_cardCVC"  placeholder="cvc" maxLength="3" oninput="maxLengthCheck(this)"/></td>
 					</tr>	
 					<tr>
-						<td><input class="form" type="number" id = "cardinfo_accountpwd" name ="cardinfo_accountpwd"  placeholder="어플비밀번호" maxLength="6"/></td>
+						<td><input class="form" type="number" id = "cardinfo_accountpwd" name ="cardinfo_accountpwd"  placeholder="어플비밀번호" maxLength="6" oninput="maxLengthCheck(this)"/></td>
 					</tr>
 					<tr>
-						<td><input class="form" type="number" id = "cardinfo_cardpwd" name ="cardinfo_cardpwd"  placeholder="카드비밀번호" maxLength="4"/></td>
+						<td><input class="form" type="number" id = "cardinfo_cardpwd" name ="cardinfo_cardpwd"  placeholder="카드비밀번호" maxLength="4" oninput="maxLengthCheck(this)"/></td>
 					</tr>
 																		
 				</tbody>

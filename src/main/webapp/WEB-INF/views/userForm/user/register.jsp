@@ -104,12 +104,12 @@
 						    $(".result2 .msg2").text("사용 불가");
 						    $(".result2 .msg2").attr("style", "color:#f00");  
 						    
-						    $("#regist_btn").attr("disabled", "disabled");
+						    $("#regist_btn").attr("disabled", "disabled2");
 						   } else {
 						    $(".result2 .msg2").text("사용 가능");
 						    $(".result2 .msg2").attr("style", "color:#00f");
 						    
-						    $("#regist_btn").removeAttr("disabled");
+						    $("#regist_btn").removeAttr("disabled2");
 						}
 					}
 					});
@@ -163,7 +163,7 @@
 			</div>		
 			<div>
 				<div class="register_but">
-					<input class= "regist_btn" id = "regist_btn" type="submit"  value="회원가입" disabled = "disabled"/>
+					<input class= "regist_btn" id = "regist_btn" type="submit"  value="회원가입" disabled = "disabled","disabled2"/>
 					<input type="button" value="취소" onClick = "location.href='/userForm/usertest'" />
 				</div>
 			</div>
