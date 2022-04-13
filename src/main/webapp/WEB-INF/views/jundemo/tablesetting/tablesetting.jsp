@@ -9,7 +9,7 @@
 </head>
 <body>
 
-
+<input type="number" id="tablenumber"/>
 <input type="button" value="테이블 추가" onclick="addtable()"/>
 
  <table id="table_list">
@@ -18,10 +18,14 @@
 
 <script type="text/javascript">
 	const addtable = () => {
+		var i = 1;
 		var tablelist = document.getElementById("table_list");
 		var table_trtd = document.createElement('tr');
-		var table_td = table_trtd.appendChild(document.createElement('td','td'));
+		var tablenum_td = table_trtd.appendChild(document.createElement('td'));
+		var tableinfo_td = table_trtd.appendChild(document.createElement('td'));
+		tablenum_td.id = 'num'+ i +'table'
 		tablelist.appendChild(table_trtd);
+		
 	}
 </script>
 
