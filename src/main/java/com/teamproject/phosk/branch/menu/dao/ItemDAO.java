@@ -43,5 +43,9 @@ public interface ItemDAO {
 
 	List<ItemOptionVO> getBOption(BranchItemInfo itemInfo);
 
-	List<ItemOptionVO> getAOption(BranchItemInfo itemInfo); 
+	List<ItemOptionVO> getAOption(BranchItemInfo itemInfo);
+
+	int updateBOption(BranchItemInfo itemInfo);
+
+	int updateAOption(BranchItemInfo itemInfo); 
 }

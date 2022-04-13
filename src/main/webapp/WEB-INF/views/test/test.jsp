@@ -6,6 +6,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </head>
 <body>
 	<form action="/test/testUpdate" method="post">
@@ -22,18 +24,17 @@
 			<!-- 추가 옵션을 넣게 되면 기본옵션과 같이 복사되어 같은 내용일 2번나왔음 -->
 			<!-- 테스트용은 db로 설명 가능 -->
 			<c:forEach items="${bOptions}" var="bOptions">
-				<label for="basic_option">기본옵션1</label>	<input type="text" name="basic_option" value="${bOptions.basic_option}"/><br />
+				<input type="hidden" name="basic_option" value="${bOptions.basic_option}"/>
+				<label for="change_basic_option">기본옵션1</label>	<input type="text" name="change_basic_option" value="${bOptions.basic_option}"/><br />
 				<label for="basic_price">기본가격1</label>	<input type="text" name="basic_price" value="${bOptions.basic_price}"/><br />
 			</c:forEach>
 			<c:forEach items="${aOptions}" var="aOptions">
-				<label for="add_option">추가옵션</label>	<input type="text" name="add_option" value="${aOptions.add_option}"/><br />
+				<input type="hidden" name="add_option" value="${aOptions.add_option}"/>
+				<label for="change_add_option">추가옵션</label>	<input type="text" name="change_add_option" value="${aOptions.add_option}"/><br />
 				<label for="add_price">추가가격</label>	<input type="text" name="add_price" value="${aOptions.add_price}"/><br />
 			</c:forEach>
-			테스트용<input type="text" name="testArr"/>
-			테스트용<input type="text" name="testArr"/>
-			추가옵션<input type="text" name="addArr"/>
-			추가옵션<input type="text" name="addArr"/>
-		<button type="submit">수정</button>
+			
+		<button type="submit">테스트 버튼</button>
 	</form>
 </body>
 </html>

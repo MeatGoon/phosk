@@ -109,4 +109,14 @@ public class ItemDAOImpl implements ItemDAO {
 		return session.selectList("addItemOption",itemInfo);
 	}
 
+	@Override
+	public int updateBOption(BranchItemInfo itemInfo) {
+		return session.update("updateBOption", itemInfo);
+	}
+
+	@Override
+	public int updateAOption(BranchItemInfo itemInfo) {
+		return session.update("updateAOption", itemInfo);
+	}
+
 }

@@ -111,4 +111,14 @@ public class ItemServiceImpl implements ItemService {
 		return testMapper.getAOption(itemInfo);
 	}
 
+	@Override
+	public int updateBOption(BranchItemInfo itemInfo) {
+		return testMapper.updateBOption(itemInfo);
+	}
+
+	@Override
+	public int updateAOption(BranchItemInfo itemInfo) {
+		return testMapper.updateAOption(itemInfo);
+	}
+
 }

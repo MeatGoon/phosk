@@ -31,7 +31,8 @@ public class ItemController {
 	private ItemService testService;
 
 	@GetMapping("/test")
-	public void test(BranchItemInfo itemInfo, String branch_num, Model model, HttpServletRequest request, NowPage nowPage) {
+	public void test(BranchItemInfo itemInfo, String branch_num, Model model, HttpServletRequest request,
+			NowPage nowPage) {
 		log.info("test List .....");
 
 		model.addAttribute("cateTest", testService.testquery(itemInfo));
@@ -39,39 +40,48 @@ public class ItemController {
 		model.addAttribute("aOptions", testService.getAOption(itemInfo));
 
 	}
+
 	@PostMapping("/testUpdate")
-	public String updateTest(BranchItemInfo itemInfo, String testArr, String addArr) {
-		System.out.println(itemInfo);
-		System.out.println(testArr);
-		System.out.println(addArr);
-		String[] testaddArr = testArr.split(",");
-		String[] ArrStr = testArr.split(",");
-		for (int i = 0; i < ArrStr.length; i++) {
-			System.out.println(ArrStr[i] + " 테스트");
-			/* 이방식처럼 basic, add 나눠서 if문으로 보낸다.
-			 * 왜냐하면 배열로 나뉠수도 있고 아닐수도 있으니
-			 * testService.updateItem(itemInfo);
-			 * testService.updateBOption(itemInfo);
-			 * testService.updateAOption(itemInfo);
-			 */
-		} /* addoption 은 null이 아닐경우 */
-		if(testaddArr != null) {
-			for (int i = 0; i < testaddArr.length; i++) {
-				System.out.println(testaddArr[i] + " 분리완료");
+	public String updateTest(BranchItemInfo itemInfo) {
+		/* System.out.println(itemInfo); */
+		
+		
+		/* 기본옵션 수정 */
+		String[] getBO = itemInfo.getBasic_option().split(",");
+		String[] getCBO = itemInfo.getChange_basic_option().split(",");
+		for (int i = 0; i < getBO.length; i++) {
+			if (!getBO[i].equals(getCBO[i])) {
+				itemInfo.setBasic_option(getBO[i]);
+				itemInfo.setChange_basic_option(getCBO[i]);
+				testService.updateBOption(itemInfo);
 			}
-		}else {
-			System.out.println("분리실패");
 		}
+		/* 추가옵션 수정 */
+		String[] getAO = itemInfo.getAdd_option().split(",");
+		String[] getCAO = itemInfo.getChange_add_option().split(",");
+		for (int i = 0; i < getAO.length; i++) {
+			if (!getAO[i].equals(getCAO[i])) {
+				itemInfo.setAdd_option(getAO[i]);
+				itemInfo.setChange_add_option(getCAO[i]);
+				testService.updateAOption(itemInfo);
+			}
+		}
+		/*
+		 * insert 할때 사용할 부분
+		 * 
+		 * if (addArr != "") { String[] ArrStr = addArr.split(","); for (int i = 0; i <
+		 * ArrStr.length; i++) { System.out.println(ArrStr[i] + "?분리완료"); } }
+		 */
 
 		return "redirect:/test/test?branch_num=123-45-67890&category_num=2&item_num=1";
 	}
+
 	@PostMapping("/testDel")
 	public String testDel() {
 
-		
 		return "redirect:/test/test?branch_num=123-45-67890&category_num=2&item_num=1";
 	}
-	
+
 	@GetMapping("/cateList")
 	public void cateList(String branch_num, String cateTest, Model model, HttpServletRequest request, NowPage nowPage) {
 		log.info("cate List .....");
@@ -103,7 +113,7 @@ public class ItemController {
 	public void detailInfo(String menue_name, Model model) {
 		model.addAttribute("meList", testService.detailInfo(menue_name));
 	}
-	
+
 	@PostMapping("/modify")
 	public String menueModify(ItemVO menueVO, RedirectAttributes rttr, NowPage nowPage) {
 		testService.modify(menueVO);
@@ -136,26 +146,25 @@ public class ItemController {
 	}
 
 	@PostMapping("/insrtCategory")
-	public String insrtCategory(CategoryVO categoryVO, int nowCate , RedirectAttributes rttr, NowPage nowPage) {
+	public String insrtCategory(CategoryVO categoryVO, int nowCate, RedirectAttributes rttr, NowPage nowPage) {
 		testService.insrtCategory(categoryVO);
 		return "redirect:/test/menueManage?cateTest=" + nowCate;
 	}
-	
+
 	@PostMapping("/updateCateName")
 	public String updateCateName(int category_num, CategoryVO cateVO, RedirectAttributes rttr) {
 		testService.updateCateName(cateVO);
 		rttr.addFlashAttribute("result", "UpCateName success");
 		return "redirect:/test/menueManage?cateTest=" + category_num;
 	}
-	
-	
+
 	@PostMapping("/deleteCategory")
 	public String deleteCategory(CategoryVO cateVO, RedirectAttributes rttr) {
 		testService.deleteCategory(cateVO);
 		rttr.addFlashAttribute("result", "delCate success");
 		return "redirect:/test/menueManage";
 	}
-	
+
 	@PostMapping("/deleteBestMenu")
 	public String deleteBestMenu(HttpServletRequest request, RedirectAttributes rttr, NowPage nowPage) {
 		String[] ajaxData = request.getParameterValues("checkedbtn");
@@ -164,9 +173,9 @@ public class ItemController {
 			testService.delBestMenu(ajaxData[i]);
 		}
 		rttr.addFlashAttribute("result", "deleteBestMenu success");
-		return "redirect:/test/menueManage?cateTest="+ nowCate;
+		return "redirect:/test/menueManage?cateTest=" + nowCate;
 	}
-	
+
 	@PostMapping("/deleteChk")
 	public String menueDelete(HttpServletRequest request, RedirectAttributes rttr, NowPage nowPage) {
 		String[] ajaxData = request.getParameterValues("checkedbtn");
@@ -175,9 +184,9 @@ public class ItemController {
 			testService.chkDel(ajaxData[i]);
 		}
 		rttr.addFlashAttribute("result", "deleteChk success");
-		return "redirect:/test/menueManage?cateTest="+ nowCate;
+		return "redirect:/test/menueManage?cateTest=" + nowCate;
 	}
-	
+
 	@PostMapping("/addBestMenu")
 	public String addBestMenu(HttpServletRequest request, RedirectAttributes rttr, NowPage nowPage) {
 		String[] ajaxData = request.getParameterValues("checkedbtn");
@@ -187,9 +196,7 @@ public class ItemController {
 			System.out.println(ajaxData[i]);
 		}
 		rttr.addFlashAttribute("result", "deleteChk success");
-		return "redirect:/test/menueManage?cateTest="+ nowCate;
+		return "redirect:/test/menueManage?cateTest=" + nowCate;
 	}
-	
-	
-	
+
 }
