@@ -5,7 +5,7 @@ import lombok.Data;
 @Data
 public class BranchItemInfo {
 	
-	// category_num
+	// phosk_category
 	private String branch_num;
 	private int category_num;
 	private String category_name;
@@ -18,20 +18,22 @@ public class BranchItemInfo {
 	private String item_lastDate;
 	private String item_regiDate;
 	
-	// 아이템에서 카테고리 이동시
+	// phosk_item에서 카테고리로 이동 할 경우
 	private int change_category_num;
 	
 	// phosk_basicoption
 	private String basic_option;//not null
 	private int basic_price;//not null
 	
-	// phosk_basicoption 명 변경시
+	// phosk_basicoption명 변경 시
 	private String change_basic_option;
 	
 	// phosk_addoption
 	private String add_option;//not null
 	private int add_price;
 	
-	// phosk_addoption 명 변경시
+	// phosk_addoption명 변경 시
 	private String change_add_option;
+	
+	// 옵션에 번호 추가하기!
 }

@@ -59,15 +59,14 @@ public class ItemServiceImpl implements ItemService {
 	}
 
 	@Override
-	public List<ItemVO> getMenue(String cateTest) {
-		System.out.println(cateTest + " 서비스의 값");
-		return testMapper.getMenue(cateTest);
+	public List<ItemVO> getMenue(BranchItemInfo itemInfo) {
+		return testMapper.getMenue(itemInfo);
 
 	}
 
 	@Override
-	public List<ItemVO> menuGetAll(String cateTest) {
-		return testMapper.menuGetAll(cateTest);
+	public List<ItemVO> menuGetAll(BranchItemInfo itemInfo) {
+		return testMapper.menuGetAll(itemInfo);
 	}
 
 	@Override
@@ -102,12 +101,12 @@ public class ItemServiceImpl implements ItemService {
 	}
 
 	@Override
-	public List<ItemOptionVO> getBOption(BranchItemInfo itemInfo) {
+	public List<BranchItemInfo> getBOption(BranchItemInfo itemInfo) {
 		return testMapper.getBOption(itemInfo);
 	}
 
 	@Override
-	public List<ItemOptionVO> getAOption(BranchItemInfo itemInfo) {
+	public List<BranchItemInfo> getAOption(BranchItemInfo itemInfo) {
 		return testMapper.getAOption(itemInfo);
 	}
 
@@ -121,4 +120,13 @@ public class ItemServiceImpl implements ItemService {
 		return testMapper.updateAOption(itemInfo);
 	}
 
+	@Override
+	public int updateItem(BranchItemInfo itemInfo) {
+		return testMapper.updateItem(itemInfo);
+	}
+
+	@Override
+	public int updateCategory(BranchItemInfo itemInfo) {
+		return testMapper.updateCategory(itemInfo);
+	}
 }

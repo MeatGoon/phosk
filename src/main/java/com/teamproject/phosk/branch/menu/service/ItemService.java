@@ -25,9 +25,9 @@ public interface ItemService {
 
 	public int insrtCategory(CategoryVO categoryVO);
 
-	public List<ItemVO> getMenue(String cateTest);
+	public List<ItemVO> getMenue(BranchItemInfo itemInfo);
 
-	public List<ItemVO> menuGetAll(String cateTest);
+	public List<ItemVO> menuGetAll(BranchItemInfo itemInfo);
 
 	public int deleteCategory(CategoryVO cateVO);
 
@@ -41,11 +41,16 @@ public interface ItemService {
 
 	public int testupdate(BranchItemInfo itemInfo);
 
-	public List<ItemOptionVO> getBOption(BranchItemInfo itemInfo);
+	public List<BranchItemInfo> getBOption(BranchItemInfo itemInfo);
 
-	public List<ItemOptionVO> getAOption(BranchItemInfo itemInfo);
+	public List<BranchItemInfo> getAOption(BranchItemInfo itemInfo);
 
 	public int updateBOption(BranchItemInfo itemInfo);
 
 	public int updateAOption(BranchItemInfo itemInfo);
+
+	public int updateItem(BranchItemInfo itemInfo);
+
+	public int updateCategory(BranchItemInfo itemInfo);
+
 }

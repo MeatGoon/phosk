@@ -5,6 +5,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,42 +29,57 @@ import lombok.extern.log4j.Log4j;
 public class ItemController {
 
 	@Autowired
-	private ItemService testService;
+	private ItemService service;
 
 	@GetMapping("/test")
 	public void test(BranchItemInfo itemInfo, String branch_num, Model model, HttpServletRequest request,
 			NowPage nowPage) {
 		log.info("test List .....");
+		
+		System.out.println(itemInfo);
 
-		model.addAttribute("cateTest", testService.testquery(itemInfo));
-		model.addAttribute("bOptions", testService.getBOption(itemInfo));
-		model.addAttribute("aOptions", testService.getAOption(itemInfo));
+		model.addAttribute("cateTest", service.testquery(itemInfo));
+		model.addAttribute("bOptions", service.getBOption(itemInfo));
+		model.addAttribute("aOptions", service.getAOption(itemInfo));
 
 	}
 
 	@PostMapping("/testUpdate")
-	public String updateTest(BranchItemInfo itemInfo) {
-		/* System.out.println(itemInfo); */
-		
-		
+	public String updateTest(BranchItemInfo itemInfo, String basic_price, String add_price) {
+		System.out.println(itemInfo);
+		System.out.println("basic_price ======" + basic_price);
+		service.updateCategory(itemInfo);
+		service.updateItem(itemInfo);
 		/* 기본옵션 수정 */
 		String[] getBO = itemInfo.getBasic_option().split(",");
+		String[] getBOP = basic_price.split(",");
 		String[] getCBO = itemInfo.getChange_basic_option().split(",");
+		
 		for (int i = 0; i < getBO.length; i++) {
-			if (!getBO[i].equals(getCBO[i])) {
-				itemInfo.setBasic_option(getBO[i]);
-				itemInfo.setChange_basic_option(getCBO[i]);
-				testService.updateBOption(itemInfo);
+			int setBOP = Integer.parseInt(getBOP[i]);
+			itemInfo.setBasic_option(getBO[i]);
+			itemInfo.setChange_basic_option(getCBO[i]);
+			itemInfo.setBasic_price(setBOP);
+			try {
+				service.updateBOption(itemInfo);
+			} catch (DuplicateKeyException e) {
+				System.out.println(e);
 			}
 		}
 		/* 추가옵션 수정 */
 		String[] getAO = itemInfo.getAdd_option().split(",");
+		String[] getAOP = add_price.split(",");
 		String[] getCAO = itemInfo.getChange_add_option().split(",");
 		for (int i = 0; i < getAO.length; i++) {
-			if (!getAO[i].equals(getCAO[i])) {
-				itemInfo.setAdd_option(getAO[i]);
-				itemInfo.setChange_add_option(getCAO[i]);
-				testService.updateAOption(itemInfo);
+			int setAOP = Integer.parseInt(getAOP[i]);
+			itemInfo.setAdd_option(getAO[i]);
+			itemInfo.setChange_add_option(getCAO[i]);
+			itemInfo.setAdd_price(setAOP);
+			try {
+				service.updateAOption(itemInfo);
+			} catch (DuplicateKeyException e) {
+				System.out.println(e);
+				/* 중복 키로인한 IDE console 출력후 반환 */
 			}
 		}
 		/*
@@ -83,40 +99,40 @@ public class ItemController {
 	}
 
 	@GetMapping("/cateList")
-	public void cateList(String branch_num, String cateTest, Model model, HttpServletRequest request, NowPage nowPage) {
+	public void cateList(String branch_num, BranchItemInfo itemInfo, Model model, HttpServletRequest request, NowPage nowPage) {
 		log.info("cate List .....");
-		System.out.println(cateTest);
-		List<CategoryVO> cateList = testService.cateList(branch_num);
-		if (cateTest != null) {
-			nowPage.setNowCate(Integer.parseInt(cateTest));
-			model.addAttribute("nowPage", nowPage);
-		}
-		model.addAttribute("cateTest", testService.getMenue(cateTest));
+		List<CategoryVO> cateList = service.cateList(branch_num);
+		model.addAttribute("branchInfo", branch_num);
+		model.addAttribute("cateTest", service.getMenue(itemInfo));
 		model.addAttribute("cateList", cateList);
-
+		/* 필요한부분 */
+		/* cateList = 카테고리 리스트 / cateTest = 메뉴 리스트 */
+		/* 기본가격 따로 불러와야함 */
 	}
 
 	@GetMapping("/menueManage") /* 카테고리 숫자 받아서 반환할거 필요할거같음 */
-	public void menueManage(String branch_num, Model model, HttpServletRequest request, NowPage nowPage) {
+	public void menueManage(String  branch_num, BranchItemInfo itemInfo, Model model, HttpServletRequest request) {
 		log.info("menuManage List .....");
 		String cateTest = request.getParameter("cateTest");
-		if (cateTest != null) {
-			nowPage.setNowCate(Integer.parseInt(cateTest));
-		}
-		List<CategoryVO> cateList = testService.cateList(branch_num);
+		List<CategoryVO> cateList = service.cateList(branch_num);
 		model.addAttribute("cateList", cateList);
-		model.addAttribute("cateTest", testService.menuGetAll(cateTest));
-		model.addAttribute("nowPage", nowPage);
+		model.addAttribute("cateTest", service.menuGetAll(itemInfo));
+		
+		/* 필요한부분 */
+		/* cateList = 카테고리 리스트 */
+		/* cateTest = 카테고리 정보가 담긴 메뉴리스트 */
 	}
 
 	@GetMapping("/detailInfo")
 	public void detailInfo(String menue_name, Model model) {
-		model.addAttribute("meList", testService.detailInfo(menue_name));
+		model.addAttribute("meList", service.detailInfo(menue_name));
+		/* 필요한부분 */
+		/* meList = 메뉴 하나의 정보가 담겨있는 부분 */
 	}
 
 	@PostMapping("/modify")
 	public String menueModify(ItemVO menueVO, RedirectAttributes rttr, NowPage nowPage) {
-		testService.modify(menueVO);
+		service.modify(menueVO);
 		int nowCate = nowPage.getNowCate();
 		rttr.addFlashAttribute("result", "modify success");
 		return "redirect:/test/menueManage" + nowCate;
@@ -124,7 +140,7 @@ public class ItemController {
 
 	@PostMapping("/delete")
 	public String menueDelete(ItemVO menueVO, RedirectAttributes rttr, NowPage nowPage) {
-		testService.delete(menueVO);
+		service.delete(menueVO);
 		int nowCate = nowPage.getNowCate();
 		rttr.addFlashAttribute("result", "delete success");
 		return "redirect:/test/menueManage" + nowCate;
@@ -133,34 +149,36 @@ public class ItemController {
 	@GetMapping("/insertMenue")
 	public void insertMenue(String branch_num, Model model, NowPage nowPage) {
 		log.info("insertMenue List .....");
-		List<CategoryVO> cateList = testService.cateList(branch_num);
+		List<CategoryVO> cateList = service.cateList(branch_num);
 		model.addAttribute("cateList", cateList);
 		model.addAttribute("nowPage", nowPage);
+		/* 필요한부분 */
+		/* cateList = 카테고리 리스트(카테고리 설정할때 사용) */
 	}
 
 	@PostMapping("/insertMenue")
 	public String insertMenue(ItemVO menueVO, int cateTest, RedirectAttributes rttr, NowPage nowPage) {
-		testService.insert(menueVO);
+		service.insert(menueVO);
 		rttr.addFlashAttribute("result", "insert success");
 		return "redirect:/test/menueManage?cateTest=" + cateTest;
 	}
 
 	@PostMapping("/insrtCategory")
 	public String insrtCategory(CategoryVO categoryVO, int nowCate, RedirectAttributes rttr, NowPage nowPage) {
-		testService.insrtCategory(categoryVO);
+		service.insrtCategory(categoryVO);
 		return "redirect:/test/menueManage?cateTest=" + nowCate;
 	}
 
 	@PostMapping("/updateCateName")
 	public String updateCateName(int category_num, CategoryVO cateVO, RedirectAttributes rttr) {
-		testService.updateCateName(cateVO);
+		service.updateCateName(cateVO);
 		rttr.addFlashAttribute("result", "UpCateName success");
 		return "redirect:/test/menueManage?cateTest=" + category_num;
 	}
 
 	@PostMapping("/deleteCategory")
 	public String deleteCategory(CategoryVO cateVO, RedirectAttributes rttr) {
-		testService.deleteCategory(cateVO);
+		service.deleteCategory(cateVO);
 		rttr.addFlashAttribute("result", "delCate success");
 		return "redirect:/test/menueManage";
 	}
@@ -170,7 +188,7 @@ public class ItemController {
 		String[] ajaxData = request.getParameterValues("checkedbtn");
 		int nowCate = nowPage.getNowCate();
 		for (int i = 0; i < ajaxData.length; i++) {
-			testService.delBestMenu(ajaxData[i]);
+			service.delBestMenu(ajaxData[i]);
 		}
 		rttr.addFlashAttribute("result", "deleteBestMenu success");
 		return "redirect:/test/menueManage?cateTest=" + nowCate;
@@ -181,7 +199,7 @@ public class ItemController {
 		String[] ajaxData = request.getParameterValues("checkedbtn");
 		int nowCate = nowPage.getNowCate();
 		for (int i = 0; i < ajaxData.length; i++) {
-			testService.chkDel(ajaxData[i]);
+			service.chkDel(ajaxData[i]);
 		}
 		rttr.addFlashAttribute("result", "deleteChk success");
 		return "redirect:/test/menueManage?cateTest=" + nowCate;
@@ -192,7 +210,7 @@ public class ItemController {
 		String[] ajaxData = request.getParameterValues("checkedbtn");
 		int nowCate = nowPage.getNowCate();
 		for (int i = 0; i < ajaxData.length; i++) {
-			testService.addBestMenu(ajaxData[i]);
+			service.addBestMenu(ajaxData[i]);
 			System.out.println(ajaxData[i]);
 		}
 		rttr.addFlashAttribute("result", "deleteChk success");

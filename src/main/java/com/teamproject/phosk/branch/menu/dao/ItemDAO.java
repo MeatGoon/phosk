@@ -25,9 +25,9 @@ public interface ItemDAO {
 
 	int insrtCategory(CategoryVO categoryVO);
 
-	List<ItemVO> getMenue(String cateTest);
+	List<ItemVO> getMenue(BranchItemInfo itemInfo);
 
-	List<ItemVO> menuGetAll(String cateTest);
+	List<ItemVO> menuGetAll(BranchItemInfo itemInfo);
 
 	int deleteCategory(CategoryVO cateVO);
 
@@ -41,11 +41,16 @@ public interface ItemDAO {
 
 	int testupdate(BranchItemInfo itemInfo);
 
-	List<ItemOptionVO> getBOption(BranchItemInfo itemInfo);
+	List<BranchItemInfo> getBOption(BranchItemInfo itemInfo);
 
-	List<ItemOptionVO> getAOption(BranchItemInfo itemInfo);
+	List<BranchItemInfo> getAOption(BranchItemInfo itemInfo);
 
 	int updateBOption(BranchItemInfo itemInfo);
 
-	int updateAOption(BranchItemInfo itemInfo); 
+	int updateAOption(BranchItemInfo itemInfo);
+
+	int updateItem(BranchItemInfo itemInfo);
+
+	int updateCategory(BranchItemInfo itemInfo);
+ 
 }

@@ -3,25 +3,33 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.teamproject.phosk.branch.menu.dao.ItemDAO">
-	<!-- 모든 정보 불러오기 -->
-	<sql id="itemAllInfo">
-		select pb.branch_num, pc.category_num, pc.category_name,
-		pi.item_num, pi.item_name, pi.item_image, pi.item_info, pi.item_lastdate, pi.item_regidate
-		from phosk_branch pb INNER JOIN phosk_category pc on (pb.branch_num = pc.branch_num)
-		INNER JOIN phosk_item pi on(pc.category_num = pi.category_num)
-	</sql>
-	
 	<!-- 카테고리만 가져오기 -->
-	<select id="getCategory">
-		select * from phosk_category where branch_num = #{branch_num} and category_num = #{category_num}
-	
+	<select id="getCategory" resultType="cateVO">
+		select * from phosk_category where branch_num = #{branch_num}
 	</select>
 	
 	<!-- 아이템까지의 값 불러오기 -->
 	<select id="itemDetailInfo" resultType="branchItemInfo">
-		<include refid="itemAllInfo" />
+		select pb.branch_num, pc.category_num, pc.category_name,
+		pi.item_num, pi.item_name, pi.item_image, pi.item_info, pi.item_lastdate, pi.item_regidate
+		from phosk_branch pb INNER JOIN phosk_category pc on (pb.branch_num = pc.branch_num)
+		INNER JOIN phosk_item pi on(pc.category_num = pi.category_num)
 		where pb.branch_num = #{branch_num} and pc.category_num =
 		#{category_num} and pi.item_num = #{item_num}
+	</select>
+	
+	<!-- 간소화된 메뉴리스트, 기본 옵션 정보 불러오기-->
+	<select id="getItem" resultType="branchItemInfo">
+		select pi.branch_num, pi.category_num, pi.item_num, pi.item_name, pi.item_image, pi.item_info, bo.basic_option, bo.basic_price from phosk_item pi INNER JOIN phosk_basicoption bo ON pi.item_num = bo.item_num
+		 WHERE pi.branch_num = #{branch_num}
+		 <choose>
+		 	<when test="category_num != null">
+		 		and pi.category_num = #{category_num}
+		 	</when>
+		 	<otherwise>
+		 		and pi.category_num = 0
+		 	</otherwise>
+		 </choose>
 	</select>
 	
 	<!-- 해당 아이템의 기본 가격 불러오기 -->
@@ -71,16 +79,22 @@
 	
 	<!-- upcate 부분 -->
 	<update id="updateCategory">
-		update phosk_item set
-		category_num = #{change_category_num}, category_name = #{category_name},
-		item_name = #{item_name}, item_image = #{item_image}, item_info = #{item_info}, item_lastDate = sysdate
-		where branch_num = #{branch_num} and category_num = #{category_num} and item_num = #{item_num}
+		update phosk_category set
+		category_name = #{category_name}
+		where branch_num = #{branch_num} and category_num = #{category_num}
 	</update>
 	<update id="updateItem">
 		update phosk_item set
 		category_num = #{change_category_num},
-		item_name = #{item_name}, item_image = #{item_image}, item_info = #{item_info}, item_lastDate = sysdate
-		where branch_num = #{branch_num} and category_num = #{category_num} and item_num = #{item_num}
+		item_name = #{item_name}
+		
+			<if test="item_image != null">
+				, item_image = #{item_image}
+			</if>
+			<if test="item_info != null">
+				, item_info = #{item_info}
+			</if>
+			, item_lastDate = sysdate where branch_num = #{branch_num} and category_num = #{category_num} and item_num = #{item_num}
 	</update>
 	<update id="updateBOption" parameterType="branchItemInfo">
 		update phosk_basicoption set category_num = #{category_num}, basic_option = #{change_basic_option}, basic_price = #{basic_price} where branch_num = #{branch_num} AND item_num = #{item_num} AND basic_option = #{basic_option}

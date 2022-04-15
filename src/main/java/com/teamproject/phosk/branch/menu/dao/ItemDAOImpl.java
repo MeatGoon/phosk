@@ -19,7 +19,7 @@ public class ItemDAOImpl implements ItemDAO {
 
 	@Override
 	public List<CategoryVO> cateList(String branch_num) {
-		return session.selectList("cateList", branch_num);
+		return session.selectList("getCategory", branch_num);
 	}
 
 	@Override
@@ -58,14 +58,13 @@ public class ItemDAOImpl implements ItemDAO {
 	}
 
 	@Override
-	public List<ItemVO> getMenue(String cateTest) {
-		System.out.println(cateTest + " 맵퍼의 값");
-		return session.selectList("getMenue", cateTest);
+	public List<ItemVO> getMenue(BranchItemInfo itemInfo) {
+		return session.selectList("getItem", itemInfo);
 	}
 
 	@Override
-	public List<ItemVO> menuGetAll(String cateTest) {
-		return session.selectList("menuGetAll", cateTest);
+	public List<ItemVO> menuGetAll(BranchItemInfo itemInfo) {
+		return session.selectList("getItem", itemInfo);
 	}
 
 	@Override
@@ -100,12 +99,12 @@ public class ItemDAOImpl implements ItemDAO {
 	}
 
 	@Override
-	public List<ItemOptionVO> getBOption(BranchItemInfo itemInfo) {
+	public List<BranchItemInfo> getBOption(BranchItemInfo itemInfo) {
 		return session.selectList("basicItemOption",itemInfo);
 	}
 
 	@Override
-	public List<ItemOptionVO> getAOption(BranchItemInfo itemInfo) {
+	public List<BranchItemInfo> getAOption(BranchItemInfo itemInfo) {
 		return session.selectList("addItemOption",itemInfo);
 	}
 
@@ -119,4 +118,13 @@ public class ItemDAOImpl implements ItemDAO {
 		return session.update("updateAOption", itemInfo);
 	}
 
+	@Override
+	public int updateItem(BranchItemInfo itemInfo) {
+		return session.update("updateItem", itemInfo);
+	}
+
+	@Override
+	public int updateCategory(BranchItemInfo itemInfo) {
+		return session.update("updateCategory", itemInfo);
+	}
 }
