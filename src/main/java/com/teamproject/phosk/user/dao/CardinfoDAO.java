@@ -11,5 +11,5 @@ public interface CardinfoDAO {
 	List<CardinfoVO> cardinfoForm();
 	
 	//카드삭제
-	public void  writecard(CardinfoVO cardninfovo);
+	public void  writecard(CardinfoVO cardinfovo);
 }

@@ -43,7 +43,6 @@
 
 	<delete id ="writecard" >
 		delete from phosk_cardinfo
-			where member_id = #{member_id}
-				and cardinfo_cardnum ={cardinfo_cardNum}
+			where cardinfo_cardnum ={cardinfo_cardNum}
 	</delete>
 </mapper>

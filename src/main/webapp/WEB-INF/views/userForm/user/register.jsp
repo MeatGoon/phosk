@@ -60,7 +60,7 @@
 			<div class= "test">
 				<input  type="text" name="member_id" id ="member_id" maxlength="11" placeholder="아이디 입력 (5~11자)"/>							
 			</div>			
-				<button type="button"  class="idchk"  >중복확인</button>
+				<button type="button"  class="idchk"  disabled = "disabled">중복확인</button>
 				<p class = "result">
 					<span class = "msg">id중복을 확인해주세요</span>
 				</p>
@@ -76,7 +76,9 @@
 						  data : query,
 						  success : function(data) {
 						  
-						   if(data == 1) {
+						  
+							   					
+						    if(data == 1){
 						    $(".result .msg").text("사용 불가");
 						    $(".result .msg").attr("style", "color:#f00");  
 						    
@@ -86,7 +88,8 @@
 						    $(".result .msg").attr("style", "color:#00f");
 						    
 						    $("#regist_btn").removeAttr("disabled");
-						}
+							}
+					
 					}
 					});
 				});	
@@ -100,16 +103,17 @@
 						  data : query,
 						  success : function(data) {
 						  
+							  
 						   if(data == 1) {
 						    $(".result2 .msg2").text("사용 불가");
 						    $(".result2 .msg2").attr("style", "color:#f00");  
 						    
-						    $("#regist_btn").attr("disabled", "disabled2");
+						    $(".idchk").attr("disabled", "disabled");
 						   } else {
 						    $(".result2 .msg2").text("사용 가능");
 						    $(".result2 .msg2").attr("style", "color:#00f");
 						    
-						    $("#regist_btn").removeAttr("disabled2");
+						    $(".idchk").removeAttr("disabled");
 						}
 					}
 					});
@@ -163,7 +167,7 @@
 			</div>		
 			<div>
 				<div class="register_but">
-					<input class= "regist_btn" id = "regist_btn" type="submit"  value="회원가입" disabled = "disabled","disabled2"/>
+					<input class= "regist_btn" id = "regist_btn" type="submit"  value="회원가입" disabled = "disabled" />
 					<input type="button" value="취소" onClick = "location.href='/userForm/usertest'" />
 				</div>
 			</div>

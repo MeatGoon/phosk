@@ -2,12 +2,15 @@ package com.teamproject.phosk.user.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.teamproject.phosk.user.service.CardinfoService;
 import com.teamproject.phosk.user.vo.CardinfoVO;
@@ -50,9 +53,28 @@ public class CardinfoController {
 	          model.addAttribute("mycard", cardinfoForm);
 
 	      }
-		 //카드정보 삭제
+			
+			
+		// 카드삭제 post
 		 @GetMapping("/writecard")
-		 public void writecard() {
-			 log.info("카드정보삭제");
+		 public String writecard(HttpSession session, CardinfoVO cardinfovo, RedirectAttributes rttr){
+		  log.info("post delete");		  		  		      
+		  
+		  
+		  CardinfoVO card = (CardinfoVO)session.getAttribute("card");
+		  
+		  String oldPass = card.getCardinfo_cardNum();
+		  String newPass = cardinfovo.getCardinfo_cardNum();
+		      
+		  if(!(oldPass.equals(newPass))) {
+		   rttr.addFlashAttribute("msg", false);
+		   return "/userForm/user/updateuser";
+		  }
+		  
+		  cardinfoservice.writecard(cardinfovo);
+		  
+		  session.invalidate();
+		   
+		  return "/userForm/user/updateuser";
 		 }
 }
