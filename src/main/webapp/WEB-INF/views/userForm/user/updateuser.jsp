@@ -38,7 +38,7 @@
 			});
 		
 		})
-
+	
 	</script>
 	<body>
 	<h1>회원수정</h1>
@@ -69,8 +69,17 @@
 									<td><c:out value="${list.cardinfo_cardNum}" /></td>								
 									<td><c:out value="${list.cardinfo_holderName}" /></td>
 									<td><input  type="text" id="cardinfo_cardNum" name="cardinfo_cardNum" value="${list.cardinfo_cardNum}"  /></td>
-									<td><button type="submit" onclick="location.href='/writecard'" >카드삭제</button></td>												
-									</tr>	
+									<td><button type="submit" id= "delete_btn" >카드삭제</button></td>												
+									</tr>
+									<script>
+									var form = $("#updateForm")
+									
+									   $("#delete_btn").on("click", function(){
+							        form.attr("action", "/writecard");
+							        form.attr("method", "post");
+							        form.submit();
+							   	 });
+									</script>	
 								</c:if>	
 							</c:forEach>
 							
