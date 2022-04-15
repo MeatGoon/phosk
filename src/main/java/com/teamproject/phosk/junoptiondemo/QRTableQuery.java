@@ -12,9 +12,9 @@ import java.sql.Statement;
 public class QRTableQuery {
 	static {
 		
-		Connection connection;
-		Statement statement;
-		ResultSet resultSet;		
+		Connection connection = null;
+		Statement statement = null;
+		ResultSet resultSet = null;		
 		
 		
 		

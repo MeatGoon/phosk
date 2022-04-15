@@ -109,6 +109,8 @@ button {
 								<button name="${cateTest.item_num}" value="${cateTest.category_num}" id="detailMenue_open">상세보기</button>
 								<div class="menueInfo menueInfo_top">
 									<span class="menue_text menue_text_top menue_info_name">음식명 : ${cateTest.item_name}</span>
+									
+									
 									<span class="menue_text menue_text_top menue_info_price">${cateTest.basic_option} : <fmt:formatNumber value="${cateTest.basic_price}"></fmt:formatNumber>&nbsp;원</span>
 								</div>
 								<div class="menueInfo menueInfo_bottom">
