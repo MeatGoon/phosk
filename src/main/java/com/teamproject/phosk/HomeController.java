@@ -35,5 +35,9 @@ public class HomeController {
 		
 		return "home";
 	}
+	@RequestMapping(value = "/branch/branch_index")
+	public void branch_index() {
+		
+	}
 	
 }

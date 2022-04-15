@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import com.teamproject.phosk.branch.menu.vo.BranchItemInfo;
 import com.teamproject.phosk.branch.menu.vo.CategoryVO;
+import com.teamproject.phosk.branch.menu.vo.ItemOptionVO;
 import com.teamproject.phosk.branch.menu.vo.ItemVO;
 
 @Repository
@@ -18,7 +19,7 @@ public class ItemDAOImpl implements ItemDAO {
 
 	@Override
 	public List<CategoryVO> cateList(String branch_num) {
-		return session.selectList("cateList", branch_num);
+		return session.selectList("getCategory", branch_num);
 	}
 
 	@Override
@@ -57,14 +58,13 @@ public class ItemDAOImpl implements ItemDAO {
 	}
 
 	@Override
-	public List<ItemVO> getMenue(String cateTest) {
-		System.out.println(cateTest + " 맵퍼의 값");
-		return session.selectList("getMenue", cateTest);
+	public List<ItemVO> getMenue(BranchItemInfo itemInfo) {
+		return session.selectList("getItem", itemInfo);
 	}
 
 	@Override
-	public List<ItemVO> menuGetAll(String cateTest) {
-		return session.selectList("menuGetAll", cateTest);
+	public List<ItemVO> menuGetAll(BranchItemInfo itemInfo) {
+		return session.selectList("getItem", itemInfo);
 	}
 
 	@Override
@@ -89,8 +89,8 @@ public class ItemDAOImpl implements ItemDAO {
 	}
 
 	@Override
-	public List<ItemVO> testquery(BranchItemInfo itemInfo) {
-		return session.selectList("itemDetailInfo",itemInfo);
+	public BranchItemInfo testquery(BranchItemInfo itemInfo) {
+		return session.selectOne("itemDetailInfo",itemInfo);
 	}
 
 	@Override
@@ -98,4 +98,33 @@ public class ItemDAOImpl implements ItemDAO {
 		return session.update("updateTest", itemInfo);
 	}
 
+	@Override
+	public List<BranchItemInfo> getBOption(BranchItemInfo itemInfo) {
+		return session.selectList("basicItemOption",itemInfo);
+	}
+
+	@Override
+	public List<BranchItemInfo> getAOption(BranchItemInfo itemInfo) {
+		return session.selectList("addItemOption",itemInfo);
+	}
+
+	@Override
+	public int updateBOption(BranchItemInfo itemInfo) {
+		return session.update("updateBOption", itemInfo);
+	}
+
+	@Override
+	public int updateAOption(BranchItemInfo itemInfo) {
+		return session.update("updateAOption", itemInfo);
+	}
+
+	@Override
+	public int updateItem(BranchItemInfo itemInfo) {
+		return session.update("updateItem", itemInfo);
+	}
+
+	@Override
+	public int updateCategory(BranchItemInfo itemInfo) {
+		return session.update("updateCategory", itemInfo);
+	}
 }

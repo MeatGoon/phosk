@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.teamproject.phosk.branch.menu.dao.ItemDAO;
 import com.teamproject.phosk.branch.menu.vo.BranchItemInfo;
 import com.teamproject.phosk.branch.menu.vo.CategoryVO;
+import com.teamproject.phosk.branch.menu.vo.ItemOptionVO;
 import com.teamproject.phosk.branch.menu.vo.ItemVO;
 
 @Service
@@ -58,15 +59,14 @@ public class ItemServiceImpl implements ItemService {
 	}
 
 	@Override
-	public List<ItemVO> getMenue(String cateTest) {
-		System.out.println(cateTest + " 서비스의 값");
-		return testMapper.getMenue(cateTest);
+	public List<ItemVO> getMenue(BranchItemInfo itemInfo) {
+		return testMapper.getMenue(itemInfo);
 
 	}
 
 	@Override
-	public List<ItemVO> menuGetAll(String cateTest) {
-		return testMapper.menuGetAll(cateTest);
+	public List<ItemVO> menuGetAll(BranchItemInfo itemInfo) {
+		return testMapper.menuGetAll(itemInfo);
 	}
 
 	@Override
@@ -91,7 +91,7 @@ public class ItemServiceImpl implements ItemService {
 	}
 
 	@Override
-	public List<ItemVO> testquery(BranchItemInfo itemInfo) {
+	public BranchItemInfo testquery(BranchItemInfo itemInfo) {
 		return testMapper.testquery(itemInfo);
 	}
 
@@ -100,4 +100,33 @@ public class ItemServiceImpl implements ItemService {
 		return testMapper.testupdate(itemInfo);
 	}
 
+	@Override
+	public List<BranchItemInfo> getBOption(BranchItemInfo itemInfo) {
+		return testMapper.getBOption(itemInfo);
+	}
+
+	@Override
+	public List<BranchItemInfo> getAOption(BranchItemInfo itemInfo) {
+		return testMapper.getAOption(itemInfo);
+	}
+
+	@Override
+	public int updateBOption(BranchItemInfo itemInfo) {
+		return testMapper.updateBOption(itemInfo);
+	}
+
+	@Override
+	public int updateAOption(BranchItemInfo itemInfo) {
+		return testMapper.updateAOption(itemInfo);
+	}
+
+	@Override
+	public int updateItem(BranchItemInfo itemInfo) {
+		return testMapper.updateItem(itemInfo);
+	}
+
+	@Override
+	public int updateCategory(BranchItemInfo itemInfo) {
+		return testMapper.updateCategory(itemInfo);
+	}
 }
