@@ -29,7 +29,7 @@ public interface ItemDAO {
 
 	List<ItemVO> menuGetAll(BranchItemInfo itemInfo);
 
-	int deleteCategory(CategoryVO cateVO);
+	int deleteCategory(BranchItemInfo itemInfo);
 
 	int updateCateName(CategoryVO cateVO);
 
@@ -52,5 +52,7 @@ public interface ItemDAO {
 	int updateItem(BranchItemInfo itemInfo);
 
 	int updateCategory(BranchItemInfo itemInfo);
+
+	int deleteItem(BranchItemInfo itemInfo);
  
 }

@@ -128,26 +128,27 @@ button {
 	</div>
 	<form id="moveForm" method="get">
 		<input type="text" name="branch_num" value="${branchInfo}"/>
-		<p>${category_num}</p>
+		<input type="text" name="category_num" value="${cateNum}"/>
+		<p>${result}</p>
 	</form>
-	${cateTest}
 	<script>
 	let form = $("#moveForm");
 	$(document).on("click", "#category_names", function() {
+		var cateVal = $(this).val();
+		console.log(cateVal);
 		form.attr("action", "/test/cateList");
-		form.append('<input type="text" name="category_num" value="' + $(this).val() + '"/>');
+		$("input[name=category_num]").val(cateVal);
 		form.submit();
 	});
 	$('#insert_btn').on('click',function() {
 				form.attr('action', '/test/insertMenue');
-				form.append('<input type="hidden" name="nowCate" value="' + $(this).val() + '"/>');
 				form.submit();
 			});
 		$(document).ready(function() {
 			$(document).on('click', 'button[id="detailMenue_open"]', function(e) {
 				var menueName = $(this).attr('name');
 				console.log(menueName);
-				form.append("<input type='hidden' name='menue_name' value='"+ menueName + "' />");
+				form.append("<input type='hidden' name='item_num' value='"+ menueName + "' />");
 				form.attr("action", "/test/detailInfo");
 				form.submit();
 				});

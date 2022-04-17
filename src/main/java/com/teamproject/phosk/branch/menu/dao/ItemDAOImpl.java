@@ -68,13 +68,13 @@ public class ItemDAOImpl implements ItemDAO {
 	}
 
 	@Override
-	public int deleteCategory(CategoryVO cateVO) {
-		return session.delete("deleteCategory", cateVO);
+	public int deleteCategory(BranchItemInfo itemInfo) {
+		return session.delete("deleteCategory", itemInfo);
 	}
 
 	@Override
 	public int updateCateName(CategoryVO cateVO) {
-		return session.update("updateCateName", cateVO);
+		return session.update("updateCategory", cateVO);
 	}
 
 	@Override
@@ -126,5 +126,10 @@ public class ItemDAOImpl implements ItemDAO {
 	@Override
 	public int updateCategory(BranchItemInfo itemInfo) {
 		return session.update("updateCategory", itemInfo);
+	}
+
+	@Override
+	public int deleteItem(BranchItemInfo itemInfo) {
+		return session.update("deleteItem", itemInfo);
 	}
 }

@@ -13,7 +13,7 @@
 	<form action="/test/testUpdate" method="post">
 			<label for="branch_num">사업자번호</label>		<input type="text" name="branch_num" value="${cateTest.branch_num}"/><br />
 			<input type="hidden" name="category_num" value="${cateTest.category_num}"/>
-			<label for="category_num">카테고리</label>		<input type="text" name="change_category_num" value="${cateTest.category_num}"/><br />
+			<label for="category_num">카테고리</label>		
 			<label for="category_name">카테고리명</label>	<input type="text" name="category_name" value="${cateTest.category_name}"/><br />
 			<label for="item_num">메뉴고유번호</label>		<input type="text" name="item_num" value="${cateTest.item_num}"/><br />
 			<label for="item_name">메뉴명</label>			<input type="text" name="item_name" value="${cateTest.item_name}"/><br />

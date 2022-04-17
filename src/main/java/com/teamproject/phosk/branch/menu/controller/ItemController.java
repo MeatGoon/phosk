@@ -35,7 +35,7 @@ public class ItemController {
 	public void test(BranchItemInfo itemInfo, String branch_num, Model model, HttpServletRequest request,
 			NowPage nowPage) {
 		log.info("test List .....");
-		
+
 		System.out.println(itemInfo);
 
 		model.addAttribute("cateTest", service.testquery(itemInfo));
@@ -54,7 +54,7 @@ public class ItemController {
 		String[] getBO = itemInfo.getBasic_option().split(",");
 		String[] getBOP = basic_price.split(",");
 		String[] getCBO = itemInfo.getChange_basic_option().split(",");
-		
+
 		for (int i = 0; i < getBO.length; i++) {
 			int setBOP = Integer.parseInt(getBOP[i]);
 			itemInfo.setBasic_option(getBO[i]);
@@ -98,52 +98,74 @@ public class ItemController {
 		return "redirect:/test/test?branch_num=123-45-67890&category_num=2&item_num=1";
 	}
 
+	// 메뉴 관리 메인 페이지
 	@GetMapping("/cateList")
-	public void cateList(String branch_num, BranchItemInfo itemInfo, Model model, HttpServletRequest request, NowPage nowPage) {
+	public void cateList(BranchItemInfo itemInfo, Model model, HttpServletRequest request, NowPage nowPage) {
 		log.info("cate List .....");
-		List<CategoryVO> cateList = service.cateList(branch_num);
-		model.addAttribute("branchInfo", branch_num);
+		String branch_num = itemInfo.getBranch_num();
+		model.addAttribute("branchInfo", branch_num); // 사업자 번호만 반환
+		model.addAttribute("cateNum", itemInfo.getCategory_num()); // 현재 카테고리 위치 반환
 		model.addAttribute("cateTest", service.getMenue(itemInfo));
-		model.addAttribute("cateList", cateList);
+		model.addAttribute("cateList", service.cateList(branch_num));
 		/* 필요한부분 */
 		/* cateList = 카테고리 리스트 / cateTest = 메뉴 리스트 */
 		/* 기본가격 따로 불러와야함 */
 	}
 
+	// 메뉴 관리 페이지 이동
 	@GetMapping("/menueManage") /* 카테고리 숫자 받아서 반환할거 필요할거같음 */
-	public void menueManage(String  branch_num, BranchItemInfo itemInfo, Model model, HttpServletRequest request) {
-		log.info("menuManage List .....");
-		String cateTest = request.getParameter("cateTest");
-		List<CategoryVO> cateList = service.cateList(branch_num);
-		model.addAttribute("cateList", cateList);
-		model.addAttribute("cateTest", service.menuGetAll(itemInfo));
-		
-		/* 필요한부분 */
-		/* cateList = 카테고리 리스트 */
-		/* cateTest = 카테고리 정보가 담긴 메뉴리스트 */
+	public void menueManage(BranchItemInfo itemInfo, Model model, HttpServletRequest request, NowPage nowPage) {
+		log.info("menueManage List .....");
+		String branch_num = itemInfo.getBranch_num();
+		model.addAttribute("branchInfo", branch_num); // 사업자 번호만 반환
+		model.addAttribute("cateNum", itemInfo.getCategory_num()); // 현재 카테고리 위치 반환
+		model.addAttribute("cateTest", service.getMenue(itemInfo));
+		model.addAttribute("cateList", service.cateList(branch_num));
 	}
 
+	// 메뉴 상세정보
 	@GetMapping("/detailInfo")
-	public void detailInfo(String menue_name, Model model) {
-		model.addAttribute("meList", service.detailInfo(menue_name));
-		/* 필요한부분 */
-		/* meList = 메뉴 하나의 정보가 담겨있는 부분 */
+	public void detailInfo(BranchItemInfo itemInfo, Model model) {
+		model.addAttribute("cateTest", service.testquery(itemInfo));
+		model.addAttribute("bOptions", service.getBOption(itemInfo));
+		model.addAttribute("aOptions", service.getAOption(itemInfo));
 	}
 
-	@PostMapping("/modify")
-	public String menueModify(ItemVO menueVO, RedirectAttributes rttr, NowPage nowPage) {
-		service.modify(menueVO);
-		int nowCate = nowPage.getNowCate();
-		rttr.addFlashAttribute("result", "modify success");
-		return "redirect:/test/menueManage" + nowCate;
-	}
+	// 메뉴수정
+	@PostMapping("/itemUpdate")
+	public String menueModify(BranchItemInfo itemInfo, String basic_price, String add_price) {
+		System.out.println(itemInfo);
+		String bNum = itemInfo.getBranch_num();
+		int cNUm = itemInfo.getCategory_num();
+		service.updateCategory(itemInfo);
+		service.updateItem(itemInfo);
+		/* 기본옵션 수정 */
+		String[] getBO = itemInfo.getBasic_option().split(",");
+		String[] getBOP = basic_price.split(",");
+		String[] getCBO = itemInfo.getChange_basic_option().split(",");
 
-	@PostMapping("/delete")
-	public String menueDelete(ItemVO menueVO, RedirectAttributes rttr, NowPage nowPage) {
-		service.delete(menueVO);
-		int nowCate = nowPage.getNowCate();
-		rttr.addFlashAttribute("result", "delete success");
-		return "redirect:/test/menueManage" + nowCate;
+		for (int i = 0; i < getBO.length; i++) {
+			int setBOP = Integer.parseInt(getBOP[i]);
+			itemInfo.setBasic_option(getBO[i]);
+			itemInfo.setChange_basic_option(getCBO[i]);
+			itemInfo.setBasic_price(setBOP);
+			service.updateBOption(itemInfo);
+		}
+		/* 추가옵션 수정 */
+		if (itemInfo.getAdd_option() != null) {
+			String[] getAO = itemInfo.getAdd_option().split(",");
+			String[] getAOP = add_price.split(",");
+			String[] getCAO = itemInfo.getChange_add_option().split(",");
+			for (int i = 0; i < getAO.length; i++) {
+				int setAOP = Integer.parseInt(getAOP[i]);
+				itemInfo.setAdd_option(getAO[i]);
+				itemInfo.setChange_add_option(getCAO[i]);
+				itemInfo.setAdd_price(setAOP);
+				service.updateAOption(itemInfo);
+			}
+
+		}
+		return "redirect:/test/cateList?branch_num=" + bNum + "&category_num=" + cNUm;
 	}
 
 	@GetMapping("/insertMenue")
@@ -168,21 +190,32 @@ public class ItemController {
 		service.insrtCategory(categoryVO);
 		return "redirect:/test/menueManage?cateTest=" + nowCate;
 	}
-
+	
+	// 카테고리명 수정
 	@PostMapping("/updateCateName")
-	public String updateCateName(int category_num, CategoryVO cateVO, RedirectAttributes rttr) {
-		service.updateCateName(cateVO);
+	public String updateCateName(CategoryVO cateVo, RedirectAttributes rttr) {
+		service.updateCateName(cateVo);
 		rttr.addFlashAttribute("result", "UpCateName success");
-		return "redirect:/test/menueManage?cateTest=" + category_num;
+		return "redirect:/test/menueManage?branch_num=" + cateVo.getBranch_num() + "&category_num=" + cateVo.getCategory_num();
 	}
 
+	// 카테고리 삭제
 	@PostMapping("/deleteCategory")
-	public String deleteCategory(CategoryVO cateVO, RedirectAttributes rttr) {
-		service.deleteCategory(cateVO);
+	public String deleteCategory(BranchItemInfo itemInfo, RedirectAttributes rttr) {
+		service.deleteCategory(itemInfo);
 		rttr.addFlashAttribute("result", "delCate success");
-		return "redirect:/test/menueManage";
+		return "redirect:/test/cateList?branch_num=" + itemInfo.getBranch_num();
+	}
+	
+	// 아이템 삭제
+	@PostMapping("/deleteItem")
+	public String menueDelete(BranchItemInfo itemInfo, RedirectAttributes rttr) {
+		service.deleteItem(itemInfo);
+		rttr.addFlashAttribute("result", "delete success"); // delete success 메인페이지로 반환 됨
+		return "redirect:/test/cateList?branch_num=" + itemInfo.getBranch_num() + "&category_num=" + itemInfo.getCategory_num();
 	}
 
+	// 값 하나만 보내다보니 조건문에 들어갈 값은 어떻게 해결해야할까..?
 	@PostMapping("/deleteBestMenu")
 	public String deleteBestMenu(HttpServletRequest request, RedirectAttributes rttr, NowPage nowPage) {
 		String[] ajaxData = request.getParameterValues("checkedbtn");
@@ -194,6 +227,7 @@ public class ItemController {
 		return "redirect:/test/menueManage?cateTest=" + nowCate;
 	}
 
+	// 값 하나만 보내다보니 조건문에 들어갈 값은 어떻게 해결해야할까..?
 	@PostMapping("/deleteChk")
 	public String menueDelete(HttpServletRequest request, RedirectAttributes rttr, NowPage nowPage) {
 		String[] ajaxData = request.getParameterValues("checkedbtn");
@@ -205,6 +239,7 @@ public class ItemController {
 		return "redirect:/test/menueManage?cateTest=" + nowCate;
 	}
 
+	// 값 하나만 보내다보니 조건문에 들어갈 값은 어떻게 해결해야할까..?
 	@PostMapping("/addBestMenu")
 	public String addBestMenu(HttpServletRequest request, RedirectAttributes rttr, NowPage nowPage) {
 		String[] ajaxData = request.getParameterValues("checkedbtn");

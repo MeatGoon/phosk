@@ -29,7 +29,7 @@ public interface ItemService {
 
 	public List<ItemVO> menuGetAll(BranchItemInfo itemInfo);
 
-	public int deleteCategory(CategoryVO cateVO);
+	public int deleteCategory(BranchItemInfo itemInfo);
 
 	public int updateCateName(CategoryVO cateVO);
 
@@ -52,5 +52,7 @@ public interface ItemService {
 	public int updateItem(BranchItemInfo itemInfo);
 
 	public int updateCategory(BranchItemInfo itemInfo);
+
+	public int deleteItem(BranchItemInfo itemInfo);
 
 }
