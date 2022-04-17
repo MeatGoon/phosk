@@ -50,9 +50,15 @@ public class CardinfoController {
 	          model.addAttribute("mycard", cardinfoForm);
 
 	      }
-		 //카드정보 삭제
-		 @GetMapping("/writecard")
-		 public void writecard() {
-			 log.info("카드정보삭제");
+			
+			
+		// 카드삭제 post
+		 @PostMapping("/writecard")
+		 public String writecard(CardinfoVO cardinfovo){
+		  log.info("post delete");		  		  		      	  
+		  
+		  cardinfoservice.writecard(cardinfovo);
+		  		   
+		  return "redirect:/userForm/user/updateuser";
 		 }
 }

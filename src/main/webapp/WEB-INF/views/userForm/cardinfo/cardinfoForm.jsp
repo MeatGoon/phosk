@@ -87,7 +87,7 @@
 						</th> 
 					</tr> 
 					<tr>
-						<td><input class="form" type="text" id="member_id" name="member_id" value="${login.member_id}" style=' color:red;' readonly="readonly"/></td>
+						<td><input class="form" type="hidden" id="member_id" name="member_id" value="${login.member_id}" /></td>
 					</tr>
 					<tr>
 						<td><input class="form" type="text" id = "cardinfo_holderName" name ="cardinfo_holderName"  placeholder="사용자이름" maxLength="50" oninput="maxLengthCheck(this)"/></td>

@@ -38,8 +38,10 @@
 			});
 		
 		})
+	
 	</script>
 	<body>
+	<h1>회원수정</h1>
 		<div id="container">
 			<form action="/userForm/user/updateuser" method="post" class= "update_userlist">						
 				<div class="form-group">
@@ -56,20 +58,31 @@
 					<button class="cencle" type="button">취소</button>
 				</div>
 				</form>
-				<div class= "user_card">
+				<div class= "user_card" >
 					<c:if test="${login != null }" >
-						<table style ='border : 1px solid red;'>
-									<tr><th>id</th><th>은행사</th><th>카드주</th></tr>		
+						<table style ='border : 1px solid red; '>
+									<tr><th>은행사</th><th>카드번호</th><th>카드주</th></tr>		
 							<c:forEach items="${mycard}" var = "list">
 								<c:if test="${list.member_id eq login.member_id}" >													
 									<tr>	
-									<td><c:out value="${list.member_id} " /></td>						
-									<td><c:out value="${list.cardinfo_bank}" /></td>								
-									<td><c:out value="${list.cardinfo_holderName}" /></td>	
-									<td><button type="submit" >카드삭제</button></td>												
-									</tr>	
+									<td><c:out value=" ${list.cardinfo_bank}" /></td>						
+									<td><c:out value="${list.cardinfo_cardNum}" /></td>								
+									<td><c:out value="${list.cardinfo_holderName}" /></td>
+									<td><input  type="text" id="cardinfo_cardNum" name="cardinfo_cardNum" value="${list.cardinfo_cardNum}"  /></td>
+									<td><button type="submit" id= "delete_btn" >카드삭제</button></td>												
+									</tr>
+									<script>
+									var form = $("#updateForm")
+									
+									   $("#delete_btn").on("click", function(){
+							        form.attr("action", "/writecard");
+							        form.attr("method", "post");
+							        form.submit();
+							   	 });
+									</script>	
 								</c:if>	
 							</c:forEach>
+							
 						</table>
 					</c:if>
 						<input type="button" value="카드등록" onClick = "location.href='/userForm/cardinfo/cardinfoForm'"><br>															

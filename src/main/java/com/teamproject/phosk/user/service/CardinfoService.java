@@ -10,5 +10,5 @@ public interface CardinfoService {
 	
 	List<CardinfoVO> cardinfoForm();
 	
-	public void  writecard(CardinfoVO cardninfovo);
+	public int  writecard(CardinfoVO cardinfovo);
 }
