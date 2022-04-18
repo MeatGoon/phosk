@@ -6,13 +6,7 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 	<script src="js/bootstrap.js"></script>
 <head>
-<script type = "test/havascript">
-	$(document).ready(function(){
-		$("#testbnt").on(click(function(){
-			location.href = "/userForm/user/updateuser";
-		});
-	});
-</script>
+
 		<jsp:include page="../userheader.jsp"/>
 </head>
 <body>
@@ -27,7 +21,6 @@
 									<td><c:out value="${list.member_id}" /></td>								
 									<td><c:out value="${list.member_pwd}" /></td>													
 								</tr>
-								<input id="testbnt " type="button" value="정보수정"  onClick = 'localocation.href = "/userForm/user/updateuser"'/>
 							</c:forEach>
 												
 			</table>

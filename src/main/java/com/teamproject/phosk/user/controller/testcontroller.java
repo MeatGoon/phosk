@@ -20,5 +20,12 @@ public class testcontroller {
 	public void testhome(){
 		log.info("testhome 페이지");
 	}
+	@GetMapping("/userForm/userOrder/test1")
+	public void testpage(){
+		log.info("가게입장 페이지");
+	}@GetMapping("/test/testList")
+	public void a(){
+		log.info("가게입장 페이지");
+	}
 	
 }

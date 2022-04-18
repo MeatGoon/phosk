@@ -10,7 +10,7 @@
 		select * from phosk_cardInfo
 	</select>
 	<select id="login" resultType="usermem">
-		SELECT member_id, member_pwd 
+		SELECT member_id, member_pwd
 		  FROM phosk_member
 		 WHERE member_id = #{member_id}
 		   AND member_pwd = #{member_pwd}   
@@ -25,12 +25,9 @@
 		values(#{cardinfo_bank},#{cardinfo_holderName},#{cardinfo_cardNum},#{cardinfo_dealine},#{cardinfo_cardCVC},#{cardinfo_accountpwd},#{cardinfo_cardpwd})	
 	</insert> 
 	
-	<update id = "updatemember">
-		update phosk_member
-		set
-			member_nic=#{member_nic}
-			member_pwd=#{member_pwd}
-		where
-			member_id=#{member_id}			
+	<update id = "updatemember">		
+		UPDATE phosk_member SET 
+		member_pwd = #{member_pwd}
+		WHERE member_id = #{member_id}			
 	</update>
 </mapper>
