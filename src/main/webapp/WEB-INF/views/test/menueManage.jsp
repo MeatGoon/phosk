@@ -369,7 +369,10 @@ button {
 				success : function(testdata) {
 					if (url = "/test/deleteChk") {
 						alert(checkedbtn.length + '개 메뉴 삭제.');
-						/* 추후 rttr 이용 혹은 modle.addAttribute 이용하여 문자 받아와서 각자의 alert 알람 */
+					}else if (url = "/test/addBestMenu") {
+						alert(checkedbtn.length + '개 인기메뉴 등록.');
+					}else if (url = "/test/deleteBestMenu") {
+						alert(checkedbtn.length + '개 인기메뉴 해제.');
 					}else {
 						alert("실패");
 					}

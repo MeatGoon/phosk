@@ -206,7 +206,7 @@ public class ItemController {
 	public String deleteCategory(BranchItemInfo itemInfo, RedirectAttributes rttr) {
 		service.deleteCategory(itemInfo);
 		rttr.addFlashAttribute("result", "delCate success");
-		return "redirect:/test/cateList?branch_num=" + itemInfo.getBranch_num();
+		return "redirect:/test/menueManage?branch_num=" + itemInfo.getBranch_num();
 	}
 	
 	// 아이템 삭제
