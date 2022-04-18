@@ -13,7 +13,11 @@ public interface MemberService {
 
 	public void updatemember(MemberVO membervo);
 	
+	public void  userdel(String member_id);
+	
 	public MemberVO idchk(String member_id);
 	
 	public MemberVO nicchk(String member_nic);
+	
+	
 }

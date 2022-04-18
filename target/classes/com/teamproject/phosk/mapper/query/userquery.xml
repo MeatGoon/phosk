@@ -40,9 +40,19 @@
 		member_pwd = #{member_pwd}
 		WHERE member_id = #{member_id}			
 	</update>
-
-	<delete id ="writecard" >
+	<!-- 카드선택삭제 -->
+	<delete id ="carddel">
 		delete from phosk_cardinfo
-			where cardinfo_cardnum ={cardinfo_cardNum}
+			where cardinfo_cardnum = #{cardinfo_cardNum}
+	</delete>
+	<!-- 카드전체삭제 -->
+	<delete id ="cardall">
+		delete from phosk_cardinfo
+			where member_id = #{member_id}
+	</delete>
+	<!-- 회원탈퇴 -->
+	<delete id ="userdel">
+		delete from phosk_member
+			where member_id = #{member_id}
 	</delete>
 </mapper>

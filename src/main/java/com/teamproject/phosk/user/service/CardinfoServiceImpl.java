@@ -1,4 +1,4 @@
-package com.teamproject.phosk.user.service;
+	package com.teamproject.phosk.user.service;
 
 import java.util.List;
 
@@ -25,8 +25,13 @@ public class CardinfoServiceImpl implements CardinfoService{
 		return cardinfodao.cardinfoForm();
 	}
 	@Override
-	public int writecard(CardinfoVO cardinfovo) {
-		return cardinfodao.writecard(cardinfovo);
+	public void carddel(int cardinfo_cardNum) {
+		cardinfodao.carddel(cardinfo_cardNum);
+
+	}
+	@Override
+	public void cardall(String member_id) {
+		cardinfodao.cardall(member_id);
 	}
 
 }

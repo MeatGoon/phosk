@@ -92,6 +92,18 @@ public class MemberController {
 
 		return "redirect:/userForm/usertest";
 		}
+		
+		 //회원탈퇴
+		 @PostMapping("/delete/userdel")
+		 public String userdel(String member_id ,HttpSession session){
+		  log.info("post delete all");
+		  		
+		  		  
+		  memberservice.userdel(member_id);
+		  session.invalidate();
+		 
+		  return "redirect:/userForm/usertest";
+		 }
 		 
 		@ResponseBody
 		@PostMapping("/idchk")

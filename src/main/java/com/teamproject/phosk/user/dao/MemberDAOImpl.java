@@ -35,6 +35,11 @@ public class MemberDAOImpl implements MemberDAO{
 	public void updatemember(MemberVO membervo) {
 		session.update("updatemember", membervo);
 		
+	
+	}
+	@Override
+	public void userdel(String member_id) {
+		session.delete("userdel",member_id);
 	}
 	@Override
 	public MemberVO idchk(String member_id) {
@@ -48,5 +53,6 @@ public class MemberDAOImpl implements MemberDAO{
 		return  session.selectOne("nicchk",member_nic);
 	
 	}
+	
 
 }
