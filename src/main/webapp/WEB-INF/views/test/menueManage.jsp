@@ -22,7 +22,7 @@ div {
 	display: block;
 }
 
-.categoryCon, .menueContainer, .menueInfo_container, .category_names {
+.categoryCon, .menueContainer, .menueInfo_container, #category_names {
 	border: 1px solid black;
 }
 
@@ -42,7 +42,7 @@ button {
 	height: 100%;
 }
 
-.category_names {
+#category_names {
 	width: 300px;
 	height: 50px;
 	margin: 0 auto;
@@ -193,13 +193,12 @@ button {
 	<div class="mainContainer">
 		<div class="categoryCon">
 			<div>
-				<button id="add_cate_btn" value="${nowPage.nowCate}">카테고리
+				<button id="add_cate_btn" value="${cateNum}">카테고리
 					추가</button>
 			</div>
 			<div class="categort_btns">
 				<c:forEach items="${cateList}" var="cateList">
-					<button value="${cateList.category_num}" class="category_names"
-						onclick="moveCategory(this)" style="color: blue;">${cateList.category_name}</button>
+					<button value="${cateList.category_num}" id="category_names" style="color: blue;">${cateList.category_name}</button>
 				</c:forEach>
 			</div>
 		</div>
@@ -207,16 +206,15 @@ button {
 			<div class="btnTest" style="position: sticky; top: 0; background-color: white; border-bottom: 1px solid black;">
 				<form action="/test/updateCateName" method="post" id="modifyForm">
 					<c:forEach var="cateList" items="${cateList}">
-						<c:if test="${cateList.category_num eq nowPage.nowCate}">
-							<input type="text" name="category_name"
-								value='${cateList.category_name}' />
-							<button type="button" value="${nowPage.nowCate}"
-								id="modify_cateName">수정</button>
+						<c:if test="${cateList.category_num eq cateNum}">
+							<input type="hidden" name="category_num" value="${cateList.category_num}"/>
+							<input type="text" name="category_name" value='${cateList.category_name}' />
+							<button type="button" value="${cateList.category_num}" id="modify_cateName">수정</button>
 						</c:if>
 					</c:forEach>
-					<button type="button" value="${nowPage.nowCate}" id="list_btn">목록이동</button>
-					<c:if test="${nowPage.nowCate ne 0}">
-						<button type="button" value="${nowPage.nowCate}"
+					<button type="button" value="${cateNum}" id="list_btn">목록이동</button>
+					<c:if test="${cateNum ne 0}">
+						<button type="button" value="${cateNum}"
 							id="delCategory_btn">카테고리 삭제</button>
 					</c:if>
 				</form>
@@ -225,34 +223,29 @@ button {
 				<c:forEach items='${cateTest}' var='cateTest'>
 					<div class='menueInfo_container'>
 						<div>
-							<button name="${cateTest.menue_name}/${cateTest.category_num}"
-								id="detailMenue_open">상세보기</button>
+							<button name="${cateTest.item_num}" value="${cateTest.category_num}" id="detailMenue_open">상세보기</button>
 						</div>
 						<div>
-							<input type="checkbox" name="menue_name" id="checked_menue"
-								value="${cateTest.menue_name}" />
+							<input type="checkbox" name="item_num" id="checked_menue" value="${cateTest.item_num}" />
 						</div>
 						<div class="menueInfo menueInfo_top">
-							<span class="menue_text menue_text_top menue_info_name">음식명
-								: ${cateTest.menue_name}</span> <span
-								class="menue_text menue_text_top menue_info_price">가격 : <fmt:formatNumber
-									value="${cateTest.menue_price}"></fmt:formatNumber>&nbsp;원
-							</span>
+							<span class="menue_text menue_text_top menue_info_name">음식명 : ${cateTest.item_name}</span>
+							<span class="menue_text menue_text_top menue_info_price">${cateTest.basic_option} : <fmt:formatNumber value="${cateTest.basic_price}"></fmt:formatNumber>&nbsp;원</span>
 						</div>
 						<div class="menueInfo menueInfo_bottom">
-							<span class="menue_text menue_info_detail">${cateTest.etc}</span>
+							<span class="menue_text menue_info_detail">${cateTest.item_info}</span>
 						</div>
 					</div>
 				</c:forEach>
 			</div>
 			<div style="position: sticky; bottom: 0; background-color: white;">
-				<c:if test="${nowPage.nowCate ne 0}">
+				<c:if test="${categoryName ne '인기메뉴'}">
 					<div>
-						<button value="${nowPage.nowCate}" id="insert_btn">메뉴등록</button>
+						<button value="${cateNum}" id="insert_btn">메뉴등록</button>
 					</div>
 				</c:if>
 				<c:choose>
-					<c:when test="${nowPage.nowCate ne 0}">
+					<c:when test="${categoryName ne '인기메뉴'}">
 						<button id="cheked_btn" class="del_checked_btn">선택 삭제</button>
 						<button id="cheked_btn" class="best_checked_btn">인기 등록</button>
 					</c:when>
@@ -263,105 +256,75 @@ button {
 			</div>
 		</div>
 	</div>
-	<form id="moveForm">
-		<!-- 추후 게시판처럼 기준vo 객체를 생성한다면 사용하게될 form -->
-		<%-- <input type="text" name="nowCate" value="${nowPage.nowCate}" /> --%>
+	<form id="moveForm" method="get">
+		<input type="text" name="branch_num" value="${branchInfo}"/>
+		<input type="text" name="category_num" value="${cateNum}"/>
+		<p>${delResult}</p>
 	</form>
 	<script>
 		/* 하나의 값만 변경후 복사가 되는 쿼리문이 없을경우 input 태그로 하나하나 입력후 새로 입력 */
 		/* 등원후 해야할것 준현님 쿼림문 적용하기 */
+		var bestNum;
+		bestNum = $("input[name=category_num]").text();
+		console.log(bestNum);
 		let moveForm = $("#moveForm");
-		$('#insert_btn')
-				.on(
-						'click',
-						function() {
-							moveForm.attr('method', 'get');
-							moveForm.attr('action', '/test/insertMenue');
-							moveForm
-									.append('<input type="hidden" name="nowCate" value="'
-											+ $(this).val() + '"/>');
-							moveForm.submit();
-						});
-		$('#modify_cateName')
-				.on(
-						'click',
-						function() {
-							let form = $('#modifyForm');
-							form
-									.append('<input type="hidden" name="category_num" value="'
-											+ $(this).val() + '"/>');
-							form.submit();
-						});
-		$('#delCategory_btn')
-				.on(
-						'click',
-						function() {
-							moveForm.attr('method', 'post');
-							if (confirm('확인시 하위 메뉴와 같이 삭제됩니다') == true) {
-								moveForm.attr('action', '/test/deleteCategory');
-								moveForm
-										.append('<input type="hidden" name="category_num" value="'
-												+ $(this).val() + '"/>');
-								moveForm.submit();
-							} else {
-								return;
-							}
-							moveForm.attr('action', '/test/deleteCategory');
-							moveForm
-									.append('<input type="hidden" name="category_num" value="'
-											+ $(this).val() + '"/>');
-							moveForm.submit();
-						});
-		$(document)
-				.ready(
-						function() {
-							$(document)
-									.on(
-											'click',
-											'button[id="detailMenue_open"]',
-											function(e) {
-
-												var menueName = $(this).attr(
-														'name');
-												var cateNum = $(this).val();
-												moveForm
-														.append("<input type='hidden' name='category_num' value='"+ cateNum + "'>");
-												moveForm
-														.append("<input type='hidden' name='menue_name' value='"+ menueName + "'>");
-												moveForm.attr("action",
-														"/test/detailInfo");
-												moveForm.submit();
-
-											});
-						});
+		$(document).on("click", "#category_names", function() {
+			var cateVal = $(this).val();
+			moveForm.attr("action", "/test/menueManage");
+			moveForm.append("<input type='text' name='category_name' value='" + $(this).text() +"'/>");
+			$("input[name=category_num]").val(cateVal);
+			moveForm.submit();
+		});
+		$('#insert_btn').on('click', function() {
+			moveForm.attr('method', 'get');
+			moveForm.attr('action', '/test/insertMenue');
+			moveForm.append('<input type="hidden" name="nowCate" value="' + $(this).val() + '"/>');
+			moveForm.submit();
+			});
+		$('#modify_cateName').on('click', function() {
+			let form = $('#modifyForm');
+			form.append('<input type="hidden" name="branch_num" value="${branchInfo}"/>');
+			form.submit();
+			});
+		
+		$('#delCategory_btn').on('click', function() {
+			moveForm.attr('method', 'post');
+			if (confirm('확인시 하위 메뉴와 같이 삭제됩니다') == true) {
+				moveForm.attr('action', '/test/deleteCategory');
+				moveForm.append('<input type="hidden" name="category_num" value="' + $(this).val() + '"/>');
+				moveForm.submit();
+				} else {
+					return;
+					}
+			moveForm.attr('action', '/test/deleteCategory');
+			moveForm.append('<input type="hidden" name="category_num" value="' + $(this).val() + '"/>');
+			moveForm.submit();
+			});
+		
+		$(document).ready(function() {
+			$(document).on('click', 'button[id="detailMenue_open"]', function(e) {
+				var item_num = $(this).attr('name');
+				console.log(item_num);
+				moveForm.append("<input type='hidden' name='item_num' value='"+ item_num + "' />");
+				moveForm.attr("action", "/test/detailInfo");
+				moveForm.submit();
+				});
+			});
 		/* 수정페이지로 이동하기 */
-		$(document)
-				.on(
-						"click",
-						"#list_btn",
-						function() {
-							console.log('test');
-							moveForm.attr('method', 'get');
-							moveForm
-									.append('<input type="hidden" name="cateTest" value="'
-											+ $(this).val() + '"/>');
-							moveForm.attr('action', '/test/cateList');
-							moveForm.submit();
-						});
+		$(document).on("click", "#list_btn", function() {
+			console.log('test');
+			moveForm.attr('method', 'get');
+			moveForm.append('<input type="hidden" name="cateTest" value="' + $(this).val() + '"/>');
+			moveForm.attr('action', '/test/cateList');
+			moveForm.submit();
+			});
 
-		$('#add_cate_btn')
-				.on(
-						'click',
-						function() {
-							moveForm.attr('method', 'post');
-							moveForm.attr('action', '/test/insrtCategory');
-							moveForm
-									.append('<input type="hidden" name="nowCate" value="'
-											+ $(this).val() + '"/>');
-							moveForm
-									.append("<input type='hidden' name='category_name' value='새 카테고리'>");
-							moveForm.submit();
-						});
+		$('#add_cate_btn').on('click', function() {
+			moveForm.attr('method', 'post');
+			moveForm.attr('action', '/test/insrtCategory');
+			moveForm.append("<input type='text' name='category_name' value='새 카테고리'>");
+			moveForm.submit();
+			});
 
 		$(document).ready(function() {
 			$(document).on("click", "button[id='cheked_btn']", function() {
@@ -385,9 +348,10 @@ button {
 
 		function checkedBtnfun(url) {
 			var checkedbtn = new Array(); /* 체크된 value의 값을 저장할 배열 생성 */
-			var btnArr;
+			var branchNum = "${branchInfo}";
+			var categoryNum = ${cateNum};
 			console.log(url + 'url 성공적 전송완료');
-			$("input:checkbox[name='menue_name']:checked").each(function() {
+			$("input:checkbox[name='item_num']:checked").each(function() {
 				/* input 태그의 checkbox의 name='menue_name'가 체크 가된 만큼 .each로 반복 하여 이벤트 발생 */
 				checkedbtn.push($(this).val()); /* 배열에 담을 checkbox의 value 값 */
 				console.log(checkedbtn); /* 배열에 담기는지 테스트 */
@@ -397,26 +361,23 @@ button {
 				type : "POST", // controller 의 mapping 타입이 Get 인지 Post 인지 설정
 				traditional : true, // 전통성 ex) true = checkedbtn='볶음밥', false = checkedbtn[]='볶음밥'
 				data : {
+					branchNum : branchNum,
+					categoryNum : categoryNum,
 					checkedbtn : checkedbtn
 				/* 담아둔 배열을 controller로 보낸다 */
 				},
 				success : function(testdata) {
-					if (testdata = 1) {
-						alert(checkedbtn.length + '개의 메뉴 작업 성공.');
+					if (url = "/test/deleteChk") {
+						alert(checkedbtn.length + '개 메뉴 삭제.');
 						/* 추후 rttr 이용 혹은 modle.addAttribute 이용하여 문자 받아와서 각자의 alert 알람 */
+					}else {
+						alert("실패");
 					}
 					console.log('성공!');
 					location.reload();
 				}
 			});
 		}
-		function moveCategory(e) {
-			var cateVal = $(e).val();
-			/* 			console.log(valtest);
-			 console.log( $(e).attr('value')); */
-			location.href = "/test/menueManage?cateTest=" + cateVal;
-		};
-		/* ajax를 통해 화면 전환을 시키니 2번씩 실행되어서 ajax를 삭제함. */
 	</script>
 </body>
 </html>

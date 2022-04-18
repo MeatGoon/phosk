@@ -3,54 +3,125 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.teamproject.phosk.branch.menu.dao.ItemDAO">
-	<sql id="itemAllInfo">
-		select pc.branch_num, pc.category_num, pc.category_name,
-		pi.item_num, pi.item_name, pi.item_image, pi.item_info,
-		pi.item_lastDate, pi.item_regiDate,
-		pb.basic_option1, pb.basic_option2,
-		pb.basic_option3, pb.basic_option4, pb.basic_price1, pb.basic_price2,
-		pb.basic_price3, pb.basic_price4,
-		pa.add_option1, pa.add_option2,
-		pa.add_option3, pa.add_option4, pa.add_option5, pa.add_price1,
-		pa.add_price2, pa.add_price3, pa.add_price4, pa.add_price5
-		from
-		phosk_category pc, phosk_item pi, phosk_basicoption pb,
-		phosk_addoption pa
-		WHERE pc.category_num = pi.category_num and
-		pi.item_num = pb.item_num and pi.item_num = pa.item_num
-	</sql>
-	<sql id="itemShorInfo">
-		select pi.item_num, pi.item_name, pi.item_image,
-		pi.item_info, pi.item_lastDate, pi.item_regiDate,
-		pb.basic_option1,
-		pb.basic_price1 from phosk_item pi, phosk_basicoption pb
-		WHERE
-		pi.item_num = pb.item_num
-	</sql>
-	<select id="cateList" resultType="cateVO">
-		select * from phosk_category
-		<if test="branch_num != null">
-			where branch_num = #{branch_num}
-		</if>
+	<!-- 카테고리만 가져오기 -->
+	<select id="getCategory" resultType="cateVO">
+		select * from phosk_category where branch_num = #{branch_num} ORDER BY category_num asc
 	</select>
-	<update id="updateTest">
-		DECLARE
-		BEGIN
-
-		Update phosk_category set category_name = #{category_name} where category_num = #{category_num};
-		
-		update phosk_item set item_name = #{item_name} where category_num = #{category_num}	AND item_num = #{item_num};
-		update phosk_basicoption set basic_option1 = #{basic_option1} where item_num = #{item_num};
-
-		END;
-		<!-- 작동은 하나 SQL 부적합한 열유형뜸 -->
-	</update>
+	
+	<!-- 아이템까지의 값 불러오기 -->
 	<select id="itemDetailInfo" resultType="branchItemInfo">
-		<include refid="itemAllInfo" />
-		and pc.branch_num = #{branch_num} and pc.category_num =
+		select pb.branch_num, pc.category_num, pc.category_name,
+		pi.item_num, pi.item_name, pi.item_image, pi.item_info, pi.item_lastdate, pi.item_regidate
+		from phosk_branch pb INNER JOIN phosk_category pc on (pb.branch_num = pc.branch_num)
+		INNER JOIN phosk_item pi on(pc.category_num = pi.category_num)
+		where pb.branch_num = #{branch_num} and pc.category_num =
 		#{category_num} and pi.item_num = #{item_num}
 	</select>
-	<select id="itemShorInfo" resultType="ItemVO">
-
+	
+	<!-- 간소화된 메뉴리스트, 기본 옵션 정보 불러오기-->
+	<select id="getItem" resultType="branchItemInfo">
+		select pi.branch_num, pi.category_num, pi.item_num, pi.item_name, pi.item_image, pi.item_info, bo.basic_option, bo.basic_price from phosk_item pi INNER JOIN phosk_basicoption bo ON pi.item_num = bo.item_num
+		 WHERE pi.branch_num = #{branch_num}
+		 <choose>
+		 	<when test="category_num != null">
+		 		and pi.category_num = #{category_num}
+		 	</when>
+		 	<otherwise>
+		 		and pi.category_name = 인기메뉴
+		 	</otherwise>
+		 </choose>
 	</select>
+	
+	<!-- 해당 아이템의 기본 가격 불러오기 -->
+	<select id="basicItemOption" resultType="itemOption">
+		select basic_option, basic_price 
+		from phosk_basicoption where branch_num = #{branch_num} and
+		category_num = #{category_num} and item_num = #{item_num}
+	</select>
+	
+	<!-- 해당 아이템의 추가옵션들 불러오기 -->
+	<select id="addItemOption" resultType="itemOption">
+		select add_option, add_price 
+		from phosk_addoption where branch_num = #{branch_num} and
+		category_num = #{category_num} and item_num = #{item_num}
+	</select>
+	
+	<!-- Insert 부분 -->
+	<insert id="insertCategory">
+		insert into phosk_category VALUES(#{branch_num}, CATE_SEQ.nextval, #{category_name})<!-- seq 사용시 변경 필요 -->
+	</insert>
+	<insert id="insertItem">
+		insert into phosk_item VALUES(#{branch_num}, #{category_num}, #{category_name}, #{item_num}, #{item_name}
+		<choose>
+			<when test="item_image != null">
+				, #{item_image}
+			</when>
+			<otherwise>
+				, null
+			</otherwise>
+		</choose>
+		<choose>
+			<when test="item_info != null">
+				, #{item_info}
+			</when>
+			<otherwise>
+				, null
+			</otherwise>
+		</choose>
+		, sysdate, sysdate)
+	</insert>
+	<insert id="insertBOption">
+		insert into phosk_basicOption VALUES(#{branch_num}, #{category_num}, #{item_num}, #{basic_option}, #{basic_price})
+	</insert>
+	<insert id="insertAOption">
+		insert into phosk_addOption values(#{branch_num}, #{category_num}, #{item_num}, #{add_option}, #{add_price})
+	</insert>
+	
+	<!-- upcate 부분 -->
+	<update id="updateCategory">
+		update phosk_category set
+		category_name = #{category_name}
+		where branch_num = #{branch_num} and category_num = #{category_num}
+	</update>
+	<update id="updateItem">
+		update phosk_item set
+		category_num = #{change_category_num},
+		item_name = #{item_name}
+		
+			<if test="item_image != null">
+				, item_image = #{item_image}
+			</if>
+			<if test="item_info != null">
+				, item_info = #{item_info}
+			</if>
+			, item_lastDate = sysdate where branch_num = #{branch_num} and category_num = #{category_num} and item_num = #{item_num}
+	</update>
+	<update id="updateBOption" parameterType="branchItemInfo">
+		update phosk_basicoption set category_num = #{category_num}, basic_option = #{change_basic_option}, basic_price = #{basic_price} where branch_num = #{branch_num} AND item_num = #{item_num} AND basic_option = #{basic_option}
+	</update>
+	<update id="updateAOption">
+		<if test="change_add_option != null">
+			update phosk_addoption set
+			category_num = #{category_num}, add_option = #{change_add_option}, add_price = #{add_price}
+			where branch_num = #{branch_num} and item_num = #{item_num} and add_option = #{add_option}
+		</if>
+	</update>
+	
+	<!-- delete 부분 -->
+	<delete id="deleteCategory">
+		delete phosk_category where branch_num = #{branch_num} and category_num = #{category_num}
+	</delete>
+	<delete id="deleteItem">
+		delete phosk_item where branch_num = #{branch_num} and category_num = #{category_num} and item_num = #{item_num}
+	</delete>
+	<delete id="deleteBOption">
+		delete basic_option where branch_num = #{branch_num} and item_num = #{item_num} and basic_option = #{basic_option} 
+	</delete>
+	<delete id="deleteAOption">
+		delete add_option where branch_num = #{branch_num} and item_num = #{item_num} and add_option = #{add_option}
+	</delete>
+	
+	<insert id="addBestMenu">
+		insert into 
+	</insert>
 </mapper>

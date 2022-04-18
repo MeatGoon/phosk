@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.teamproject.phosk.branch.menu.vo.BranchItemInfo;
 import com.teamproject.phosk.branch.menu.vo.CategoryVO;
+import com.teamproject.phosk.branch.menu.vo.ItemOptionVO;
 import com.teamproject.phosk.branch.menu.vo.ItemVO;
 
 public interface ItemDAO {
@@ -20,15 +21,15 @@ public interface ItemDAO {
 
 	int insert(ItemVO menueVO);
 
-	int chkDel(String menueVO);
+	int chkDel(ItemVO itemVO);
 
-	int insrtCategory(CategoryVO categoryVO);
+	int insrtCategory(CategoryVO cateVo);
 
-	List<ItemVO> getMenue(String cateTest);
+	List<ItemVO> getMenue(BranchItemInfo itemInfo);
 
-	List<ItemVO> menuGetAll(String cateTest);
+	List<ItemVO> menuGetAll(BranchItemInfo itemInfo);
 
-	int deleteCategory(CategoryVO cateVO);
+	int deleteCategory(BranchItemInfo itemInfo);
 
 	int updateCateName(CategoryVO cateVO);
 
@@ -36,7 +37,22 @@ public interface ItemDAO {
 
 	int addBestMenu(String menueVO);
 
-	List<ItemVO> testquery(BranchItemInfo itemInfo);
+	BranchItemInfo testquery(BranchItemInfo itemInfo);
 
-	int testupdate(BranchItemInfo itemInfo); 
+	int testupdate(BranchItemInfo itemInfo);
+
+	List<BranchItemInfo> getBOption(BranchItemInfo itemInfo);
+
+	List<BranchItemInfo> getAOption(BranchItemInfo itemInfo);
+
+	int updateBOption(BranchItemInfo itemInfo);
+
+	int updateAOption(BranchItemInfo itemInfo);
+
+	int updateItem(BranchItemInfo itemInfo);
+
+	int updateCategory(BranchItemInfo itemInfo);
+
+	int deleteItem(BranchItemInfo itemInfo);
+ 
 }

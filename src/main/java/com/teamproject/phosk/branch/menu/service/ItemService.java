@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.teamproject.phosk.branch.menu.vo.BranchItemInfo;
 import com.teamproject.phosk.branch.menu.vo.CategoryVO;
+import com.teamproject.phosk.branch.menu.vo.ItemOptionVO;
 import com.teamproject.phosk.branch.menu.vo.ItemVO;
 
 public interface ItemService {
@@ -20,15 +21,15 @@ public interface ItemService {
 
 	public int insert(ItemVO menueVO);
 
-	public int chkDel(String menueVO);
+	public int chkDel(ItemVO itemVO);
 
-	public int insrtCategory(CategoryVO categoryVO);
+	public int insrtCategory(CategoryVO cateVo);
 
-	public List<ItemVO> getMenue(String cateTest);
+	public List<ItemVO> getMenue(BranchItemInfo itemInfo);
 
-	public List<ItemVO> menuGetAll(String cateTest);
+	public List<ItemVO> menuGetAll(BranchItemInfo itemInfo);
 
-	public int deleteCategory(CategoryVO cateVO);
+	public int deleteCategory(BranchItemInfo itemInfo);
 
 	public int updateCateName(CategoryVO cateVO);
 
@@ -36,7 +37,22 @@ public interface ItemService {
 
 	public int addBestMenu(String menueVO);
 
-	public List<ItemVO> testquery(BranchItemInfo itemInfo);
+	public BranchItemInfo testquery(BranchItemInfo itemInfo);
 
 	public int testupdate(BranchItemInfo itemInfo);
+
+	public List<BranchItemInfo> getBOption(BranchItemInfo itemInfo);
+
+	public List<BranchItemInfo> getAOption(BranchItemInfo itemInfo);
+
+	public int updateBOption(BranchItemInfo itemInfo);
+
+	public int updateAOption(BranchItemInfo itemInfo);
+
+	public int updateItem(BranchItemInfo itemInfo);
+
+	public int updateCategory(BranchItemInfo itemInfo);
+
+	public int deleteItem(BranchItemInfo itemInfo);
+
 }
