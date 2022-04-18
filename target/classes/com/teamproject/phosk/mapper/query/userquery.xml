@@ -16,13 +16,23 @@
 		   AND member_pwd = #{member_pwd}   
 	</select>
 	
+	 
+	<select id ="idchk" resultType="usermem">
+		select member_id from phosk_member
+		where member_id = #{member_id}
+	</select>
+	<select id ="nicchk" resultType="usermem">
+		select member_nic from phosk_member
+		where member_nic = #{member_nic}
+	</select>
+	
 	<insert id="insertMember">
 		insert into phosk_member(member_nic,member_id,member_pwd)
 		values(#{member_nic},#{member_id},#{member_pwd})	
 	</insert>
 	<insert id="insertCard" >
-		insert into phosk_cardInfo(cardinfo_bank,cardinfo_holderName,cardinfo_cardNum,cardinfo_dealine,cardinfo_cardCVC,cardinfo_accountpwd,cardinfo_cardpwd)
-		values(#{cardinfo_bank},#{cardinfo_holderName},#{cardinfo_cardNum},#{cardinfo_dealine},#{cardinfo_cardCVC},#{cardinfo_accountpwd},#{cardinfo_cardpwd})	
+		insert into phosk_cardInfo(cardinfo_bank,cardinfo_holderName,cardinfo_cardNum,cardinfo_dealine,cardinfo_cardCVC,cardinfo_accountpwd,cardinfo_cardpwd,member_id)
+		values(#{cardinfo_bank},#{cardinfo_holderName},#{cardinfo_cardNum},#{cardinfo_dealine},#{cardinfo_cardCVC},#{cardinfo_accountpwd},#{cardinfo_cardpwd},#{member_id})	
 	</insert> 
 	
 	<update id = "updatemember">		
@@ -30,4 +40,19 @@
 		member_pwd = #{member_pwd}
 		WHERE member_id = #{member_id}			
 	</update>
+	<!-- 카드선택삭제 -->
+	<delete id ="carddel">
+		delete from phosk_cardinfo
+			where cardinfo_cardnum = #{cardinfo_cardNum}
+	</delete>
+	<!-- 카드전체삭제 -->
+	<delete id ="cardall">
+		delete from phosk_cardinfo
+			where member_id = #{member_id}
+	</delete>
+	<!-- 회원탈퇴 -->
+	<delete id ="userdel">
+		delete from phosk_member
+			where member_id = #{member_id}
+	</delete>
 </mapper>

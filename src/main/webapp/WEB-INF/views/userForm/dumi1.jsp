@@ -11,7 +11,10 @@
 <body>
 <div class= "testFooter">
 <h1>FOOTER</h1>
-								
+	<p> 음식 선택창</p>	
+	<div>
+	
+	</div>						
 </div>
 </body>
 </html>

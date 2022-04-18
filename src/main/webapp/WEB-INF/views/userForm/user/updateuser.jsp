@@ -1,16 +1,26 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix = "c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
  
 <!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset= UTF-8">
-	<jsp:include page="../userheader.jsp"/>	
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-	<script src="js/bootstrap.js"></script>
 	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 		<title>회원 정보수정</title>
 </head>
+<style>
+	.update_userlist{
+		text-align: center;
+	}
+	.user_card{
+		text-align: center;
+	}
+</style>
+<header>
+			<jsp:include page="../userheader.jsp"/>
+</header>
 	<script type="text/javascript">
 		$(document).ready(function(){
 			// 취소
@@ -26,43 +36,70 @@
 				}			
 			});
 		
-		})
+		
+		}
+	
+	//카드 전체삭제시 안내말 +만약 회원탈퇴시 카드정보가 있으면 카드삭제로 focus 주기 
+		
 	</script>
 	<body>
+	<h1>회원수정</h1>
 		<div id="container">
-			<form action="/userForm/user/updateuser" method="post">						
+			<form action="/userForm/user/updateuser" method="post" class= "update_userlist">						
 				<div class="form-group">
-					<label class="control" for="member_id" >아이디</label>
-					<input class="form" type="text" id="member_id" name="member_id" value="${login.member_id}" style=' color:red;' readonly="readonly"/>
-				</div>		
-				<div class="form-groupk">
-				기존페스워드
+					<label class="control" for="member_id" ></label>
+					<input class="form" type="hidden" id="member_id" name="member_id" value="${login.member_id}"  readonly="readonly"/>
 				</div>
+						
 				<div class="form-groupk">
-					<label class="control" for="member_pwd">패스워드</label>
+					<p>비밀번호변경</p><br>
+					<label class="control" for="member_pwd"></label>
 					<input class="forml" type="password" id="member_pwd" name="member_pwd" />
-				</div>		
+				</div>
+						
 				<div class="form-group">
 					<button class="btn" type="submit" id="submit">회원정보수정</button>
 					<button class="cencle" type="button">취소</button>
 				</div>
+			</form>
+				<form class = "change_line" autocomplete="off" method = "post">
+					<div class= "user_card" >
+						<c:if test="${login != null }" >
+							<table style ='border : 1px solid red; '>
+										<tr><th>은행사</th><th>카드번호</th><th>카드주</th></tr>		
+								<c:forEach items="${mycard}" var = "list">
+									<c:if test="${list.member_id eq login.member_id}" >													
+										<tr>	
+										<td><c:out value=" ${list.cardinfo_bank}" /></td>						
+										<td><c:out value="${list.cardinfo_cardNum}" /></td>								
+										<td><c:out value="${list.cardinfo_holderName}" /></td>
+										<td><input  type="hidden" id="cardinfo_cardNum" name="cardinfo_cardNum" value="${list.cardinfo_cardNum}" /></td>									
+										<td><button type="submit"  onclick="javascript: form.action='/delete/carddel';">카드삭제</button></td>	
+									</tr>
+																					
+							
+									</c:if>	
+								</c:forEach>
+									<tr>
+										<!-- 회원탈퇴랑 공통사용 -->
+										<td><input  type="hidden" id="member_id" name="member_id" value="${login.member_id}" /></td>
+										<td><button type="submit" class= "carddel_bnt"   onClick = "javascript: form.action='/delete/cardall';" >카드전체삭제</button></td>	
+									</tr>
+							</table>
+						</c:if>
+							<div>
+								<input type="button" value="카드등록" onClick = "location.href='/userForm/cardinfo/cardinfoForm'"><br>	
+							</div>
+							<div>
+								
+								<input type="submit" id = "userdel_btn"value="회원탈퇴" onClick = "javascript: form.action='/delete/userdel';">															
+							</div>
+				
+					</div>
 				</form>
-				<div>
-							<p>카드정보</p>
-					<table style ='border : 1px solid red;'>
-						<tr><th>번호</th><th>은행사</th><th>카드주</th></tr>						
-						<c:forEach items="${mycard}" var = "list">
-							<tr>	
-							<td><c:out value="1" /></td>						
-							<td><c:out value="${list.cardinfo_bank}" /></td>								
-							<td><c:out value="${list.cardinfo_holderName}" /></td>													
-							</tr>
-						</c:forEach>	
-					</table>
-						<input type="button" class="cc" value="카드등록" onClick = "location.href='/userForm/cardinfo/cardinfoForm'"><br>															
-				</div>
 		</div>
 		
 	</body>
+	
 	
 </html>

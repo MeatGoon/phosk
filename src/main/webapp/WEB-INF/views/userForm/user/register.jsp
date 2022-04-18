@@ -1,18 +1,20 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix = "c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page session="false" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <!DOCTYPE html>
 <html>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 	<script src="js/bootstrap.js"></script>
 	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+	<script src='https://code.jquery.com/jquery-3.3.1.min.js'></script>
 
 <head>
-	<jsp:include page="../userheader.jsp"/>
 	<title>회원가입창</title>
 </head>
-
+<header>
+			<jsp:include page="../userheader.jsp"/>
+</header>
 <body>	
 <script type="text/javascript">
 		
@@ -41,20 +43,82 @@
 		});
 	
 	});
-	</script>
+	
+</script>
 
     <div class = "register_main">
 		<form action="/userForm/user/register" method="POST">				
 			<div class= "test">
 				<input type="text" name="member_nic" id ="member_nic" maxlength="10" placeholder="닉네임" />											
 			</div>	
-				<input type="button"  class='as' id="check_button" value="check" onclick="checkid();">	
+				<button type="button"  class="nicchk"  >중복확인</button>
+				<p class = "result2">
+					<span class = "msg2">nic중복을 확인해주세요</span>
+				</p>
 		
 			<br>			
 			<div class= "test">
-				<input  type="text" name="member_id" id ="member_id" maxlength="11" placeholder="아이디 입력 (5~11자)" />							
-			</div>
-				<input type="button"  class='as' id="check_button" value="check" onclick="checkid();">
+				<input  type="text" name="member_id" id ="member_id" maxlength="11" placeholder="아이디 입력 (5~11자)"/>							
+			</div>			
+				<button type="button"  class="idchk"  disabled = "disabled">중복확인</button>
+				<p class = "result">
+					<span class = "msg">id중복을 확인해주세요</span>
+				</p>
+				<script>
+				//중복체크
+				$(".idchk").click(function(){ 
+
+					var query = {member_id : $("#member_id").val()};
+					
+					$.ajax({
+						  url : "/idchk",
+						  type : "post",
+						  data : query,
+						  success : function(data) {
+						  
+						  
+							   					
+						    if(data == 1){
+						    $(".result .msg").text("사용 불가");
+						    $(".result .msg").attr("style", "color:#f00");  
+						    
+						    $("#regist_btn").attr("disabled", "disabled");
+						   } else {
+						    $(".result .msg").text("사용 가능");
+						    $(".result .msg").attr("style", "color:#00f");
+						    
+						    $("#regist_btn").removeAttr("disabled");
+							}
+					
+					}
+					});
+				});	
+				$(".nicchk").click(function(){ 
+
+					var query = {member_nic : $("#member_nic").val()};
+					
+					$.ajax({
+						  url : "/nicchk",
+						  type : "post",
+						  data : query,
+						  success : function(data) {
+						  
+							  
+						   if(data == 1) {
+						    $(".result2 .msg2").text("사용 불가");
+						    $(".result2 .msg2").attr("style", "color:#f00");  
+						    
+						    $(".idchk").attr("disabled", "disabled");
+						   } else {
+						    $(".result2 .msg2").text("사용 가능");
+						    $(".result2 .msg2").attr("style", "color:#00f");
+						    
+						    $(".idchk").removeAttr("disabled");
+						}
+					}
+					});
+				});	
+				</script>
 			<br>
 			<div class= "test">
 				<input  class="form-control" type="password"  name="member_pwd" id ="member_pwd" maxlength="20"
@@ -89,20 +153,21 @@
 			<br>
 			<div>
 				<input type="button" class="cc" value="카드등록" onClick = "location.href='/userForm/cardinfo/cardinfoForm'"><br>
-				<table  style ='width:250px; border : 1px solid red;'>
-							<tr><th>번호</th><th>은행사</th><th>카드주</th></tr>						
+				<p>회원가입이후 내정보등록에서 이용가능합니다</p>
+				<%-- <table  style ='width:250px; border : 1px solid red;'>
+							<tr><th>회원아이디</th><th>은행사</th><th>카드주</th></tr>						
 							<c:forEach items="${cardinfoForm}" var = "list">
 								<tr>	
-									<td><c:out value="1" /></td>						
+									<td><c:out value="${list.member_id}" /></td>						
 									<td><c:out value="${list.cardinfo_bank}" /></td>								
 									<td><c:out value="${list.cardinfo_holderName}" /></td>													
 								</tr>
 							</c:forEach>					
-				</table>
+				</table> --%>
 			</div>		
 			<div>
 				<div class="register_but">
-					<input class= "regist_btn" type="submit" value="회원가입" />
+					<input class= "regist_btn" id = "regist_btn" type="submit"  value="회원가입" disabled = "disabled" />
 					<input type="button" value="취소" onClick = "location.href='/userForm/usertest'" />
 				</div>
 			</div>

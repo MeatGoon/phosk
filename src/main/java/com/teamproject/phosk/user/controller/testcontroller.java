@@ -23,9 +23,11 @@ public class testcontroller {
 	@GetMapping("/userForm/userOrder/test1")
 	public void testpage(){
 		log.info("가게입장 페이지");
-	}@GetMapping("/test/testList")
-	public void a(){
-		log.info("가게입장 페이지");
 	}
-	
+	@GetMapping("/userForm/dumibranch")
+	public void dumibranch(){
+		log.info("가게선택 페이지");
+	}
+
+
 }

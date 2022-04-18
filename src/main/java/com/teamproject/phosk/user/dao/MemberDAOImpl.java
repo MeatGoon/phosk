@@ -33,15 +33,26 @@ public class MemberDAOImpl implements MemberDAO{
 	}
 	@Override
 	public void updatemember(MemberVO membervo) {
-		int result = session.update("updatemember", membervo);
+		session.update("updatemember", membervo);
 		
-		System.out.println(membervo.getMember_nic());
-		System.out.println(membervo.getMember_pwd());
-		System.out.println(membervo.getMember_id());
-		
-		System.out.println(result);
-		
-		
+	
 	}
+	@Override
+	public void userdel(String member_id) {
+		session.delete("userdel",member_id);
+	}
+	@Override
+	public MemberVO idchk(String member_id) {
+		
+		return  session.selectOne("idchk",member_id);
+	
+	}
+	@Override
+	public MemberVO nicchk(String member_nic) {
+		
+		return  session.selectOne("nicchk",member_nic);
+	
+	}
+	
 
 }

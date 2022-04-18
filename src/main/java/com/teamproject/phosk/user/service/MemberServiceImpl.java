@@ -33,10 +33,20 @@ public class MemberServiceImpl implements MemberService{
 
 	@Override
 	public void updatemember(MemberVO membervo) {
-		memberdao.updatemember(membervo);
-		
-		System.out.println(membervo.getMember_nic());
-		System.out.println(membervo.getMember_pwd());
+		memberdao.updatemember(membervo);		
+	}
+	@Override
+	public void userdel(String member_id) {
+		memberdao.userdel(member_id);
+	}
+	
+	@Override
+	public MemberVO idchk(String member_id) {
+		return memberdao.idchk(member_id);
+	}
+	@Override
+	public MemberVO nicchk(String member_nic) {
+		return memberdao.nicchk(member_nic);
 	}
 		
 }

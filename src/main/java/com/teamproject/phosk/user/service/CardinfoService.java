@@ -9,4 +9,8 @@ public interface CardinfoService {
 	public void insertCard(CardinfoVO cardinfovo);
 	
 	List<CardinfoVO> cardinfoForm();
+	
+	public void  carddel(int cardinfo_cardNum);
+	
+	public void  cardall(String member_id);
 }

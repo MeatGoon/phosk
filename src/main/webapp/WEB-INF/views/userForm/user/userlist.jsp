@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix = "c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <!DOCTYPE html>
 <html>
@@ -7,8 +8,11 @@
 	<script src="js/bootstrap.js"></script>
 <head>
 
-		<jsp:include page="../userheader.jsp"/>
+		<title>회원조회</title>
 </head>
+<header>
+			<jsp:include page="../userheader.jsp"/>
+</header>
 <body>
 	<div>
 	<h1  style= ' text-align: center;'>회원정보조회</h1>
