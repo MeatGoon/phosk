@@ -48,7 +48,7 @@
 	
 	<!-- Insert 부분 -->
 	<insert id="insertCategory">
-		insert into phosk_item VALUES(#{branch_num}, #{category_num}, #{category_name})<!-- seq 사용시 변경 필요 -->
+		insert into phosk_category VALUES(#{branch_num}, CATE_SEQ.nextval, #{category_name})<!-- seq 사용시 변경 필요 -->
 	</insert>
 	<insert id="insertItem">
 		insert into phosk_item VALUES(#{branch_num}, #{category_num}, #{category_name}, #{item_num}, #{item_name}

@@ -54,8 +54,8 @@ public class ItemServiceImpl implements ItemService {
 	}
 
 	@Override
-	public int insrtCategory(CategoryVO categoryVO) {
-		return itemMapper.insrtCategory(categoryVO);
+	public int insrtCategory(CategoryVO cateVo) {
+		return itemMapper.insrtCategory(cateVo);
 	}
 
 	@Override

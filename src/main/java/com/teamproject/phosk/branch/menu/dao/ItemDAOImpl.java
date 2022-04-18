@@ -53,8 +53,8 @@ public class ItemDAOImpl implements ItemDAO {
 	}
 
 	@Override
-	public int insrtCategory(CategoryVO categoryVO) {
-		return session.insert("insrtCategory", categoryVO);
+	public int insrtCategory(CategoryVO cateVo) {
+		return session.insert("insertCategory", cateVo);
 	}
 
 	@Override

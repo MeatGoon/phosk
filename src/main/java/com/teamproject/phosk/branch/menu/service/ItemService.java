@@ -23,7 +23,7 @@ public interface ItemService {
 
 	public int chkDel(ItemVO itemVO);
 
-	public int insrtCategory(CategoryVO categoryVO);
+	public int insrtCategory(CategoryVO cateVo);
 
 	public List<ItemVO> getMenue(BranchItemInfo itemInfo);
 

@@ -322,7 +322,7 @@ button {
 		$('#add_cate_btn').on('click', function() {
 			moveForm.attr('method', 'post');
 			moveForm.attr('action', '/test/insrtCategory');
-			moveForm.append("<input type='hidden' name='category_name' value='새 카테고리'>");
+			moveForm.append("<input type='text' name='category_name' value='새 카테고리'>");
 			moveForm.submit();
 			});
 

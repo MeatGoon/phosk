@@ -23,7 +23,7 @@ public interface ItemDAO {
 
 	int chkDel(ItemVO itemVO);
 
-	int insrtCategory(CategoryVO categoryVO);
+	int insrtCategory(CategoryVO cateVo);
 
 	List<ItemVO> getMenue(BranchItemInfo itemInfo);
 

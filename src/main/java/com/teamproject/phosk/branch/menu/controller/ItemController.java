@@ -179,17 +179,18 @@ public class ItemController {
 		/* cateList = 카테고리 리스트(카테고리 설정할때 사용) */
 	}
 
+	@PostMapping("/insrtCategory")
+	public String insrtCategory(CategoryVO cateVo, RedirectAttributes rttr) {
+		System.out.println(cateVo);
+		service.insrtCategory(cateVo);
+		return "redirect:/test/menueManage?branch_num=" + cateVo.getBranch_num() + "&category_num=" + cateVo.getCategory_num();
+	}
+	
 	@PostMapping("/insertMenue")
 	public String insertMenue(ItemVO menueVO, int cateTest, RedirectAttributes rttr, NowPage nowPage) {
 		service.insert(menueVO);
 		rttr.addFlashAttribute("result", "insert success");
 		return "redirect:/test/menueManage?cateTest=" + cateTest;
-	}
-
-	@PostMapping("/insrtCategory")
-	public String insrtCategory(CategoryVO categoryVO, int nowCate, RedirectAttributes rttr, NowPage nowPage) {
-		service.insrtCategory(categoryVO);
-		return "redirect:/test/menueManage?cateTest=" + nowCate;
 	}
 	
 	// 카테고리명 수정
