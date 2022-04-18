@@ -49,8 +49,8 @@ public class ItemServiceImpl implements ItemService {
 	}
 
 	@Override
-	public int chkDel(String menueVO) {
-		return itemMapper.chkDel(menueVO);
+	public int chkDel(ItemVO itemVO) {
+		return itemMapper.chkDel(itemVO);
 	}
 
 	@Override

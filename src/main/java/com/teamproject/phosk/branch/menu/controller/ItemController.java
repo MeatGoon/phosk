@@ -114,11 +114,12 @@ public class ItemController {
 
 	// 메뉴 관리 페이지 이동
 	@GetMapping("/menueManage") /* 카테고리 숫자 받아서 반환할거 필요할거같음 */
-	public void menueManage(BranchItemInfo itemInfo, Model model, HttpServletRequest request, NowPage nowPage) {
+	public void menueManage(BranchItemInfo itemInfo, Model model, HttpServletRequest request) {
 		log.info("menueManage List .....");
 		String branch_num = itemInfo.getBranch_num();
 		model.addAttribute("branchInfo", branch_num); // 사업자 번호만 반환
 		model.addAttribute("cateNum", itemInfo.getCategory_num()); // 현재 카테고리 위치 반환
+		model.addAttribute("categoryName", itemInfo.getCategory_name()); // 인기메뉴 구별을 위한 카테고리 이름 정보
 		model.addAttribute("cateTest", service.getMenue(itemInfo));
 		model.addAttribute("cateList", service.cateList(branch_num));
 	}
@@ -229,14 +230,21 @@ public class ItemController {
 
 	// 값 하나만 보내다보니 조건문에 들어갈 값은 어떻게 해결해야할까..?
 	@PostMapping("/deleteChk")
-	public String menueDelete(HttpServletRequest request, RedirectAttributes rttr, NowPage nowPage) {
+	public String menueDelete(ItemVO itemVO, HttpServletRequest request, RedirectAttributes rttr) {
 		String[] ajaxData = request.getParameterValues("checkedbtn");
-		int nowCate = nowPage.getNowCate();
+		String branchNum = request.getParameter("branchNum");
+		String categoryNum = request.getParameter("categoryNum");
+		System.out.println(ajaxData.length);
 		for (int i = 0; i < ajaxData.length; i++) {
-			service.chkDel(ajaxData[i]);
+			System.out.println("================");
+			System.out.println(i);
+			itemVO.setBranch_num(branchNum);
+			itemVO.setCategory_num(Integer.parseInt(categoryNum));
+			itemVO.setItem_num(Integer.parseInt(ajaxData[i]));
+			service.chkDel(itemVO);
 		}
 		rttr.addFlashAttribute("result", "deleteChk success");
-		return "redirect:/test/menueManage?cateTest=" + nowCate;
+		return "redirect:/test/menueManage?branch_num=" + itemVO.getBranch_num() + "&category_num=" + itemVO.getCategory_num();
 	}
 
 	// 값 하나만 보내다보니 조건문에 들어갈 값은 어떻게 해결해야할까..?
@@ -248,7 +256,7 @@ public class ItemController {
 			service.addBestMenu(ajaxData[i]);
 			System.out.println(ajaxData[i]);
 		}
-		rttr.addFlashAttribute("result", "deleteChk success");
+		rttr.addFlashAttribute("result", "addBest success");
 		return "redirect:/test/menueManage?cateTest=" + nowCate;
 	}
 

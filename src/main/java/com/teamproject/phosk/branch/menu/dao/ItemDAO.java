@@ -21,7 +21,7 @@ public interface ItemDAO {
 
 	int insert(ItemVO menueVO);
 
-	int chkDel(String menueVO);
+	int chkDel(ItemVO itemVO);
 
 	int insrtCategory(CategoryVO categoryVO);
 

@@ -21,7 +21,7 @@ public interface ItemService {
 
 	public int insert(ItemVO menueVO);
 
-	public int chkDel(String menueVO);
+	public int chkDel(ItemVO itemVO);
 
 	public int insrtCategory(CategoryVO categoryVO);
 

@@ -48,8 +48,8 @@ public class ItemDAOImpl implements ItemDAO {
 	}
 
 	@Override
-	public int chkDel(String menueVO) {
-		return session.delete("menueDelete", menueVO);
+	public int chkDel(ItemVO itemVO) {
+		return session.delete("deleteItem", itemVO);
 	}
 
 	@Override

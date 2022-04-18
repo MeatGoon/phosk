@@ -4,7 +4,8 @@ import lombok.Data;
 
 @Data
 public class ItemVO {
-	CategoryVO categoryVO;
+	private String branch_num;
+	private int category_num;
 	private int item_num;
 	private String item_name;
 	private String item_image;

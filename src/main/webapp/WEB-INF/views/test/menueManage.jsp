@@ -226,7 +226,7 @@ button {
 							<button name="${cateTest.item_num}" value="${cateTest.category_num}" id="detailMenue_open">상세보기</button>
 						</div>
 						<div>
-							<input type="checkbox" name="menue_name" id="checked_menue" value="${cateTest.item_name}" />
+							<input type="checkbox" name="item_num" id="checked_menue" value="${cateTest.item_num}" />
 						</div>
 						<div class="menueInfo menueInfo_top">
 							<span class="menue_text menue_text_top menue_info_name">음식명 : ${cateTest.item_name}</span>
@@ -239,13 +239,13 @@ button {
 				</c:forEach>
 			</div>
 			<div style="position: sticky; bottom: 0; background-color: white;">
-				<c:if test="${cateNum ne 0}">
+				<c:if test="${categoryName ne '인기메뉴'}">
 					<div>
 						<button value="${cateNum}" id="insert_btn">메뉴등록</button>
 					</div>
 				</c:if>
 				<c:choose>
-					<c:when test="${cateNum ne 0}">
+					<c:when test="${categoryName ne '인기메뉴'}">
 						<button id="cheked_btn" class="del_checked_btn">선택 삭제</button>
 						<button id="cheked_btn" class="best_checked_btn">인기 등록</button>
 					</c:when>
@@ -259,15 +259,19 @@ button {
 	<form id="moveForm" method="get">
 		<input type="text" name="branch_num" value="${branchInfo}"/>
 		<input type="text" name="category_num" value="${cateNum}"/>
+		<p>${delResult}</p>
 	</form>
 	<script>
 		/* 하나의 값만 변경후 복사가 되는 쿼리문이 없을경우 input 태그로 하나하나 입력후 새로 입력 */
 		/* 등원후 해야할것 준현님 쿼림문 적용하기 */
+		var bestNum;
+		bestNum = $("input[name=category_num]").text();
+		console.log(bestNum);
 		let moveForm = $("#moveForm");
 		$(document).on("click", "#category_names", function() {
 			var cateVal = $(this).val();
-			console.log(cateVal);
 			moveForm.attr("action", "/test/menueManage");
+			moveForm.append("<input type='text' name='category_name' value='" + $(this).text() +"'/>");
 			$("input[name=category_num]").val(cateVal);
 			moveForm.submit();
 		});
@@ -344,9 +348,10 @@ button {
 
 		function checkedBtnfun(url) {
 			var checkedbtn = new Array(); /* 체크된 value의 값을 저장할 배열 생성 */
-			var btnArr;
+			var branchNum = "${branchInfo}";
+			var categoryNum = ${cateNum};
 			console.log(url + 'url 성공적 전송완료');
-			$("input:checkbox[name='menue_name']:checked").each(function() {
+			$("input:checkbox[name='item_num']:checked").each(function() {
 				/* input 태그의 checkbox의 name='menue_name'가 체크 가된 만큼 .each로 반복 하여 이벤트 발생 */
 				checkedbtn.push($(this).val()); /* 배열에 담을 checkbox의 value 값 */
 				console.log(checkedbtn); /* 배열에 담기는지 테스트 */
@@ -356,13 +361,17 @@ button {
 				type : "POST", // controller 의 mapping 타입이 Get 인지 Post 인지 설정
 				traditional : true, // 전통성 ex) true = checkedbtn='볶음밥', false = checkedbtn[]='볶음밥'
 				data : {
+					branchNum : branchNum,
+					categoryNum : categoryNum,
 					checkedbtn : checkedbtn
 				/* 담아둔 배열을 controller로 보낸다 */
 				},
 				success : function(testdata) {
-					if (testdata = 1) {
-						alert(checkedbtn.length + '개의 메뉴 작업 성공.');
+					if (url = "/test/deleteChk") {
+						alert(checkedbtn.length + '개 메뉴 삭제.');
 						/* 추후 rttr 이용 혹은 modle.addAttribute 이용하여 문자 받아와서 각자의 alert 알람 */
+					}else {
+						alert("실패");
 					}
 					console.log('성공!');
 					location.reload();

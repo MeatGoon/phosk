@@ -103,7 +103,7 @@ button {
 			</div>
 			<div id="menue_eachform">
 				<c:choose>
-					<c:when test="${!empty cateTest }">
+					<c:when test="${!empty cateTest}">
 						<c:forEach items='${cateTest}' var='cateTest'>
 							<div class='menueInfo_container'>
 								<button name="${cateTest.item_num}" value="${cateTest.category_num}" id="detailMenue_open">상세보기</button>

@@ -5,7 +5,7 @@
 <mapper namespace="com.teamproject.phosk.branch.menu.dao.ItemDAO">
 	<!-- 카테고리만 가져오기 -->
 	<select id="getCategory" resultType="cateVO">
-		select * from phosk_category where branch_num = #{branch_num}
+		select * from phosk_category where branch_num = #{branch_num} ORDER BY category_num asc
 	</select>
 	
 	<!-- 아이템까지의 값 불러오기 -->
@@ -27,7 +27,7 @@
 		 		and pi.category_num = #{category_num}
 		 	</when>
 		 	<otherwise>
-		 		and pi.category_num = 0
+		 		and pi.category_name = 인기메뉴
 		 	</otherwise>
 		 </choose>
 	</select>
@@ -120,4 +120,8 @@
 	<delete id="deleteAOption">
 		delete add_option where branch_num = #{branch_num} and item_num = #{item_num} and add_option = #{add_option}
 	</delete>
+	
+	<insert id="addBestMenu">
+		insert into 
+	</insert>
 </mapper>
