@@ -80,9 +80,8 @@ public class ItemServiceImpl implements ItemService {
 	}
 
 	@Override
-	public int addBestMenu(String menueVO) {
-		System.out.println(menueVO);
-		return itemMapper.addBestMenu(menueVO);
+	public int addBestMenu(ItemVO itemVO) {
+		return itemMapper.addBestMenu(itemVO);
 	}
 
 	@Override

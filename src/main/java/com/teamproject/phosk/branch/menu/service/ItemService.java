@@ -35,7 +35,7 @@ public interface ItemService {
 
 	public int delBestMenu(String menueVO);
 
-	public int addBestMenu(String menueVO);
+	public int addBestMenu(ItemVO itemVO);
 
 	public BranchItemInfo testquery(BranchItemInfo itemInfo);
 

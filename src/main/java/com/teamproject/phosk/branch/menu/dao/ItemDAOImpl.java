@@ -83,9 +83,9 @@ public class ItemDAOImpl implements ItemDAO {
 	}
 
 	@Override
-	public int addBestMenu(String menueVO) {
-		System.out.println(menueVO);
-		return session.insert("addBestMenu", menueVO);
+	public int addBestMenu(ItemVO itemVO) {
+		System.out.println(itemVO);
+		return session.insert("addBestMenu", itemVO);
 	}
 
 	@Override

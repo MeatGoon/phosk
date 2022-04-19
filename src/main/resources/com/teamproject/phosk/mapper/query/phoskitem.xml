@@ -20,14 +20,13 @@
 	
 	<!-- 간소화된 메뉴리스트, 기본 옵션 정보 불러오기-->
 	<select id="getItem" resultType="branchItemInfo">
-		select pi.branch_num, pi.category_num, pi.item_num, pi.item_name, pi.item_image, pi.item_info, bo.basic_option, bo.basic_price from phosk_item pi INNER JOIN phosk_basicoption bo ON pi.item_num = bo.item_num
-		 WHERE pi.branch_num = #{branch_num}
+		select * from phosk_item WHERE branch_num = #{branch_num}
 		 <choose>
 		 	<when test="category_num != null">
-		 		and pi.category_num = #{category_num}
+		 		and category_num = #{category_num}
 		 	</when>
 		 	<otherwise>
-		 		and pi.category_name = 인기메뉴
+		 		and category_num = 0
 		 	</otherwise>
 		 </choose>
 	</select>
@@ -122,6 +121,6 @@
 	</delete>
 	
 	<insert id="addBestMenu">
-		insert into 
+		    insert into phosk_item SELECT branch_num, 0, item_num, item_name, item_image, item_info, item_lastdate, item_regidate FROM phosk_item where branch_num = #{branch_num} and category_num = #{category_num} and item_num = #{item_num}
 	</insert>
 </mapper>

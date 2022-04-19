@@ -119,8 +119,8 @@ public class ItemController {
 		String branch_num = itemInfo.getBranch_num();
 		model.addAttribute("branchInfo", branch_num); // 사업자 번호만 반환
 		model.addAttribute("cateNum", itemInfo.getCategory_num()); // 현재 카테고리 위치 반환
-		model.addAttribute("categoryName", itemInfo.getCategory_name()); // 인기메뉴 구별을 위한 카테고리 이름 정보
 		model.addAttribute("cateTest", service.getMenue(itemInfo));
+		model.addAttribute("bOptions", service.getBOption(itemInfo));
 		model.addAttribute("cateList", service.cateList(branch_num));
 	}
 
@@ -250,15 +250,21 @@ public class ItemController {
 
 	// 값 하나만 보내다보니 조건문에 들어갈 값은 어떻게 해결해야할까..?
 	@PostMapping("/addBestMenu")
-	public String addBestMenu(HttpServletRequest request, RedirectAttributes rttr, NowPage nowPage) {
+	public String addBestMenu(ItemVO itemVO, HttpServletRequest request, RedirectAttributes rttr) {
 		String[] ajaxData = request.getParameterValues("checkedbtn");
-		int nowCate = nowPage.getNowCate();
+		String branchNum = request.getParameter("branchNum");
+		String categoryNum = request.getParameter("categoryNum");
+		System.out.println(ajaxData.length);
 		for (int i = 0; i < ajaxData.length; i++) {
-			service.addBestMenu(ajaxData[i]);
-			System.out.println(ajaxData[i]);
+			System.out.println("================");
+			System.out.println(i);
+			itemVO.setBranch_num(branchNum);
+			itemVO.setCategory_num(Integer.parseInt(categoryNum));
+			itemVO.setItem_num(Integer.parseInt(ajaxData[i]));
+			service.addBestMenu(itemVO);
 		}
-		rttr.addFlashAttribute("result", "addBest success");
-		return "redirect:/test/menueManage?cateTest=" + nowCate;
+		rttr.addFlashAttribute("result", "bestMenu success");
+		return "redirect:/test/menueManage?branch_num=" + itemVO.getBranch_num() + "&category_num=" + itemVO.getCategory_num();
 	}
 
 }

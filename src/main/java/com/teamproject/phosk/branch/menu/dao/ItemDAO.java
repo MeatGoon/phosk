@@ -35,7 +35,7 @@ public interface ItemDAO {
 
 	int delBestMenu(String menueVO);
 
-	int addBestMenu(String menueVO);
+	int addBestMenu(ItemVO itemVO);
 
 	BranchItemInfo testquery(BranchItemInfo itemInfo);
 

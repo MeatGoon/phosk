@@ -43,31 +43,31 @@
 			<div class="menu_box">
 				<!-- name명 수정 필요 -->
 				<label>음식명 : </label>
-				<input class="menue_info" type="hidden" name="item_num" value="${cateTest.item_num}"/>
-				<input class="menue_info" type="text" name="item_name" value="${cateTest.item_name}"/>
+				<input class="menue_info" type="hidden" readonly="readonly" name="item_num" value="${cateTest.item_num}"/>
+				<input class="menue_info" type="text" readonly="readonly" name="item_name" value="${cateTest.item_name}"/>
 			</div>
 			<!--  -->
 			<div class="menu_box">
 				<label>상세 설명 : </label>
-				<input class="menue_info" type="text" name="item_info" value="${cateTest.item_info}"/>
+				<input class="menue_info" type="text" readonly="readonly" name="item_info" value="${cateTest.item_info}"/>
 			</div>
 			<c:forEach items="${bOptions}" var="bOptions">
 			<div class="menu_box">
 				<input type="hidden" name="basic_option" value="${bOptions.basic_option}"/>
-				<label for="change_basic_option">기본옵션1</label>	<input class="menue_info" type="text" name="change_basic_option" value="${bOptions.basic_option}"/>
-				<label for="basic_price">기본가격1</label>	<input class="menue_info" type="text" name="basic_price" value="${bOptions.basic_price}"/>
+				<label for="change_basic_option">기본옵션1</label>	<input class="menue_info" type="text" readonly="readonly" name="change_basic_option" value="${bOptions.basic_option}"/>
+				<label for="basic_price">기본가격1</label>	<input class="menue_info" type="text" readonly="readonly" name="basic_price" value="${bOptions.basic_price}"/>
 			</div>
 			</c:forEach>
 			<c:forEach items="${aOptions}" var="aOptions">
 			<div class="menu_box">
 				<input type="hidden" name="add_option" value="${aOptions.add_option}"/>
-				<label for="change_add_option">추가옵션</label>	<input class="menue_info" type="text" name="change_add_option" value="${aOptions.add_option}"/>
-				<label for="add_price">추가가격</label>	<input class="menue_info" type="text" name="add_price" value="${aOptions.add_price}"/>
+				<label for="change_add_option">추가옵션</label>	<input class="menue_info" type="text" readonly="readonly" name="change_add_option" value="${aOptions.add_option}"/>
+				<label for="add_price">추가가격</label>	<input class="menue_info" type="text" readonly="readonly" name="add_price" value="${aOptions.add_price}"/>
 			</div>
 			</c:forEach>
 			<div class="menu_box">
-				<label for="item_lastDate">마지막수정일</label>	<input class="menue_info" type="text" name="item_lastDate" value="${cateTest.item_lastDate}"/>
-				<label for="item_regiDate">등록일</label>		<input class="menue_info" type="text" name="item_regiDate" value="${cateTest.item_regiDate}"/>
+				<label for="item_lastDate">마지막수정일</label>	<input class="menue_info" type="text" readonly="readonly" name="item_lastDate" value="${cateTest.item_lastDate}"/>
+				<label for="item_regiDate">등록일</label>		<input class="menue_info" type="text" readonly="readonly" name="item_regiDate" value="${cateTest.item_regiDate}"/>
 			</div>
 		</form>
 	</div>

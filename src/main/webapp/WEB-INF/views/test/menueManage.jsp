@@ -239,13 +239,13 @@ button {
 				</c:forEach>
 			</div>
 			<div style="position: sticky; bottom: 0; background-color: white;">
-				<c:if test="${categoryName ne '인기메뉴'}">
+				<c:if test="${cateNum ne 0}">
 					<div>
 						<button value="${cateNum}" id="insert_btn">메뉴등록</button>
 					</div>
 				</c:if>
 				<c:choose>
-					<c:when test="${categoryName ne '인기메뉴'}">
+					<c:when test="${cateNum ne 0}">
 						<button id="cheked_btn" class="del_checked_btn">선택 삭제</button>
 						<button id="cheked_btn" class="best_checked_btn">인기 등록</button>
 					</c:when>
@@ -264,14 +264,10 @@ button {
 	<script>
 		/* 하나의 값만 변경후 복사가 되는 쿼리문이 없을경우 input 태그로 하나하나 입력후 새로 입력 */
 		/* 등원후 해야할것 준현님 쿼림문 적용하기 */
-		var bestNum;
-		bestNum = $("input[name=category_num]").text();
-		console.log(bestNum);
 		let moveForm = $("#moveForm");
 		$(document).on("click", "#category_names", function() {
 			var cateVal = $(this).val();
 			moveForm.attr("action", "/test/menueManage");
-			moveForm.append("<input type='text' name='category_name' value='" + $(this).text() +"'/>");
 			$("input[name=category_num]").val(cateVal);
 			moveForm.submit();
 		});
@@ -367,11 +363,11 @@ button {
 				/* 담아둔 배열을 controller로 보낸다 */
 				},
 				success : function(testdata) {
-					if (url = "/test/deleteChk") {
+					if (url === "/test/deleteChk") {
 						alert(checkedbtn.length + '개 메뉴 삭제.');
-					}else if (url = "/test/addBestMenu") {
+					}else if (url === "/test/addBestMenu") {
 						alert(checkedbtn.length + '개 인기메뉴 등록.');
-					}else if (url = "/test/deleteBestMenu") {
+					}else if (url === "/test/deleteBestMenu") {
 						alert(checkedbtn.length + '개 인기메뉴 해제.');
 					}else {
 						alert("실패");
