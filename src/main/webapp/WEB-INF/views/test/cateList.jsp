@@ -109,9 +109,9 @@ button {
 								<button name="${cateTest.item_num}" value="${cateTest.category_num}" id="detailMenue_open">상세보기</button>
 								<div class="menueInfo menueInfo_top">
 									<span class="menue_text menue_text_top menue_info_name">음식명 : ${cateTest.item_name}</span>
-									<c:forEach items="${bOptions}" var="bOptions">
-										<c:if test="${bOptions eq cateNum}"><!-- 가격만 따로 불러와서 분리하기 -->
-											<span class="menue_text menue_text_top menue_info_price">${bOptions.basic_option} : <fmt:formatNumber value="${cateTest.basic_price}"></fmt:formatNumber>&nbsp;원</span>	
+									<c:forEach items="${itemPrice}" var="itemPrice">
+										<c:if test="${itemPrice.item_num eq cateTest.item_num}">
+											<span class="menue_text menue_text_top menue_info_price">${itemPrice.basic_option} : <fmt:formatNumber value="${itemPrice.basic_price}"></fmt:formatNumber>&nbsp;원</span>
 										</c:if>
 									</c:forEach>
 								</div>

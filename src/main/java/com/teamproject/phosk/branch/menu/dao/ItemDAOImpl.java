@@ -132,4 +132,14 @@ public class ItemDAOImpl implements ItemDAO {
 	public int deleteItem(BranchItemInfo itemInfo) {
 		return session.update("deleteItem", itemInfo);
 	}
+
+	@Override
+	public List<BranchItemInfo> getItemPrice(BranchItemInfo itemInfo) {
+		return session.selectList("getItemPrice", itemInfo);
+	}
+
+	@Override
+	public int deleteBestMenu(ItemVO itemVO) {
+		return session.delete("deleteBestMenu", itemVO);
+	}
 }

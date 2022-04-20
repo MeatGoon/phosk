@@ -230,7 +230,12 @@ button {
 						</div>
 						<div class="menueInfo menueInfo_top">
 							<span class="menue_text menue_text_top menue_info_name">음식명 : ${cateTest.item_name}</span>
-							<span class="menue_text menue_text_top menue_info_price">${cateTest.basic_option} : <fmt:formatNumber value="${cateTest.basic_price}"></fmt:formatNumber>&nbsp;원</span>
+							<c:forEach items="${itemPrice}" var="itemPrice">
+								<c:if test="${itemPrice.item_num eq cateTest.item_num}">
+									<span class="menue_text menue_text_top menue_info_price">${itemPrice.basic_option} : <fmt:formatNumber value="${itemPrice.basic_price}"></fmt:formatNumber>&nbsp;원</span>
+								</c:if>
+							</c:forEach>
+							
 						</div>
 						<div class="menueInfo menueInfo_bottom">
 							<span class="menue_text menue_info_detail">${cateTest.item_info}</span>

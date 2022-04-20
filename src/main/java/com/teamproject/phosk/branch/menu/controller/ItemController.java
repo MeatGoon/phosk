@@ -31,73 +31,6 @@ public class ItemController {
 	@Autowired
 	private ItemService service;
 
-	@GetMapping("/test")
-	public void test(BranchItemInfo itemInfo, String branch_num, Model model, HttpServletRequest request,
-			NowPage nowPage) {
-		log.info("test List .....");
-
-		System.out.println(itemInfo);
-
-		model.addAttribute("cateTest", service.testquery(itemInfo));
-		model.addAttribute("bOptions", service.getBOption(itemInfo));
-		model.addAttribute("aOptions", service.getAOption(itemInfo));
-
-	}
-
-	@PostMapping("/testUpdate")
-	public String updateTest(BranchItemInfo itemInfo, String basic_price, String add_price) {
-		System.out.println(itemInfo);
-		System.out.println("basic_price ======" + basic_price);
-		service.updateCategory(itemInfo);
-		service.updateItem(itemInfo);
-		/* 기본옵션 수정 */
-		String[] getBO = itemInfo.getBasic_option().split(",");
-		String[] getBOP = basic_price.split(",");
-		String[] getCBO = itemInfo.getChange_basic_option().split(",");
-
-		for (int i = 0; i < getBO.length; i++) {
-			int setBOP = Integer.parseInt(getBOP[i]);
-			itemInfo.setBasic_option(getBO[i]);
-			itemInfo.setChange_basic_option(getCBO[i]);
-			itemInfo.setBasic_price(setBOP);
-			try {
-				service.updateBOption(itemInfo);
-			} catch (DuplicateKeyException e) {
-				System.out.println(e);
-			}
-		}
-		/* 추가옵션 수정 */
-		String[] getAO = itemInfo.getAdd_option().split(",");
-		String[] getAOP = add_price.split(",");
-		String[] getCAO = itemInfo.getChange_add_option().split(",");
-		for (int i = 0; i < getAO.length; i++) {
-			int setAOP = Integer.parseInt(getAOP[i]);
-			itemInfo.setAdd_option(getAO[i]);
-			itemInfo.setChange_add_option(getCAO[i]);
-			itemInfo.setAdd_price(setAOP);
-			try {
-				service.updateAOption(itemInfo);
-			} catch (DuplicateKeyException e) {
-				System.out.println(e);
-				/* 중복 키로인한 IDE console 출력후 반환 */
-			}
-		}
-		/*
-		 * insert 할때 사용할 부분
-		 * 
-		 * if (addArr != "") { String[] ArrStr = addArr.split(","); for (int i = 0; i <
-		 * ArrStr.length; i++) { System.out.println(ArrStr[i] + "?분리완료"); } }
-		 */
-
-		return "redirect:/test/test?branch_num=123-45-67890&category_num=2&item_num=1";
-	}
-
-	@PostMapping("/testDel")
-	public String testDel() {
-
-		return "redirect:/test/test?branch_num=123-45-67890&category_num=2&item_num=1";
-	}
-
 	// 메뉴 관리 메인 페이지
 	@GetMapping("/cateList")
 	public void cateList(BranchItemInfo itemInfo, Model model, HttpServletRequest request, NowPage nowPage) {
@@ -106,6 +39,7 @@ public class ItemController {
 		model.addAttribute("branchInfo", branch_num); // 사업자 번호만 반환
 		model.addAttribute("cateNum", itemInfo.getCategory_num()); // 현재 카테고리 위치 반환
 		model.addAttribute("cateTest", service.getMenue(itemInfo));
+		model.addAttribute("itemPrice", service.getItemPrice(itemInfo));
 		model.addAttribute("cateList", service.cateList(branch_num));
 		/* 필요한부분 */
 		/* cateList = 카테고리 리스트 / cateTest = 메뉴 리스트 */
@@ -120,7 +54,7 @@ public class ItemController {
 		model.addAttribute("branchInfo", branch_num); // 사업자 번호만 반환
 		model.addAttribute("cateNum", itemInfo.getCategory_num()); // 현재 카테고리 위치 반환
 		model.addAttribute("cateTest", service.getMenue(itemInfo));
-		model.addAttribute("bOptions", service.getBOption(itemInfo));
+		model.addAttribute("itemPrice", service.getItemPrice(itemInfo));
 		model.addAttribute("cateList", service.cateList(branch_num));
 	}
 
@@ -218,18 +152,6 @@ public class ItemController {
 	}
 
 	// 값 하나만 보내다보니 조건문에 들어갈 값은 어떻게 해결해야할까..?
-	@PostMapping("/deleteBestMenu")
-	public String deleteBestMenu(HttpServletRequest request, RedirectAttributes rttr, NowPage nowPage) {
-		String[] ajaxData = request.getParameterValues("checkedbtn");
-		int nowCate = nowPage.getNowCate();
-		for (int i = 0; i < ajaxData.length; i++) {
-			service.delBestMenu(ajaxData[i]);
-		}
-		rttr.addFlashAttribute("result", "deleteBestMenu success");
-		return "redirect:/test/menueManage?cateTest=" + nowCate;
-	}
-
-	// 값 하나만 보내다보니 조건문에 들어갈 값은 어떻게 해결해야할까..?
 	@PostMapping("/deleteChk")
 	public String menueDelete(ItemVO itemVO, HttpServletRequest request, RedirectAttributes rttr) {
 		String[] ajaxData = request.getParameterValues("checkedbtn");
@@ -264,6 +186,24 @@ public class ItemController {
 			service.addBestMenu(itemVO);
 		}
 		rttr.addFlashAttribute("result", "bestMenu success");
+		return "redirect:/test/menueManage?branch_num=" + itemVO.getBranch_num() + "&category_num=" + itemVO.getCategory_num();
+	}
+	
+	@PostMapping("/deleteBestMenu")
+	public String deleteBestMenu(ItemVO itemVO, HttpServletRequest request, RedirectAttributes rttr) {
+		String[] ajaxData = request.getParameterValues("checkedbtn");
+		String branchNum = request.getParameter("branchNum");
+		String categoryNum = request.getParameter("categoryNum");
+		System.out.println(ajaxData.length);
+		for (int i = 0; i < ajaxData.length; i++) {
+			System.out.println("================");
+			System.out.println(i);
+			itemVO.setBranch_num(branchNum);
+			itemVO.setCategory_num(Integer.parseInt(categoryNum));
+			itemVO.setItem_num(Integer.parseInt(ajaxData[i]));
+			service.deleteBestMenu(itemVO);
+		}
+		rttr.addFlashAttribute("result", "deleteBestMenu success");
 		return "redirect:/test/menueManage?branch_num=" + itemVO.getBranch_num() + "&category_num=" + itemVO.getCategory_num();
 	}
 

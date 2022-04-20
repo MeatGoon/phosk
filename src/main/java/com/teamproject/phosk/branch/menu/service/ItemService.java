@@ -55,4 +55,8 @@ public interface ItemService {
 
 	public int deleteItem(BranchItemInfo itemInfo);
 
+	public List<BranchItemInfo> getItemPrice(BranchItemInfo itemInfo);
+
+	public int deleteBestMenu(ItemVO itemVO);
+
 }

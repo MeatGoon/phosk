@@ -54,5 +54,9 @@ public interface ItemDAO {
 	int updateCategory(BranchItemInfo itemInfo);
 
 	int deleteItem(BranchItemInfo itemInfo);
+
+	List<BranchItemInfo> getItemPrice(BranchItemInfo itemInfo);
+
+	int deleteBestMenu(ItemVO itemVO);
  
 }

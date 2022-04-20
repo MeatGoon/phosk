@@ -31,6 +31,11 @@
 		 </choose>
 	</select>
 	
+	<!-- 메뉴 간략화된 리스트에 출력하기 위해 사용하는 query -->
+	<select id="getItemPrice" resultType="itemOption">
+		select * from phosk_basicOption where branch_num = #{branch_num} and category_num = #{category_num}
+	</select>
+	
 	<!-- 해당 아이템의 기본 가격 불러오기 -->
 	<select id="basicItemOption" resultType="itemOption">
 		select basic_option, basic_price 
@@ -121,6 +126,15 @@
 	</delete>
 	
 	<insert id="addBestMenu">
-		    insert into phosk_item SELECT branch_num, 0, item_num, item_name, item_image, item_info, item_lastdate, item_regidate FROM phosk_item where branch_num = #{branch_num} and category_num = #{category_num} and item_num = #{item_num}
+	 	DECLARE
+		BEGIN
+		    insert into phosk_item SELECT branch_num, 0, item_num, item_name, item_image, item_info, item_lastdate, item_regidate FROM phosk_item where branch_num = #{branch_num} and category_num = #{category_num} and item_num = #{item_num};
+		    insert into phosk_basicoption SELECT branch_num, 0, item_num, basic_option, basic_price FROM phosk_basicoption where branch_num = #{branch_num} and category_num = #{category_num} and item_num = #{item_num};
+		    insert into phosk_addoption SELECT branch_num, 0, item_num, add_option, add_price FROM phosk_addoption where branch_num = #{branch_num} and category_num = #{category_num} and item_num = #{item_num};
+		END;
 	</insert>
+	
+	<delete id="deleteBestMenu">
+		DELETE phosk_item WHERE branch_num = #{branch_num} and category_num = #{category_num} and item_num = #{item_num} 
+	</delete>
 </mapper>

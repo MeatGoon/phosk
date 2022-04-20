@@ -133,4 +133,14 @@ public class ItemServiceImpl implements ItemService {
 	public int deleteItem(BranchItemInfo itemInfo) {
 		return itemMapper.deleteItem(itemInfo);
 	}
+
+	@Override
+	public List<BranchItemInfo> getItemPrice(BranchItemInfo itemInfo) {
+		return itemMapper.getItemPrice(itemInfo);
+	}
+
+	@Override
+	public int deleteBestMenu(ItemVO itemVO) {
+		return itemMapper.deleteBestMenu(itemVO);
+	}
 }
