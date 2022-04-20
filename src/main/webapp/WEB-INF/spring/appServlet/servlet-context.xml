@@ -22,10 +22,21 @@
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
 	
-	<context:component-scan base-package="com.teamproject.phosk.junoptiondemo" />
-    
-       
-
+	<beans:bean class="org.springframework.web.servlet.view.UrlBasedViewResolver"
+		p:order="2"
+		p:viewClass="org.springframework.web.servlet.view.JstlView"
+	    p:prefix="/WEB-INF/views/"    
+	    p:suffix=".jsp"/>
 	
-
+	<beans:bean class="org.springframework.web.servlet.view.BeanNameViewResolver" p:order="1"/>     
+       
+	       
+	<beans:bean id="qrcodeview" class="com.teamproject.phosk.junoptiondemo.QRCodeView"/>
+	
+	
+	
+	<context:component-scan base-package="com.teamproject.phosk" />
+	
+	
+	
 </beans:beans>
