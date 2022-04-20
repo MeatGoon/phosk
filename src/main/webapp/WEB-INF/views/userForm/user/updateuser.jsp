@@ -97,9 +97,7 @@
 							$(function(){					
 								$("#userdel_btn").on("click", function(){
 					
-									if(data === null){
-											alert("회원탈퇴가 완료되었습니다");										
-										}else{
+									if(data != null){
 											alert("카드전체삭제를 먼저 진행해주세요");	
 											return false;
 										}
