@@ -58,7 +58,7 @@
 		
 			<br>			
 			<div class= "test">
-				<input  type="text" name="member_id" id ="member_id" maxlength="11" placeholder="아이디 입력 (5~11자)"/>							
+				<input  type="text" name="member_id" id ="member_id" maxlength="11" placeholder="아이디 입력 (숫자만 사용)"/>							
 			</div>			
 				<button type="button"  class="idchk"  disabled = "disabled">중복확인</button>
 				<p class = "result">

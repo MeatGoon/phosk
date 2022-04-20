@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
+<meta http-equiv = "Content-Type" content= "text/html; charset=UTF-8">
 <title>Insert title here</title>
 </head>
 <style type="text/css">
@@ -35,7 +35,10 @@
 		<div>
 			<form action="" method="get">
 			<h1>가게사진</h1>
-			<p>qr로 읽은 branch정보에서 사진 불러오기</p>
+			<p>qr로 읽은 branch정보에서 사진 불러오기 임시용 이미지 불러옴</p>
+			<div>
+			<img alt="바위" src="/resources/images/rock.jpg" width = "250px;" height = "150px;">
+			</div>
 			</form>	
 		</div>
 	</div>
@@ -46,21 +49,33 @@
 	
 	<div class="right">
 		<div>
-			<form action="" method= "get">
-				<div>
-					<div>
-						<h1>미니장바구니</h1>
-						<p> qr테이블 생성(더미 branch생성으로 위치잡은상태)<br>
-						푸터에 더미용 음식정보파일 1개 생성<br>
-						이후 더미 1파일을 이용해서 장바구니 구현
-					</p>
-					</div>
-					<div>
-					<input type="button" value="자세히보기"/>
-					<input type="button" value="가격중간점검"/>
-					</div>
-				</div>
-			</form>
+			<c:choose>
+				<c:when test = "값이 없을떄">
+					내용이 없습니다.
+				</c:when>
+				<c:otherwise>
+					<form action="" method= "get">	
+						<div>
+							<div>
+							<h1>미니장바구니</h1>
+								<table>
+								<tr>
+								<th>이름</th><th>수량</th><th>가격</th>
+								</tr>
+								<c:foreach 장바구니에 정보추가의 경우>
+								
+								
+								</c:foreach>
+								</table>
+							</div>
+							<div>
+								<input type="button" value="자세히보기"/>
+								<input type="button" value="가격중간점검"/>
+							</div>
+						</div>
+					</form>
+				</c:otherwise>
+			</c:choose>
 		</div>
 	</div>
 </div>

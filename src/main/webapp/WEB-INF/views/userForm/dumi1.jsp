@@ -13,7 +13,7 @@
 <h1>FOOTER</h1>
 	<p> 음식 선택창</p>	
 	<div>
-	
+		정보수령
 	</div>						
 </div>
 </body>

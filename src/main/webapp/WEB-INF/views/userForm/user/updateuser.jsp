@@ -92,11 +92,11 @@
 							</div>
 							<c:forEach items="${mycard}" var = "list" >
 							<c:if test="${list.member_id eq login.member_id}" >	
-							<p>${list.member_id }</p>
 							<script>	
 							var data = ${list.member_id};
 							$(function(){					
 								$("#userdel_btn").on("click", function(){
+					
 									if(data === null){
 											alert("회원탈퇴가 완료되었습니다");										
 										}else{
@@ -104,8 +104,8 @@
 											return false;
 										}
 									});
-								})
-						
+								}) 
+				
 														
 							</script>
 							</c:if>	
