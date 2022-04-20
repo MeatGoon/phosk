@@ -32,6 +32,13 @@ public class MemberController {
 	@Autowired
 	private MemberService memberservice;
 	
+	
+	
+	@GetMapping("/userForm/user/register") 
+	public void getregister(){
+	log.info("get회원가입 페이지"); 
+	}
+
 	@PostMapping("/userForm/user/register")
 	public String loginpagePOST(MemberVO membervo) {
 		log.info("회원가입 post");

@@ -21,7 +21,7 @@
 		<c:if test="${login != null }">						
 				<p>${login.member_id}님 환영 합니다.</p>
 				<button type="button" onclick="location.href='/logout' ">로그아웃</button>
-		</c:if>      	
+		</c:if>   	
 	</div>
 	<h2><a href = "/userForm/dumibranch" style=' color:blue;'>가짜 메인페이지</a></h2>
 </body>

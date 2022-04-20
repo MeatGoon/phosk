@@ -8,7 +8,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import com.teamproject.phosk.user.service.CardinfoService;
 import com.teamproject.phosk.user.vo.CardinfoVO;
@@ -37,13 +36,7 @@ public class CardinfoController {
 			return "redirect:/userForm/usertest";
 			
 		}	
-		 @GetMapping("/userForm/user/register")
-	      public void carlist(Model model) {          
-	          log.info("카드정보조회");
-	          List<CardinfoVO> cardinfoForm = cardinfoservice.cardinfoForm();
-	          model.addAttribute("cardinfoForm", cardinfoForm);
 
-	      }
 		 @GetMapping("/userForm/user/updateuser")
 	      public void mycarlist(Model model) {          
 	          log.info("회원정보");
@@ -67,7 +60,6 @@ public class CardinfoController {
 		 public String cardall(String member_id){
 		  log.info("post delete all");		  		  		      	  
 		  cardinfoservice.cardall(member_id);
-		  System.out.println(member_id);
 		  return "redirect:/userForm/user/updateuser";
 		 }
 }

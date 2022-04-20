@@ -154,16 +154,7 @@
 			<div>
 				<input type="button" class="cc" value="카드등록" onClick = "location.href='/userForm/cardinfo/cardinfoForm'"><br>
 				<p>회원가입이후 내정보등록에서 이용가능합니다</p>
-				<%-- <table  style ='width:250px; border : 1px solid red;'>
-							<tr><th>회원아이디</th><th>은행사</th><th>카드주</th></tr>						
-							<c:forEach items="${cardinfoForm}" var = "list">
-								<tr>	
-									<td><c:out value="${list.member_id}" /></td>						
-									<td><c:out value="${list.cardinfo_bank}" /></td>								
-									<td><c:out value="${list.cardinfo_holderName}" /></td>													
-								</tr>
-							</c:forEach>					
-				</table> --%>
+
 			</div>		
 			<div>
 				<div class="register_but">
