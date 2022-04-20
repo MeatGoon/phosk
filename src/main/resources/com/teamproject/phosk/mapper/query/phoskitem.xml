@@ -116,7 +116,7 @@
 		delete phosk_category where branch_num = #{branch_num} and category_num = #{category_num}
 	</delete>
 	<delete id="deleteItem">
-		delete phosk_item where branch_num = #{branch_num} and category_num = #{category_num} and item_num = #{item_num}
+		delete phosk_item where branch_num = #{branch_num} and item_num = #{item_num}
 	</delete>
 	<delete id="deleteBOption">
 		delete basic_option where branch_num = #{branch_num} and item_num = #{item_num} and basic_option = #{basic_option} 
@@ -125,6 +125,8 @@
 		delete add_option where branch_num = #{branch_num} and item_num = #{item_num} and add_option = #{add_option}
 	</delete>
 	
+	
+	<!-- 인기메뉴 관련 부분 -->
 	<insert id="addBestMenu">
 	 	DECLARE
 		BEGIN

@@ -4,22 +4,11 @@ import java.util.List;
 
 import com.teamproject.phosk.branch.menu.vo.BranchItemInfo;
 import com.teamproject.phosk.branch.menu.vo.CategoryVO;
-import com.teamproject.phosk.branch.menu.vo.ItemOptionVO;
 import com.teamproject.phosk.branch.menu.vo.ItemVO;
 
 public interface ItemDAO {
 	
 	List<CategoryVO> cateList(String branch_num);
-
-	List<ItemVO> meList();
-
-	ItemVO detailInfo(String menue_name);
-
-	int modify(ItemVO menueVO);
-
-	int delete(ItemVO menueVO);
-
-	int insert(ItemVO menueVO);
 
 	int chkDel(ItemVO itemVO);
 
@@ -37,9 +26,7 @@ public interface ItemDAO {
 
 	int addBestMenu(ItemVO itemVO);
 
-	BranchItemInfo testquery(BranchItemInfo itemInfo);
-
-	int testupdate(BranchItemInfo itemInfo);
+	BranchItemInfo menuDetail(BranchItemInfo itemInfo);
 
 	List<BranchItemInfo> getBOption(BranchItemInfo itemInfo);
 

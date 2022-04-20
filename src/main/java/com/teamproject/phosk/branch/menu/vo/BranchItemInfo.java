@@ -34,6 +34,4 @@ public class BranchItemInfo {
 	
 	// phosk_addoption명 변경 시
 	private String change_add_option;
-	
-	// 옵션에 번호 추가하기!
 }

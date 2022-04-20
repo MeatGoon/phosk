@@ -5,7 +5,6 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -61,7 +60,15 @@ public class ItemController {
 	// 메뉴 상세정보
 	@GetMapping("/detailInfo")
 	public void detailInfo(BranchItemInfo itemInfo, Model model) {
-		model.addAttribute("cateTest", service.testquery(itemInfo));
+		model.addAttribute("cateTest", service.menuDetail(itemInfo));
+		model.addAttribute("bOptions", service.getBOption(itemInfo));
+		model.addAttribute("aOptions", service.getAOption(itemInfo));
+	}
+	
+	// 메뉴 수정
+	@GetMapping("/itemModify")
+	public void itemModify(BranchItemInfo itemInfo, Model model) {
+		model.addAttribute("cateTest", service.menuDetail(itemInfo));
 		model.addAttribute("bOptions", service.getBOption(itemInfo));
 		model.addAttribute("aOptions", service.getAOption(itemInfo));
 	}
@@ -103,28 +110,11 @@ public class ItemController {
 		return "redirect:/test/cateList?branch_num=" + bNum + "&category_num=" + cNUm;
 	}
 
-	@GetMapping("/insertMenue")
-	public void insertMenue(String branch_num, Model model, NowPage nowPage) {
-		log.info("insertMenue List .....");
-		List<CategoryVO> cateList = service.cateList(branch_num);
-		model.addAttribute("cateList", cateList);
-		model.addAttribute("nowPage", nowPage);
-		/* 필요한부분 */
-		/* cateList = 카테고리 리스트(카테고리 설정할때 사용) */
-	}
-
 	@PostMapping("/insrtCategory")
 	public String insrtCategory(CategoryVO cateVo, RedirectAttributes rttr) {
 		System.out.println(cateVo);
 		service.insrtCategory(cateVo);
 		return "redirect:/test/menueManage?branch_num=" + cateVo.getBranch_num() + "&category_num=" + cateVo.getCategory_num();
-	}
-	
-	@PostMapping("/insertMenue")
-	public String insertMenue(ItemVO menueVO, int cateTest, RedirectAttributes rttr, NowPage nowPage) {
-		service.insert(menueVO);
-		rttr.addFlashAttribute("result", "insert success");
-		return "redirect:/test/menueManage?cateTest=" + cateTest;
 	}
 	
 	// 카테고리명 수정
@@ -151,7 +141,7 @@ public class ItemController {
 		return "redirect:/test/cateList?branch_num=" + itemInfo.getBranch_num() + "&category_num=" + itemInfo.getCategory_num();
 	}
 
-	// 값 하나만 보내다보니 조건문에 들어갈 값은 어떻게 해결해야할까..?
+	// 메뉴 선택 삭제
 	@PostMapping("/deleteChk")
 	public String menueDelete(ItemVO itemVO, HttpServletRequest request, RedirectAttributes rttr) {
 		String[] ajaxData = request.getParameterValues("checkedbtn");
@@ -170,7 +160,7 @@ public class ItemController {
 		return "redirect:/test/menueManage?branch_num=" + itemVO.getBranch_num() + "&category_num=" + itemVO.getCategory_num();
 	}
 
-	// 값 하나만 보내다보니 조건문에 들어갈 값은 어떻게 해결해야할까..?
+	// 인기메뉴 등록
 	@PostMapping("/addBestMenu")
 	public String addBestMenu(ItemVO itemVO, HttpServletRequest request, RedirectAttributes rttr) {
 		String[] ajaxData = request.getParameterValues("checkedbtn");
@@ -189,6 +179,7 @@ public class ItemController {
 		return "redirect:/test/menueManage?branch_num=" + itemVO.getBranch_num() + "&category_num=" + itemVO.getCategory_num();
 	}
 	
+	// 인기메뉴 해제
 	@PostMapping("/deleteBestMenu")
 	public String deleteBestMenu(ItemVO itemVO, HttpServletRequest request, RedirectAttributes rttr) {
 		String[] ajaxData = request.getParameterValues("checkedbtn");

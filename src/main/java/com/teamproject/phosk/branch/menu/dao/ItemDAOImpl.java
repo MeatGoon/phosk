@@ -8,7 +8,6 @@ import org.springframework.stereotype.Repository;
 
 import com.teamproject.phosk.branch.menu.vo.BranchItemInfo;
 import com.teamproject.phosk.branch.menu.vo.CategoryVO;
-import com.teamproject.phosk.branch.menu.vo.ItemOptionVO;
 import com.teamproject.phosk.branch.menu.vo.ItemVO;
 
 @Repository
@@ -21,32 +20,7 @@ public class ItemDAOImpl implements ItemDAO {
 	public List<CategoryVO> cateList(String branch_num) {
 		return session.selectList("getCategory", branch_num);
 	}
-
-	@Override
-	public List<ItemVO> meList() {
-		return session.selectList("meList");
-	}
-
-	@Override
-	public ItemVO detailInfo(String menue_name) {
-		return session.selectOne("detailInfo", menue_name);
-	}
-
-	@Override
-	public int modify(ItemVO menueVO) {
-		return session.update("menueModify", menueVO);
-	}
-
-	@Override
-	public int delete(ItemVO menueVO) {
-		return session.delete("menueDelete", menueVO);
-	}
-
-	@Override
-	public int insert(ItemVO menueVO) {
-		return session.insert("menueInsert", menueVO);
-	}
-
+	
 	@Override
 	public int chkDel(ItemVO itemVO) {
 		return session.delete("deleteItem", itemVO);
@@ -89,13 +63,8 @@ public class ItemDAOImpl implements ItemDAO {
 	}
 
 	@Override
-	public BranchItemInfo testquery(BranchItemInfo itemInfo) {
+	public BranchItemInfo menuDetail(BranchItemInfo itemInfo) {
 		return session.selectOne("itemDetailInfo",itemInfo);
-	}
-
-	@Override
-	public int testupdate(BranchItemInfo itemInfo) {
-		return session.update("updateTest", itemInfo);
 	}
 
 	@Override

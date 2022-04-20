@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 import com.teamproject.phosk.branch.menu.dao.ItemDAO;
 import com.teamproject.phosk.branch.menu.vo.BranchItemInfo;
 import com.teamproject.phosk.branch.menu.vo.CategoryVO;
-import com.teamproject.phosk.branch.menu.vo.ItemOptionVO;
 import com.teamproject.phosk.branch.menu.vo.ItemVO;
 
 @Service
@@ -20,32 +19,6 @@ public class ItemServiceImpl implements ItemService {
 	@Override
 	public List<CategoryVO> cateList(String branch_num) {
 		return itemMapper.cateList(branch_num);
-	}
-
-	@Override
-	public List<ItemVO> meList() {
-		return itemMapper.meList();
-	}
-
-	@Override
-	public ItemVO detailInfo(String menue_name) {
-		return itemMapper.detailInfo(menue_name);
-	}
-
-	@Override
-	public int modify(ItemVO menueVO) {
-		return itemMapper.modify(menueVO);
-
-	}
-
-	@Override
-	public int delete(ItemVO menueVO) {
-		return itemMapper.delete(menueVO);
-	}
-
-	@Override
-	public int insert(ItemVO menueVO) {
-		return itemMapper.insert(menueVO);
 	}
 
 	@Override
@@ -65,18 +38,8 @@ public class ItemServiceImpl implements ItemService {
 	}
 
 	@Override
-	public List<ItemVO> menuGetAll(BranchItemInfo itemInfo) {
-		return itemMapper.menuGetAll(itemInfo);
-	}
-
-	@Override
 	public int updateCateName(CategoryVO cateVO) {
 		return itemMapper.updateCateName(cateVO);
-	}
-
-	@Override
-	public int delBestMenu(String menueVO) {
-		return itemMapper.delBestMenu(menueVO);
 	}
 
 	@Override
@@ -85,13 +48,8 @@ public class ItemServiceImpl implements ItemService {
 	}
 
 	@Override
-	public BranchItemInfo testquery(BranchItemInfo itemInfo) {
-		return itemMapper.testquery(itemInfo);
-	}
-
-	@Override
-	public int testupdate(BranchItemInfo itemInfo) {
-		return itemMapper.testupdate(itemInfo);
+	public BranchItemInfo menuDetail(BranchItemInfo itemInfo) {
+		return itemMapper.menuDetail(itemInfo);
 	}
 
 	@Override

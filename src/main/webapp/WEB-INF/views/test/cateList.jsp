@@ -131,8 +131,8 @@ button {
 		</div>
 	</div>
 	<form id="moveForm" method="get">
-		<input type="text" name="branch_num" value="${branchInfo}"/>
-		<input type="text" name="category_num" value="${cateNum}"/>
+		<input type="hidden" name="branch_num" value="${branchInfo}"/>
+		<input type="hidden" name="category_num" value="${cateNum}"/>
 		<p>${result}</p>
 	</form>
 	<script>
@@ -158,11 +158,10 @@ button {
 				});
 			});
 		$(document).on("click", "#manage_btn", function() {
-			form.append('<input type="text" name="category_num" value="' + $(this).val() + '"/>');
+			form.append('<input type="hidden" name="category_num" value="' + $(this).val() + '"/>');
 			form.attr('action', '/test/menueManage');
 			form.submit();
-			});
-		/* ajax를 통해 화면 전환을 시키니 2번씩 실행되어서 ajax를 삭제함. */
+			});	
 	</script>
 </body>
 </html>
