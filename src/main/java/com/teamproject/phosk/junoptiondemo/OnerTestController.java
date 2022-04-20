@@ -1,10 +1,24 @@
 package com.teamproject.phosk.junoptiondemo;
 
+import java.text.DateFormat;
+import java.util.Locale;
+import java.util.Date;
+import java.util.List;
+
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import com.teamproject.phosk.branch.menu.vo.CategoryVO;
+import com.teamproject.phosk.branch.menu.vo.ItemVO;
+import com.teamproject.phosk.branch.menu.vo.NowPage;
 
 import lombok.extern.log4j.Log4j;
 
@@ -24,55 +38,57 @@ public class OnerTestController {
 		log.info("menueditpopup.....");
 	}
 	
-	/*
-	  @PostMapping("/qr" ) public String qrcode(@RequestParam String content) {
-	  QRCodeView qr = new QRCodeView();
-	  
-	  
-	  return "redirect:/jundemo/qrtest"; }
-	 */
+	@RequestMapping(value = "/junmain")
+	public void junmain() {
+		log.info("junmain.....");
+	}
+	
+	
+	
 			  
 	@RequestMapping(value = "/tablesetting/*")
 	public void tablesetting() {
 		log.info("tablesetting.....");
-	}			  
-
-
+	}	
+	
+	/*
+	 * @GetMapping("/tablesetting") public String tablesetting(QRTableVO qrtableVO,
+	 * int cateTest, RedirectAttributes rttr, NowPage nowPage) {
+	 * testService.insert(menueVO); rttr.addFlashAttribute("result",
+	 * "insert success"); return "redirect:/test/menueManage?cateTest=" + cateTest;
+	 * }
+	 */
+	
+	
+	
+	
+	
+	@RequestMapping(value = "/QRtest", method = RequestMethod.GET)
+	public String QRtest(Locale locale, Model model) {
 
 		
-
-	@RequestMapping("/createCode.do")
-	public ModelAndView createCode(@RequestParam String content){
-	    //ModelAndView 바로 리턴
-	    return new ModelAndView("qrcodeview", "content", content);
+		Date date = new Date();
+		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
+		
+		String formattedDate = dateFormat.format(date);
+		
+		model.addAttribute("serverTime", formattedDate );
+		
+		return "./jundemo/QRtest";
 	}
-
+	@RequestMapping("/qr")
+	public ModelAndView qrcode(@RequestParam String content) {
+		return new ModelAndView("qrcodeview","content",content);
+	}
+	
+	
+	
+	
+	
 }
 
 
-
-
-
-
-
-
-/*	@RequestMapping(value = "/onerHeader")
-	public String onerHeader(){
-		return "test/onerHeader";
-	}
-	
-	@RequestMapping(value = "/menueditpopup/menuEditPopup")
-	public String menuEditPopup() {
-		return "test/menueditpopup/menuEditPopup";
-	}
-	
-	
-	@RequestMapping(value = "/menueditpopup/menuEditOptionPopup")
-	public String menuEditOptionPopup() {
-		return "test/menueditpopup/menuEditOptionPopup";
-	}
-	
-}*/
+		
 
 
 
