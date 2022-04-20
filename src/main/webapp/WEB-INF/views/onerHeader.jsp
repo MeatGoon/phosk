@@ -33,7 +33,7 @@
 	
 	
 	
-	<jsp:include page="./test/menuedit.jsp"/>             
+	<%-- <jsp:include page="./test/menuedit.jsp"/>  --%>            
 	
 	
 	<footer>
