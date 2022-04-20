@@ -1,12 +1,12 @@
-package com.teamproject.phosk.junoptiondemo;
+package com.teamproject.phosk.option.service;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.teamproject.phosk.junoptiondemo.BasicoptionDAO;
-import com.teamproject.phosk.junoptiondemo.BasicOptionVO;
+import com.teamproject.phosk.option.dao.BasicoptionDAO;
+import com.teamproject.phosk.option.vo.BasicOptionVO;
 
 
 

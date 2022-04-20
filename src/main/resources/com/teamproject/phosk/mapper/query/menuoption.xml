@@ -4,8 +4,8 @@
 <mapper namespace="com.teamproject.phosk.junoptiondemo.BasicoptionDAO">
 
 
-	<select id="">
-	
+	<select id="basicoptionForm" resultType="basicoption"> 
+		select * from phosk_basicOption
 	</select>
 
 	<insert id="insertBasicoption" >

@@ -1,4 +1,4 @@
-package com.teamproject.phosk.junoptiondemo;
+package com.teamproject.phosk.option.controller;
 
 import java.util.List;
 
@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.teamproject.phosk.junoptiondemo.BasicoptionService;
-import com.teamproject.phosk.junoptiondemo.BasicOptionVO;
+import com.teamproject.phosk.option.service.BasicoptionService;
+import com.teamproject.phosk.option.vo.BasicOptionVO;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
@@ -35,17 +35,8 @@ public class BasicoptionController {
 		basicoptionservice.insertBasicoption(basicoptionvo);
 	}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 }
+
+
+
+

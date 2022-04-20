@@ -1,5 +1,4 @@
-package com.teamproject.phosk.junoptiondemo;
-
+package com.teamproject.phosk.option.vo;
 
 import lombok.Data;
 

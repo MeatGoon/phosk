@@ -45,7 +45,7 @@
 						<input type='button' value='X' class="optionclosept"
 							id="optionbtnClose" />
 						<p>메뉴옵션 등록</p>
-
+					
 						<form action="/jundemo/menueditpopup/menuEditPopup" method="post">
 							<table>
 								<tr>

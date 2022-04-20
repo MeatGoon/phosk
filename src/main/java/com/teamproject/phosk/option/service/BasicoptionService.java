@@ -1,8 +1,8 @@
-package com.teamproject.phosk.junoptiondemo;
+package com.teamproject.phosk.option.service;
 
 import java.util.List;
 
-import com.teamproject.phosk.junoptiondemo.BasicOptionVO;
+import com.teamproject.phosk.option.vo.BasicOptionVO;
 
 public interface BasicoptionService {
 	
