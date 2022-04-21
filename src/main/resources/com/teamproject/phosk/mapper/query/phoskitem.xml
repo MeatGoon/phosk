@@ -20,16 +20,20 @@
 	
 	<!-- 간소화된 메뉴리스트, 기본 옵션 정보 불러오기-->
 	<select id="getItem" resultType="branchItemInfo">
-		select pi.branch_num, pi.category_num, pi.item_num, pi.item_name, pi.item_image, pi.item_info, bo.basic_option, bo.basic_price from phosk_item pi INNER JOIN phosk_basicoption bo ON pi.item_num = bo.item_num
-		 WHERE pi.branch_num = #{branch_num}
+		select * from phosk_item WHERE branch_num = #{branch_num}
 		 <choose>
 		 	<when test="category_num != null">
-		 		and pi.category_num = #{category_num}
+		 		and category_num = #{category_num}
 		 	</when>
 		 	<otherwise>
-		 		and pi.category_name = 인기메뉴
+		 		and category_num = 0
 		 	</otherwise>
 		 </choose>
+	</select>
+	
+	<!-- 메뉴 간략화된 리스트에 출력하기 위해 사용하는 query -->
+	<select id="getItemPrice" resultType="itemOption">
+		select * from phosk_basicOption where branch_num = #{branch_num} and category_num = #{category_num}
 	</select>
 	
 	<!-- 해당 아이템의 기본 가격 불러오기 -->
@@ -85,7 +89,6 @@
 	</update>
 	<update id="updateItem">
 		update phosk_item set
-		category_num = #{change_category_num},
 		item_name = #{item_name}
 		
 			<if test="item_image != null">
@@ -112,16 +115,27 @@
 		delete phosk_category where branch_num = #{branch_num} and category_num = #{category_num}
 	</delete>
 	<delete id="deleteItem">
-		delete phosk_item where branch_num = #{branch_num} and category_num = #{category_num} and item_num = #{item_num}
+		delete phosk_item where branch_num = #{branch_num} and item_num = #{item_num}
 	</delete>
 	<delete id="deleteBOption">
-		delete basic_option where branch_num = #{branch_num} and item_num = #{item_num} and basic_option = #{basic_option} 
+		delete phosk_basicoption where branch_num = #{branch_num} and item_num = #{item_num} and basic_option = #{basic_option} 
 	</delete>
 	<delete id="deleteAOption">
-		delete add_option where branch_num = #{branch_num} and item_num = #{item_num} and add_option = #{add_option}
+		delete phosk_addoption where branch_num = #{branch_num} and item_num = #{item_num} and add_option = #{add_option}
 	</delete>
 	
+	
+	<!-- 인기메뉴 관련 부분 -->
 	<insert id="addBestMenu">
-		insert into 
+	 	DECLARE
+		BEGIN
+		    insert into phosk_item SELECT branch_num, 0, item_num, item_name, item_image, item_info, item_lastdate, item_regidate FROM phosk_item where branch_num = #{branch_num} and category_num = #{category_num} and item_num = #{item_num};
+		    insert into phosk_basicoption SELECT branch_num, 0, item_num, basic_option, basic_price FROM phosk_basicoption where branch_num = #{branch_num} and category_num = #{category_num} and item_num = #{item_num};
+		    insert into phosk_addoption SELECT branch_num, 0, item_num, add_option, add_price FROM phosk_addoption where branch_num = #{branch_num} and category_num = #{category_num} and item_num = #{item_num};
+		END;
 	</insert>
+	
+	<delete id="deleteBestMenu">
+		DELETE phosk_item WHERE branch_num = #{branch_num} and category_num = #{category_num} and item_num = #{item_num} 
+	</delete>
 </mapper>

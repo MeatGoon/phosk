@@ -23,32 +23,6 @@ public class ItemServiceImpl implements ItemService {
 	}
 
 	@Override
-	public List<ItemVO> meList() {
-		return itemMapper.meList();
-	}
-
-	@Override
-	public ItemVO detailInfo(String menue_name) {
-		return itemMapper.detailInfo(menue_name);
-	}
-
-	@Override
-	public int modify(ItemVO menueVO) {
-		return itemMapper.modify(menueVO);
-
-	}
-
-	@Override
-	public int delete(ItemVO menueVO) {
-		return itemMapper.delete(menueVO);
-	}
-
-	@Override
-	public int insert(ItemVO menueVO) {
-		return itemMapper.insert(menueVO);
-	}
-
-	@Override
 	public int chkDel(ItemVO itemVO) {
 		return itemMapper.chkDel(itemVO);
 	}
@@ -65,34 +39,18 @@ public class ItemServiceImpl implements ItemService {
 	}
 
 	@Override
-	public List<ItemVO> menuGetAll(BranchItemInfo itemInfo) {
-		return itemMapper.menuGetAll(itemInfo);
-	}
-
-	@Override
 	public int updateCateName(CategoryVO cateVO) {
 		return itemMapper.updateCateName(cateVO);
 	}
 
 	@Override
-	public int delBestMenu(String menueVO) {
-		return itemMapper.delBestMenu(menueVO);
+	public int addBestMenu(ItemVO itemVO) {
+		return itemMapper.addBestMenu(itemVO);
 	}
 
 	@Override
-	public int addBestMenu(String menueVO) {
-		System.out.println(menueVO);
-		return itemMapper.addBestMenu(menueVO);
-	}
-
-	@Override
-	public BranchItemInfo testquery(BranchItemInfo itemInfo) {
-		return itemMapper.testquery(itemInfo);
-	}
-
-	@Override
-	public int testupdate(BranchItemInfo itemInfo) {
-		return itemMapper.testupdate(itemInfo);
+	public BranchItemInfo menuDetail(BranchItemInfo itemInfo) {
+		return itemMapper.menuDetail(itemInfo);
 	}
 
 	@Override
@@ -133,5 +91,25 @@ public class ItemServiceImpl implements ItemService {
 	@Override
 	public int deleteItem(BranchItemInfo itemInfo) {
 		return itemMapper.deleteItem(itemInfo);
+	}
+
+	@Override
+	public List<BranchItemInfo> getItemPrice(BranchItemInfo itemInfo) {
+		return itemMapper.getItemPrice(itemInfo);
+	}
+
+	@Override
+	public int deleteBestMenu(ItemVO itemVO) {
+		return itemMapper.deleteBestMenu(itemVO);
+	}
+
+	@Override
+	public int deleteAOption(ItemOptionVO optionInfo) {
+		return itemMapper.deleteAOption(optionInfo);
+	}
+	
+	@Override
+	public int deleteBOption(ItemOptionVO optionInfo) {
+		return itemMapper.deleteBOption(optionInfo);
 	}
 }
