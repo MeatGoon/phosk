@@ -9,6 +9,9 @@
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </head>
+<header>
+		<h1>해더 </h1>	
+</header>
 <body>
 	<p>메인페이지</p>
 	<a>지점정보</a>

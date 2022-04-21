@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.teamproject.phosk.user.service.MemberService;
-import com.teamproject.phosk.user.vo.MemberVO;
+import com.teamproject.phosk.user.member.service.MemberService;
+import com.teamproject.phosk.user.member.vo.MemberVO;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
