@@ -1,61 +1,118 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix = "c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+ 
 <!DOCTYPE html>
 <html>
+	<meta http-equiv="Content-Type" content="text/html; charset= UTF-8">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset= UTF-8">
-<title>회원정보 수정 삭제 등등</title>
-	<jsp:include page="../userheader.jsp"/>	
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-		<!-- 부가적인 테마 -->
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
-	 	
-	 	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-		<title>회원가입</title>
-	</head>
+		<title>회원 정보수정</title>
+</head>
+<style>
+	.update_userlist{
+		text-align: center;
+	}
+	.user_card{
+		text-align: center;
+	}
+</style>
+<header>
+			<jsp:include page="../userheader.jsp"/>
+</header>
 	<script type="text/javascript">
-		$(document).ready(function(){
+		$(function(){					
 			// 취소
 			$(".cencle").on("click", function(){
-				
-				location.href = "/user/usertest";						    
-			})		
-			$("#submit").on("click", function(){
-				if($("#userPass").val()==""){
+				location.href = "/userForm/usertest";						    
+			});		
+			$("#editt").on("click", function(){		
+				if($("#member_pwd").val()==""){
 					alert("비밀번호를 입력해주세요.");
-					$("#userPass").focus();
+					$("#member_pwd").focus();
 					return false;
 				}
-				if($("#userName").val()==""){
-					alert("성명을 입력해주세요.");
-					$("#userName").focus();
-					return false;
-				}
-			});
-		
-		})
+				});			
+			})
+	
+	//카드 전체삭제시 안내말 +만약 회원탈퇴시 카드정보가 있으면 카드삭제로 focus 주기 
 	</script>
 	<body>
-		<section id="container">
-			<form action="/userForm/user/updateuser" method="post">
-				<div class="form-group has-feedback">
-					<label class="control-label" for="userId">아이디</label>
-					<input class="form-control" type="text" id="member_id" name="member_id" value="${register.member_id}" readonly="readonly"/>
+	<h1>회원수정</h1>
+		<div id="container">
+			<form action="/userForm/user/updateuser" method="post" class= "update_userlist">						
+				<div class="form-group">
+					<label class="control" for="member_id" ></label>
+					<input class="form" type="hidden" id="member_id" name="member_id" value="${login.member_id}"  readonly="readonly"/>
 				</div>
-				<div class="form-group has-feedback">
-					<label class="control-label" for="member_pwd">패스워드</label>
-					<input class="form-control" type="password" id="member_pwd" name="member_pwd" />
+						
+				<div class="form-groupk">
+					<p>비밀번호변경</p><br>
+					<label class="control" for="member_pwd"></label>
+					<input class="forml" type="password" id="member_pwd" name="member_pwd" />
 				</div>
-				<div class="form-group has-feedback">
-					<label class="control-label" for="member_nic">닉네임</label>
-					<input class="form-control" type="text" id="member_nic" name="member_nic" value="${register.member_nic}"/>
-				</div>
-				<div class="form-group has-feedback">
-					<button class="btn btn-success" type="submit" id="submit">회원정보수정</button>
-					<button class="cencle btn btn-danger" type="button">취소</button>
+						
+				<div class="form-group">
+					<button class="btn" type="submit" id="editt">회원정보수정</button>
+					<button class="cencle" type="button">취소</button>
 				</div>
 			</form>
-		</section>
+			<form class = "change_line" autocomplete="off" method = "post" action="/delete/userdel">
+					<div class= "user_card" >
+						<c:if test="${login != null }" >
+							<table style ='border : 1px solid red; '>
+										<tr><th>은행사</th><th>카드번호</th><th>카드주</th></tr>		
+								<c:forEach items="${mycard}" var = "list" >
+									<c:if test="${list.member_id eq login.member_id}" >													
+										<tr >	
+										<td><c:out value="${list.cardinfo_bank}" /></td>						
+										<td><c:out value="${list.cardinfo_cardNum}" /></td>								
+										<td><c:out value="${list.cardinfo_holderName}" /></td>	
+										<td><input  type="hidden" id="cardinfo_cardNum" name="cardinfo_cardNum" value="${list.cardinfo_cardNum}" /></td>									
+										<td><button type="submit"  onclick="javascript: form.action='/delete/carddel';">카드삭제</button></td>										
+										</tr>
+		
+									</c:if>	
+								</c:forEach>
+									<tr>
+										<!-- 회원탈퇴랑 공통사용 -->
+										<td><input  type="hidden" id="member_id" name="member_id" value="${login.member_id}" /></td>
+										<td><button type="submit" class= "carddel_bnt"   onClick = "javascript: form.action='/delete/cardall';" >카드전체삭제</button></td>	
+									</tr>
+							</table>
+						</c:if>
+							<div>
+								<input type="button" value="카드등록" onClick = "location.href='/userForm/cardinfo/cardinfoForm'"><br>	
+							</div>
+							
+							<div>
+								<input type="submit" id = "userdel_btn" value="회원탈퇴" >
+								<!-- <input type="submit" id = "userdel_btn"value="회원탈퇴" onClick = "javascript: form.action='/delete/userdel';"> -->															
+							</div>
+							<c:forEach items="${mycard}" var = "list" >
+							<c:if test="${list.member_id eq login.member_id}" >	
+							<script>	
+							var data = ${list.member_id};
+							$(function(){					
+								$("#userdel_btn").on("click", function(){
+					
+									if(data != null){
+											alert("카드전체삭제를 먼저 진행해주세요");	
+											return false;
+										}
+									});
+								}) 
+				
+														
+							</script>
+							</c:if>	
+							</c:forEach>
+					</div>
+				</form>
+		</div>
 		
 	</body>
+	
 	
 </html>

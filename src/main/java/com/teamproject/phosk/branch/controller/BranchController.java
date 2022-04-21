@@ -1,9 +1,11 @@
 package com.teamproject.phosk.branch.controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
 
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
@@ -15,8 +17,9 @@ import lombok.extern.log4j.Log4j;
 public class BranchController {
 	
 	@GetMapping("/index")
-	public void branchMainIndex(@RequestParam("branch_name") String branch_name) {
+	public void branchMainIndex(@RequestParam("branch_num") String branch_num , Model model) {
 		log.info("branchMainIndex 호출");
-		System.out.println(branch_name);
+		log.info(branch_num);
+		model.addAttribute("branch_num" , branch_num);
 	}
 }

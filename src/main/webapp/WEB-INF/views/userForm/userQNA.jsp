@@ -2,15 +2,13 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-<head>
 <meta charset="UTF-8">
 <head>
 	<title>QNA</title>
-
-		<jsp:include page="./userheader.jsp"/>
-
 </head>
-</head>
+<header>
+			<jsp:include page="./userheader.jsp"/>
+</header>
 <body>
 <h1>문의 페이지입니다</h1>
 <p> 문의하세요</p>

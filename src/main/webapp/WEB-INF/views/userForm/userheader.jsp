@@ -18,7 +18,7 @@ header{
 #header_logo{
     position: absolute;
     top: 10px;
-    left: 30px;
+    left: -20%;
     font-size : 30px;
  
 }
@@ -27,7 +27,7 @@ header{
 #header_log{
     position: absolute;
     top: 20px;
-    right: 10px;
+    right: -20%;
 }
  
 /* top_menu a의 글시 하얀색으로 */
@@ -52,8 +52,8 @@ nav li{
 /* 콘텐츠 영역의 알래에 있는 배너 이미지 inline으로 */
 #header_log li{
     display: inline;
-    margin-left: 15px;
-    font-size:12px;
+    margin-left: 10px;
+    font-size:20px;
 }
  
 /* 전체 페이지가 가운데로 오도록 */
@@ -75,11 +75,11 @@ nav li{
             <div id="header_log">
             	<%-- member가 없으면 그대로 나옴 로그인 상태가 아닐때 --%>
                 	<c:if test= "${login == null}">
-					    <li><a href="/userForm/user/loginpage" role="button">로그인</a></li>
+					    <li><a href="/userForm/user/loginpage" role="button">로그인</a></li>&nbsp&nbsp|
 					    <li><a href="/userForm/user/register" role="button">회원가입</a></li>
 			        </c:if>
 			        <c:if test= "${login != null}">
-				        <li><a href="/userForm/usertest" role="button">로그아웃</a></li>
+				        <li><a href="/logout" role="button">로그아웃</a></li>&nbsp&nbsp|
 				        <li><a href="/userForm/user/updateuser" role="button">내 정보</a></li>
 			        </c:if>
             </div>
