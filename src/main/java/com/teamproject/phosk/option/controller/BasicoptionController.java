@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+
 import com.teamproject.phosk.option.service.BasicoptionService;
 import com.teamproject.phosk.option.vo.BasicOptionVO;
 
@@ -17,15 +18,19 @@ import lombok.extern.log4j.Log4j;
 
 @Controller
 @Log4j
-@RequestMapping("/*")
+@RequestMapping(value="/jundemo/*")
 @AllArgsConstructor
 public class BasicoptionController {
 
 	
 	@Autowired
 	private BasicoptionService basicoptionservice;
+	
+	@RequestMapping(value = "/menueditpopup/menuEditOptionPopup") 
+	public void menueditoptionpopup() {
+	log.info("menueditoptionpopup....."); }
 
-	@GetMapping("/jundemo/menuEditOptionPopup/menuEditPopup")
+	@GetMapping("/menuEditOptionPopup/menuEditPopup")
 	public void menuupdate() {
 		log.info("메뉴등록페이지");
 	}

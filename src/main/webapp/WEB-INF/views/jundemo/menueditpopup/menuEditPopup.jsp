@@ -59,7 +59,8 @@
 								</tr>
 							</table>
 							<input type="button" value="추가" onclick="printbasic_optionName()"><br />
-
+							<input type="submit" value="등록"/>
+						</form>
 
 
 
@@ -111,8 +112,7 @@
 
 
 							</div>
-						</form>
-
+							
 						<!-- ----------------------------------------------------------------------------------------------------->
 
 
@@ -169,7 +169,7 @@
 								</th>
 							</tr>
 						</table>
-
+						
 
 
 
@@ -178,6 +178,11 @@
 
 
 						<input type="button" value="확인" id="btnCheck" />
+						
+
+
+
+
 
 					</div>
 				</div> <script>
@@ -203,6 +208,7 @@
 
 					//확인버튼 옵션선택내용 출력
 					btnCheck.onclick = function() {
+						
 						var optionmodal = document
 								.getElementById("optionmodal");
 						optionmodal.style.display = "none";
