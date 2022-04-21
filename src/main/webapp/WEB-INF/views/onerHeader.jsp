@@ -15,7 +15,7 @@
 	<header>
 		<nav>
 			<ul class = "headul">
-				<a class = "logo" href="/">로고</a>
+				
 				<li><button class = "middle">지점정보</button></li>
 				<li><button class = "middle">QR및테이블</button></li>
 				<li><button class = "middle">메뉴관리</button></li>
@@ -33,7 +33,7 @@
 	
 	
 	
-	<jsp:include page="./test/menuedit.jsp"/>             
+       
 	
 	
 	<footer>
