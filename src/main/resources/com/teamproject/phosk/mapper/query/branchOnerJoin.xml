@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.teamproject.phosk.branch.login.dao.BranchLoginDAO">
+	<select id="branchCheckIDForEmail" parameterType="branchLogin" resultType="branchLogin">
+		select * from phosk_oner
+		<where>
+			<if test="oner_id != null">
+				oner_id = #{oner_id}
+			</if>
+			<if test="oner_email != null">
+				oner_email = #{oner_email}
+			</if>
+		</where> 
+	</select>
+	
+	<insert id="branchOnerRegister" parameterType="branchLogin" >
+		insert into phosk_oner values(#{oner_id} , #{oner_pwd} , #{oner_email} , #{oner_phone})
+	</insert>
+</mapper>

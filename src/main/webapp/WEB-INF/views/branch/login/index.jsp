@@ -21,8 +21,8 @@
 			<label for="oner_id">점주 아이디 : </label><input type="text" name="oner_id" maxlength="20"/>
 			<label for="oner_pwd">점주 패스워드 : </label><input type="text" name="oner_pwd" maxlength="20" onkeyup="enterkey();"/><br/>
 			<input type="checkbox" id="id_save"><label>ID 기억하기</label>
-			
-			<button>LOGIN</button>
+			<button id="login">LOGIN</button>
+			<button type="button" onclick="location.href='/branch/join/index'">JOIN</button>
 		</form>
 	</div>
 	
@@ -43,11 +43,29 @@ window.onload = function loadcookie() {
 </script>
 <script type="text/javascript">
 	$(document).ready(function() {
+		
+		var result = '<c:out value="${result}"/>';
+		var executions = '<c:out value="${executions}"/>';
+		checkMessage(result,executions);
+		//뭔가 작업후 이전페이지 갈때 반복안되게..예 : 등록후 이전페이지 클릭시 도배되는 문제를 막음.
+		history.replaceState({},null,null);
+		
+		function checkMessage(result , executions) {
+			if(result === '' || history.state){
+				return;			
+			}else if (result == 'success'){
+				alert(executions + "를(을) 성공 하였습니다.");		
+			}else{
+				alert(executions + "를(을) 실패 하였습니다.");
+			}
+		}
+		
+		
 		errCodeCheck();
 		
 		var branchLoginForm = $("#branchLoginForm");
 		
-		$("#branchLoginForm button").on("click", function(e) {
+		$("#login").on("click", function(e) {
 			e.preventDefault();
 			if(!formCheck(branchLoginForm.find("input[name='oner_id']"),"아이디를" )){
 				return;
