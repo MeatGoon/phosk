@@ -8,6 +8,6 @@ public interface BasicoptionService {
 	
 	public void insertBasicoption(BasicOptionVO basicoptionvo);
 	
-	List<BasicOptionVO> menuEditPopup();
+	/* List<BasicOptionVO> menuEditPopup(); */
 
 }

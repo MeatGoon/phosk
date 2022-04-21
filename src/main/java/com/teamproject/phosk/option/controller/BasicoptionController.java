@@ -23,21 +23,32 @@ import lombok.extern.log4j.Log4j;
 public class BasicoptionController {
 
 	
+	 @RequestMapping("") public void jundemo() {
+	 log.info("jundemo....."); }
+	
+	 @GetMapping("/menueditpopup/menuEditOptionPopup") public void menueditpopup() {
+	 log.info("menueditpopup....."); }
+	 
+	 
 	@Autowired
 	private BasicoptionService basicoptionservice;
 	
-	@RequestMapping(value = "/menueditpopup/menuEditOptionPopup") 
-	public void menueditoptionpopup() {
-	log.info("menueditoptionpopup....."); }
+	/*
+	 * @RequestMapping(value = "/menueditpopup/menuEditOptionPopup") public void
+	 * menueditoptionpopup() { log.info("menueditoptionpopup....."); }
+	 */
 
-	@GetMapping("/menuEditOptionPopup/menuEditPopup")
-	public void menuupdate() {
+	@GetMapping("/menueditpopup/menuEditPopup")
+	public void menuEditPopup() {
 		log.info("메뉴등록페이지");
 	}
-	@PostMapping("/jundemo/menuEditOptionPopup/menuEditPopup")
-	public void menuupdatePOST(BasicOptionVO basicoptionvo){
+	@PostMapping("/menueditpopup/menuEditPopup")
+	public String menuupdatePOST(BasicOptionVO basicoptionvo){
 		log.info("사이즈 옵션 post");
+		log.info("BasicOptionVO : " + basicoptionvo);
+		
 		basicoptionservice.insertBasicoption(basicoptionvo);
+		return "redirect:/jundemo/menueditpopup/menuEditPopup";
 	}
 
 }

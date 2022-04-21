@@ -19,13 +19,21 @@ public class BasicoptionServiceImpl implements BasicoptionService{
 	
 	@Override
 	public void insertBasicoption(BasicOptionVO basicoptionvo) {
-		basicoptiondao.insertBasicoption(basicoptionvo);
-	}
-	@Override
-	public List<BasicOptionVO> menuEditPopup(){
 		
-		return basicoptiondao.menuEditPopup();
+//		basicoptionvo.setBranch_num("123-45-67890");
+//		basicoptionvo.setCategory_num(2);
+//		basicoptionvo.setItem_num(2);
+//		basicoptionvo.setBasic_option("기본");
+//		basicoptionvo.setBasic_price(4000);
+		
+		basicoptiondao.insertbasicoption(basicoptionvo);
+		
 	}
+	/*
+	 * @Override public List<BasicOptionVO> menuEditPopup(){
+	 * 
+	 * return basicoptiondao.menuEditPopup(); }
+	 */
 	
 	
 }

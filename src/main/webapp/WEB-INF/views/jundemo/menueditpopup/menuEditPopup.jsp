@@ -19,7 +19,7 @@
 </head>
 <body>
 	<h1>메뉴등록페이지</h1>
-	<form method="post" enctype="multipart/form-data">
+
 		<a>취소</a> <input type="submit">
 		<ul>
 			<li>메뉴정보</li>
@@ -54,11 +54,10 @@
 								</tr>
 								<tr>
 									<td><label>가격 입력:</label></td>
-									<td><input type="number" id="basic_price"
-										name="basic_price" /></td>
+									<td><input type="number" id="basic_price" name="basic_price" /></td>
 								</tr>
 							</table>
-							<input type="button" value="추가" onclick="printbasic_optionName()"><br />
+							<input type="button" value="추가" onclick="printbasic_optionName()"><br/>
 							<input type="submit" value="등록"/>
 						</form>
 
@@ -242,7 +241,7 @@
 
 
 
-	</form>
+	
 
 
 </body>

@@ -17,14 +17,14 @@ public class BasicoptionDAOImpl implements BasicoptionDAO{
 	private SqlSession session;
 	
 	@Override
-	public void insertBasicoption(BasicOptionVO basicoptionvo) {
-		session.insert("insertBasicoption", basicoptionvo);
+	public void insertbasicoption(BasicOptionVO basicoptionvo) {
+		session.insert("insertbasicoption", basicoptionvo);
 	}
 	
 
-	@Override
-	public List<BasicOptionVO> menuEditPopup() {
-		
-		return session.selectList("basicoptionForm");
-	}	
+	/*
+	 * @Override public List<BasicOptionVO> menuEditPopup() {
+	 * 
+	 * return session.selectList("basicoptionForm"); }
+	 */	
 }
