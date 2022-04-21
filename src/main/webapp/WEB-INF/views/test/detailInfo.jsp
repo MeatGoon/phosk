@@ -80,7 +80,7 @@
 	<script>
 		let form = $("#updateForm");
 		let moveForm = $("#moveForm");
-		let bOptionLen = ${fn:length(bOptions)};
+		
 		
 		$("#modify_btn").on("click", function() {
 			$(".menue_info").attr("readonly", false);
@@ -88,10 +88,9 @@
 			$("#accpt_btn").attr("hidden", false);
 			$("#delete_btn").attr("hidden", false);
 			$(".add").attr("hidden", false);
-			if (bOptionLen != 1) {
-				$(".basic").attr("hidden", false);
-			}
+
 		});
+
 		
 		$("#accpt_btn").on("click", function() {
 			form.attr("action", "/test/itemUpdate");

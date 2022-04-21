@@ -75,11 +75,14 @@
 	<script>
 		let form = $("#updateForm");
 		
-		let bOptionLen = ${fn:length(bOptions)};
-		
-		if (bOptionLen != 1) {
-			$(".basic").attr("hidden", false);
-		}
+		$(document).ready(function() {
+			let bOptionLen = ${fn:length(bOptions)};
+			if (bOptionLen != 1) {
+				$(".basic").attr("hidden", false);
+			}else {
+				$(".basic").attr("hidden", "hidden");
+			}
+		});
 		
 		$("#accpt_btn").on("click", function() {
 			form.attr("action", "/test/itemUpdate");

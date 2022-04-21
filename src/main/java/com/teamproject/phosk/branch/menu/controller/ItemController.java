@@ -40,9 +40,37 @@ public class ItemController {
 		model.addAttribute("cateTest", service.getMenue(itemInfo));
 		model.addAttribute("itemPrice", service.getItemPrice(itemInfo));
 		model.addAttribute("cateList", service.cateList(branch_num));
-		/* 필요한부분 */
-		/* cateList = 카테고리 리스트 / cateTest = 메뉴 리스트 */
-		/* 기본가격 따로 불러와야함 */
+	}
+	
+	@GetMapping("/insertMenu") /* 카테고리 숫자 받아서 반환할거 필요할거같음 */
+	public void insertMenue(BranchItemInfo itemInfo, Model model, HttpServletRequest request) {
+		log.info("insertMenu List .....");
+		String branch_num = itemInfo.getBranch_num();
+		model.addAttribute("branchInfo", branch_num); // 사업자 번호만 반환
+		model.addAttribute("cateNum", itemInfo.getCategory_num()); // 현재 카테고리 위치 반환
+		model.addAttribute("cateList", service.cateList(branch_num));
+	}
+	
+	@PostMapping("/basicOption") /* 카테고리 숫자 받아서 반환할거 필요할거같음 */
+	public String basicOption(BranchItemInfo itemInfo, Model model) {
+		// 임의로 null 값이 들어가있는 옵션을 넣을예정
+		// 하지만 try catch? 혹은 if 문으로 먼저 selet후 반환받아 처리?
+		return null;
+	}
+	
+	@PostMapping("/addOption") /* 카테고리 숫자 받아서 반환할거 필요할거같음 */
+	public String addOption(BranchItemInfo itemInfo, Model model) {
+		// 임의로 null 값이 들어가있는 옵션을 넣을예정
+		// 하지만 try catch? 혹은 if 문으로 먼저 selet후 반환받아 처리?
+		return null;
+	}
+	
+	@PostMapping("/insertMenu") /* 카테고리 숫자 받아서 반환할거 필요할거같음 */
+	public String insertMenue(BranchItemInfo itemInfo, Model model) {
+		System.out.println(itemInfo);
+		
+		// 면류에서 우선 테스트
+		return "redirect/test/insertMenu?branch_num=123-45-67890&category_num=2";
 	}
 
 	// 메뉴 관리 페이지 이동

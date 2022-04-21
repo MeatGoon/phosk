@@ -13,11 +13,12 @@
 	<h1>등록페이지</h1>
 	<div>
 		<form id="insertForm" method="post">
-			<div>
+			<div class="menu_box">
+				<input type="hidden" name="branch_num" value="${cateTest.branch_num}"/>
 				<select name="category_num">
 					<c:forEach var="cateList" items="${cateList}">
 						<c:choose>
-							<c:when test="${cateList.category_num eq nowPage.nowCate}">
+							<c:when test="${cateList.category_num eq cateNum}">
 								<option selected="selected" value="${cateList.category_num}">${cateList.category_name}</option>
 							</c:when>
 							<c:otherwise>
@@ -27,22 +28,30 @@
 					</c:forEach>
 				</select>
 			</div>
-			<div>
-				<label>음식 명 : </label><input type="text" name="menue_name" />
+			<div class="menu_box">
+				<label for="item_name">음식명 : </label>
+				<input class="menue_info" type="text" name="item_name"/>
 			</div>
-			<div>
-				<label>음식 가격 : </label><input type="text" name="menue_price" />
+			<div class="menu_box">
+				<label for="item_info">상세설명</label>
+				<textarea class="menue_info" rows="" cols="" name="item_info" ></textarea>
 			</div>
-			<div>
-				<label>상세 설명 : </label><input type="text" name="etc" />
+			<div class="menu_box BOption">
+				<input type="text" name="basic_option" readonly="readonly" value="가격"/> :
+				<input type="text" name="basic_price"/>
 			</div>
+			<div class="menu_box AOption">
+			
+			</div>
+			<!-- 추가 버튼 클릭시 readonly 해제후 임의의 값을 먼저 넣은후 -->
+			<!-- 만약 한번더 추가할시 현재 입력되어있는 옵션명을 비교? try catch? -->
 		</form>
 		<button type="button" id="insert_btn">등록</button>
 		<button type="button" id="list_btn">목록이동</button>
 	</div>
 	<script>
 		$("#list_btn").on('click', function() {
-			location.href = "/test/menueManage?cateTest=" + ${nowPage.nowCate};
+			location.href = "/test/menueManage?branch_num=${branchInfo}&category_num=${cateNum}";
 		});
 		$("#insert_btn").on('click', function() {
  			var text = $("select[name='category_num']").val();
@@ -52,9 +61,7 @@
 				console.log('if 여긴가');
 			} else {
 				console.log('else 여긴가');
-				var nowCate = ${nowPage.nowCate};
-				$("#insertForm").attr('action', '/test/insertMenue');
-				$("#insertForm").append('<input type="hidden" name="cateTest" value="' + nowCate + '"/>');
+				$("#insertForm").attr('action', '/test/insertMenu');
 				$("#insertForm").submit();
 				/* 자고 일어나서 왜 작동안하는지 원인 찾기 */
 				
