@@ -49,6 +49,11 @@
 						<form action="/jundemo/menueditpopup/menuEditPopup" method="post">
 							<table>
 								<tr>
+									<td><input type="hidden" name="branch_num" value="123-45-67890"/></td>
+									<td><input type="hidden" name="category_num" value="2"/></td>
+									<td><input type="hidden" name="item_num" value="2"/></td>
+								</tr>
+								<tr>
 									<td><label>사이즈 옵션:</label></td>
 									<td><input type="text" id="basic_option" name="basic_option" /></td>
 								</tr>
