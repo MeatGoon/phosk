@@ -17,7 +17,7 @@
 		where ph.oner_id = #{oner_id}
 	</select>
 	
-	
+	<!-- 페이징기능 -->
 	<select id="branchlist" resultType="branchInfo">
 		select * from phosk_branch
 	</select>	
@@ -31,8 +31,7 @@
                 )pb
              where rNum between #{rowStart} and #{rowEnd}
              	order by   branch_name desc
-	</select>
-	<!-- 페이징기능 -->
+	</select>	
 	<select id ="listcount" resultType="int">
 		select count(*) from phosk_branch
 	</select>

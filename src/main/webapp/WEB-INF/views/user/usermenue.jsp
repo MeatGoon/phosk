@@ -1,7 +1,11 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix = "c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
 <!DOCTYPE html>
 <html>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
 <head>
 <meta charset="UTF-8">
 <title>온라인 메뉴판</title>
@@ -13,30 +17,27 @@
 <h1>온라인 메뉴판입니다</h1>
 <div>
 <form action="">
-<p> 카테고리 db읽고</p><br>
-<p> 카테고리 분류하고</p><br>
-<p> 그 안에서 이름,가격,옵션 등으로 나누고끝</p><br>
-<table style = 'float:left;'>
-<tr>
-	<th>인기메뉴</th>
-	<td>이름</td>
-	<td>옵션1가격</td>
-	<td>옵션2가격</td>	 
-</tr>
-<tr>
-	<th>인기메뉴</th>
-	<td>이름</td>
-	<td>옵션1가격</td>
-	<td>옵션2가격</td>	 
-</tr>
-<tr>
-	<th>인기메뉴</th>
-	<td>이름</td>
-	<td>옵션1가격</td>
-	<td>옵션2가격</td>	 
-</tr>
+<p> 추가옵션부분 삽입해서 가격만 기재하면 마무리</p>
 
+<table style = 'float:left; '>
+
+		<c:forEach items="${catemenulist}" var = "cmenu">
+			<tr >
+					
+				<tr><c:out value="${cmenu.category_name}" /></tr>
+				<c:forEach items="${itemmenulist}" var = "imenu">
+				<tr>
+				<c:if test="${cmenu.category_num eq imenu.category_num}" >	
+				<td><c:out value="${imenu.item_image}" /></td>
+				<td><c:out value="${imenu.item_name}" /></td>
+				<td><c:out value="${imenu.item_info}" /></td>
+				</c:if>
+				</tr>				
+				</c:forEach>							
+			</tr>
+		</c:forEach>
 </table>
+
 </form>
 
 </div>

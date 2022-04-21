@@ -10,10 +10,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.teamproject.phosk.branch.info.vo.BranchInfoVO;
+import com.teamproject.phosk.branch.menu.vo.CategoryVO;
+import com.teamproject.phosk.branch.menu.vo.ItemVO;
 import com.teamproject.phosk.branch.qr.vo.BranchQRVO;
 import com.teamproject.phosk.user.main.paging.Criteria;
 import com.teamproject.phosk.user.main.paging.pageMaker;
 import com.teamproject.phosk.user.main.service.UsermainService;
+import com.teamproject.phosk.user.main.service.UsermenuService;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
@@ -25,9 +28,8 @@ import lombok.extern.log4j.Log4j;
 public class UsermainController {
 	@Autowired
 	private UsermainService usermainservice;
-	
-
-	
+	@Autowired
+	private UsermenuService usermenuservice;
 	
 	 @GetMapping("/user/branchpaging")
 	 public void branchpaging(Criteria cri,Model model) {
@@ -54,6 +56,11 @@ public class UsermainController {
 	 @GetMapping("/user/usermenue")
      public void usermenue(Model model, String branch_name , String qrtable_num) {          
          log.info("메인페이지 조회");
+         List<CategoryVO> catemenulist = usermenuservice.catemenulist();
+         List<ItemVO> itemmenulist = usermenuservice.itemmenulist();
+         
+         model.addAttribute("catemenulist",catemenulist);
+         model.addAttribute("itemmenulist",itemmenulist);
          model.addAttribute("branch_name" , branch_name);
          model.addAttribute("qrtable_num" , qrtable_num);        
      }	
