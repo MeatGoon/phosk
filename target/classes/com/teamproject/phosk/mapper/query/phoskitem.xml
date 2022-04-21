@@ -89,7 +89,6 @@
 	</update>
 	<update id="updateItem">
 		update phosk_item set
-		category_num = #{change_category_num},
 		item_name = #{item_name}
 		
 			<if test="item_image != null">

@@ -18,9 +18,6 @@ public class BranchItemInfo {
 	private String item_lastDate;
 	private String item_regiDate;
 	
-	// phosk_item에서 카테고리로 이동 할 경우
-	private int change_category_num;
-	
 	// phosk_basicoption
 	private String basic_option;//not null
 	private int basic_price;//not null

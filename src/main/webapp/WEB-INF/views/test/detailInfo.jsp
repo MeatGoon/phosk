@@ -33,10 +33,10 @@
 			<div class="menu_box">
 				<input type="hidden" name="branch_num" value="${cateTest.branch_num}"/>
 				<label>카테고리명 : </label>
-				<input class="menue_info" type="hidden" name="category_num" value="${cateTest.category_num}"/><!-- 아이템 카테고리 이동시 사용할 부분 -->
-				<input class="menue_info" type="hidden" name="change_category_num" value="${cateTest.category_num}"/>
-				
-				<input class="menue_info" type="text" name="category_name" value="${cateTest.category_name}"/>
+	
+				<span>${cateTest.category_name}</span>
+				<input class="menue_info" type="hidden" name="category_num" value="${cateTest.category_num}"/>		
+
 			</div>
 			<div class="menu_box">
 				<!-- name명 수정 필요 -->
@@ -54,7 +54,7 @@
 				<input type="hidden" name="basic_option" value="${bOptions.basic_option}"/>
 				<label for="change_basic_option">기본옵션1</label>	<input class="menue_info" type="text" readonly="readonly" name="change_basic_option" value="${bOptions.basic_option}"/>
 				<label for="basic_price">기본가격1</label>	<input class="menue_info" type="text" readonly="readonly" name="basic_price" value="${bOptions.basic_price}"/>
-				<button type="button" value="${bOptions.basic_option}" id="delete_option">삭제</button>
+				<button type="button" value="${bOptions.basic_option}" id="delete_BOption">삭제</button>
 			</div>
 			</c:forEach>
 			<c:forEach items="${aOptions}" var="aOptions">
@@ -62,7 +62,7 @@
 				<input type="hidden" name="add_option" value="${aOptions.add_option}"/>
 				<label for="change_add_option">추가옵션</label>	<input class="menue_info" type="text" readonly="readonly" name="change_add_option" value="${aOptions.add_option}"/>
 				<label for="add_price">추가가격</label>	<input class="menue_info" type="text" readonly="readonly" name="add_price" value="${aOptions.add_price}"/>
-				<button type="button" value="${aOptions.basic_option}" id="delete_option">삭제</button>
+				<button type="button" value="${aOptions.add_option}" id="delete_AOption">삭제</button>
 			</div>
 			</c:forEach>
 			<div class="menu_box">
@@ -72,7 +72,8 @@
 		</form>
 	</div>
 	<form id="moveForm" method="post">
-	
+		<input type="text" name="branch_num" value="${cateTest.branch_num}"/>
+		<input type="text" name="item_num" value="${cateTest.item_num}"/>
 	</form>
 	<script>
 		let form = $("#updateForm");
@@ -95,10 +96,21 @@
 			form.attr("action", "/test/deleteItem");
 			form.submit();
 		});
+		$(document).ready(function() {
+			$(document).on("click", "#delete_BOption" ,function() {
+				moveForm.append("<input type='text' name='basic_option' value='"+$(this).val()+"'/>");
+			});
+		});
+		$(document).ready(function() {
+			$(document).on("click", "#delete_AOption" ,function() {
+				moveForm.append("<input type='text' name='add_option' value='"+$(this).val()+"'/>");
+				
+				$(this).parents(".menu_box").empty();
+				$(this).unwrap();
+				
+			});
+		});
 		
-/* 		$("#delete_option").on("click", function() {
-			moveForm.appen
-		}); */
 		function moveList() {
 			location.href = "/test/cateList?branch_num=${cateTest.branch_num}&category_num=${cateTest.category_num}";
 		}

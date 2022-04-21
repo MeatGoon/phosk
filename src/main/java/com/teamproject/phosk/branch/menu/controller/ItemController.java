@@ -65,7 +65,7 @@ public class ItemController {
 		model.addAttribute("aOptions", service.getAOption(itemInfo));
 	}
 	
-	// 메뉴 수정
+	// 메뉴 수정 페이지 이동
 	@GetMapping("/itemModify")
 	public void itemModify(BranchItemInfo itemInfo, Model model) {
 		model.addAttribute("cateTest", service.menuDetail(itemInfo));
@@ -73,7 +73,7 @@ public class ItemController {
 		model.addAttribute("aOptions", service.getAOption(itemInfo));
 	}
 
-	// 메뉴수정
+	// 메뉴 수정
 	@PostMapping("/itemUpdate")
 	public String menueModify(BranchItemInfo itemInfo, String basic_price, String add_price) {
 		System.out.println(itemInfo);
