@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.teamproject.phosk.branch.info.vo.BranchInfoVO;
+import com.teamproject.phosk.user.main.paging.Criteria;
+import com.teamproject.phosk.user.main.paging.pageMaker;
 import com.teamproject.phosk.user.main.service.UsermainService;
 
 import lombok.AllArgsConstructor;
@@ -31,5 +33,20 @@ public class UsermainController {
          model.addAttribute("branchlist", branchlist);
 
      }	
+	 
+	 @GetMapping("/user/branchpaging")
+	 public void branchpaging(Criteria cri,Model model) {
+		 log.info("페이징");
+		 
+		 List<BranchInfoVO> list = usermainservice.branchpaging(cri);
+		 
+		 model.addAttribute("list",list);
+		 
+		 pageMaker pagemaker = new pageMaker();
+		 pagemaker.setCri(cri);
+		 pagemaker.setTotalCount(usermainservice.listcount());
+		 model.addAttribute("pagemaker",pagemaker);
+	 }
 	
+
 }

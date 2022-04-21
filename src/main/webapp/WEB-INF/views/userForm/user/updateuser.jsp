@@ -88,6 +88,8 @@
 							
 							<div>
 								<input type="submit" id = "userdel_btn" value="회원탈퇴" >
+								<script>function goBack() {window.history.back();}</script>
+					        	<input class="non_update" type="button" value="뒤로가기" onClick= "goBack();">
 								<!-- <input type="submit" id = "userdel_btn"value="회원탈퇴" onClick = "javascript: form.action='/delete/userdel';"> -->															
 							</div>
 							<c:forEach items="${mycard}" var = "list" >

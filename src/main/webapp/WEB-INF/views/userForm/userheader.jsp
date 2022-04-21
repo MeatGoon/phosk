@@ -18,7 +18,7 @@ header{
 #header_logo{
     position: absolute;
     top: 10px;
-    left: -20%;
+    left: 2%;
     font-size : 30px;
  
 }
@@ -27,7 +27,7 @@ header{
 #header_log{
     position: absolute;
     top: 20px;
-    right: -20%;
+    right: 2%;
 }
  
 /* top_menu a의 글시 하얀색으로 */
@@ -44,7 +44,7 @@ nav{
  
 nav li{
     display: inline;
-    margin-left: 30px;
+    margin-left: 8%;
 }
  
 
@@ -57,7 +57,7 @@ nav li{
 }
  
 /* 전체 페이지가 가운데로 오도록 */
-#header_page{width: 820px; margin: 0px auto;}
+#header_page{width: auto; margin: 0px auto;}
 </style>
 <head>
  

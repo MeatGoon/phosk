@@ -10,9 +10,8 @@
 			<jsp:include page="../userheader.jsp"/>
 </header>
 	<body>	
-
-    	<fieldset class="logForm" >
-    		<form action="/userForm/user/loginpage" method = "post">
+    	<div>
+    	   <form action="/userForm/user/loginpage" method = "post">
 	     	<c:if test="${login == null}">
 		     	<div class="login_main" >	     	
 			      	<div class="login_insert">		      	
@@ -30,13 +29,6 @@
 			  
 			      </div>
 		      	<div class="login_ano">
-			        <div class="login_chk"> <!-- 체크시 checked 추가 -->
-				        <input type="checkbox" id="keepLogin" class="inp_radio"  name="keepLogin">
-				        <label for="keepLogin" class="lab_g">
-							<span class="img_top ico_check"></span>
-							<span class="txt_lab">로그인 상태 유지</span>
-						</label>
-			        </div>
 			        <span class="login_find">
 			        	<a href="/userForm/usertest" class="link_find">아이디</a> / <a href="/userForm/usertest" class="link_find">비밀번호 찾기</a>
 			        </span>
@@ -50,6 +42,6 @@
 				</div>
 			</c:if>      	
 	      </form>	      
-   	 	</fieldset>
+   	 	</div>
 	</body> 
 </html>

@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.teamproject.phosk.branch.info.vo.BranchInfoVO;
+import com.teamproject.phosk.user.main.paging.Criteria;
 
 @Repository
 public class UsermainDAOImpl implements UsermainDAO{
@@ -17,5 +18,15 @@ public class UsermainDAOImpl implements UsermainDAO{
 	public List<BranchInfoVO> branchlist(){
 		
 		return session.selectList("branchlist");
+	}
+	//가게 목록 + 페이징
+	@Override
+	public List<BranchInfoVO> branchpaging(Criteria cri){
+		return session.selectList("branchpaging",cri);
+	}
+	//가게 총 개수
+	@Override
+	public int listcount() {
+		return session.selectOne("listcount");
 	}
 }
