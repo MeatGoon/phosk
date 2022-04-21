@@ -40,7 +40,7 @@
 						<td><c:out value="${page.branch_name}" /></td>						
 						<td><c:out value="${page.branch_detail}" /></td>								
 						<td><c:out value="${page.branch_phone}" /></td>	
-						<td><button type="button" onclick="location.href='/branch/main/index?branch_name=${page.branch_name}'">이동</button></td>													
+						<td><button type="button" onclick="location.href='/user/tablechoice?branch_name=${page.branch_name}'">이동</button></td>																		
 					</tr>
 				</c:forEach>
 			</table>		

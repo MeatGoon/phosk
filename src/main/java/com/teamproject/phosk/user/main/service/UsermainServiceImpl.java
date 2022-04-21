@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.teamproject.phosk.branch.info.vo.BranchInfoVO;
+import com.teamproject.phosk.branch.qr.vo.BranchQRVO;
 import com.teamproject.phosk.user.main.dao.UsermainDAO;
 import com.teamproject.phosk.user.main.paging.Criteria;
 
@@ -27,5 +28,9 @@ public class UsermainServiceImpl implements UsermainService{
 	@Override
 	public int listcount(){
 		return usermaindao.listcount();
+	}
+	@Override
+	public List<BranchQRVO> qrlist(){
+		return usermaindao.qrlist();
 	}
 }

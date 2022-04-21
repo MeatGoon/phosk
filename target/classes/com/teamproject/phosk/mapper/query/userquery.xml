@@ -55,4 +55,8 @@
 		delete from phosk_member
 			where member_id = #{member_id}
 	</delete>
+	<!-- qr테이블 리스트 -->
+	<select id ="qrlist" resultType="branchQR">
+		select * from phosk_QRTable
+	</select>
 </mapper>

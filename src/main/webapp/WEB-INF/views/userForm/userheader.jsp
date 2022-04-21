@@ -86,7 +86,11 @@ nav li{
  
             <nav>
                 <ul>
-	                    <li><a href="/userForm/userQNA">QNA</a></li>
+                	<c:if test= "${login != null}">
+	                    <li><a href="/userForm/userQNA?member_id=${login.member_id}">QNA</a></li>
+	            	 </c:if>
+	            	 <c:if test= "${login == null}">
+	            	 </c:if>
 	            </ul>
             </nav>
         </header>

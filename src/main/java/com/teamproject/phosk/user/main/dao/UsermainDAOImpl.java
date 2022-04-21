@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.teamproject.phosk.branch.info.vo.BranchInfoVO;
+import com.teamproject.phosk.branch.qr.vo.BranchQRVO;
 import com.teamproject.phosk.user.main.paging.Criteria;
 
 @Repository
@@ -28,5 +29,10 @@ public class UsermainDAOImpl implements UsermainDAO{
 	@Override
 	public int listcount() {
 		return session.selectOne("listcount");
+	}
+	//qr테이블
+	@Override
+	public List<BranchQRVO> qrlist(){
+		return session.selectList("qrlist");
 	}
 }

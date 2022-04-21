@@ -73,7 +73,7 @@ public class MemberController {
 			return "/userForm/user/loginpage";
 			
 		}		
-		return "/userForm/usertest";		
+		return "/userForm/usertest" ;		
 	}
 	@GetMapping("/logout")
 	public String logout(HttpServletRequest request) {
