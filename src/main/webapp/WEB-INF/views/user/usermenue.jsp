@@ -24,7 +24,7 @@
 		<c:forEach items="${catemenulist}" var = "cmenu">
 			<tr >
 					
-				<tr><c:out value="${cmenu.category_name}" /></tr>
+				<td><c:out value="${cmenu.category_name}" /></td>
 				<c:forEach items="${itemmenulist}" var = "imenu">
 				<tr>
 				<c:if test="${cmenu.category_num eq imenu.category_num}" >	
