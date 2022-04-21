@@ -1,10 +1,9 @@
 package com.teamproject.phosk.branch.menu.controller;
 
-import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.expression.spel.ast.OpInc;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,6 +14,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.teamproject.phosk.branch.menu.service.ItemService;
 import com.teamproject.phosk.branch.menu.vo.BranchItemInfo;
 import com.teamproject.phosk.branch.menu.vo.CategoryVO;
+import com.teamproject.phosk.branch.menu.vo.ItemOptionVO;
 import com.teamproject.phosk.branch.menu.vo.ItemVO;
 import com.teamproject.phosk.branch.menu.vo.NowPage;
 
@@ -139,6 +139,40 @@ public class ItemController {
 		service.deleteItem(itemInfo);
 		rttr.addFlashAttribute("result", "delete success"); // delete success 메인페이지로 반환 됨
 		return "redirect:/test/cateList?branch_num=" + itemInfo.getBranch_num() + "&category_num=" + itemInfo.getCategory_num();
+	}
+	
+	@PostMapping("/deleteBOption")
+	public String deleteBOption(ItemOptionVO optionInfo, HttpServletRequest request, RedirectAttributes rttr) {
+		String branchNum = request.getParameter("branchNum");
+		int cateNum = Integer.parseInt(request.getParameter("cateNum"));
+		int itmeNum = Integer.parseInt(request.getParameter("itmeNum"));
+		String optionName = request.getParameter("optionName");
+
+		optionInfo.setBranch_num(branchNum);
+		optionInfo.setItem_num(itmeNum);
+		optionInfo.setBasic_option(optionName);
+
+		service.deleteBOption(optionInfo);
+		
+		rttr.addFlashAttribute("result", "delete success"); // delete success 메인페이지로 반환 됨
+		return "redirect:/test/cateList?branch_num=" + branchNum + "&category_num=" + cateNum + "&item_num=" + itmeNum;
+	}
+	
+	@PostMapping("/deleteAOption")
+	public String deleteAOption(ItemOptionVO optionInfo, HttpServletRequest request, RedirectAttributes rttr) {
+		String branchNum = request.getParameter("branchNum");
+		int cateNum = Integer.parseInt(request.getParameter("cateNum"));
+		int itmeNum = Integer.parseInt(request.getParameter("itmeNum"));
+		String optionName = request.getParameter("optionName");
+
+		optionInfo.setBranch_num(branchNum);
+		optionInfo.setItem_num(itmeNum);
+		optionInfo.setAdd_option(optionName);
+
+		service.deleteAOption(optionInfo);
+		
+		rttr.addFlashAttribute("result", "delete success"); // delete success 메인페이지로 반환 됨
+		return "redirect:/test/cateList?branch_num=" + branchNum + "&category_num=" + cateNum + "&item_num=" + itmeNum;
 	}
 
 	// 메뉴 선택 삭제

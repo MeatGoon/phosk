@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.teamproject.phosk.branch.menu.dao.ItemDAO;
 import com.teamproject.phosk.branch.menu.vo.BranchItemInfo;
 import com.teamproject.phosk.branch.menu.vo.CategoryVO;
+import com.teamproject.phosk.branch.menu.vo.ItemOptionVO;
 import com.teamproject.phosk.branch.menu.vo.ItemVO;
 
 @Service
@@ -100,5 +101,15 @@ public class ItemServiceImpl implements ItemService {
 	@Override
 	public int deleteBestMenu(ItemVO itemVO) {
 		return itemMapper.deleteBestMenu(itemVO);
+	}
+
+	@Override
+	public int deleteAOption(ItemOptionVO optionInfo) {
+		return itemMapper.deleteAOption(optionInfo);
+	}
+	
+	@Override
+	public int deleteBOption(ItemOptionVO optionInfo) {
+		return itemMapper.deleteBOption(optionInfo);
 	}
 }

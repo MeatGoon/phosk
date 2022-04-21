@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.teamproject.phosk.branch.menu.vo.BranchItemInfo;
 import com.teamproject.phosk.branch.menu.vo.CategoryVO;
+import com.teamproject.phosk.branch.menu.vo.ItemOptionVO;
 import com.teamproject.phosk.branch.menu.vo.ItemVO;
 
 public interface ItemDAO {
@@ -45,5 +46,9 @@ public interface ItemDAO {
 	List<BranchItemInfo> getItemPrice(BranchItemInfo itemInfo);
 
 	int deleteBestMenu(ItemVO itemVO);
+
+	int deleteAOption(ItemOptionVO optionInfo);
+
+	int deleteBOption(ItemOptionVO optionInfo);
  
 }

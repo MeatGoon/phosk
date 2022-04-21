@@ -118,10 +118,10 @@
 		delete phosk_item where branch_num = #{branch_num} and item_num = #{item_num}
 	</delete>
 	<delete id="deleteBOption">
-		delete basic_option where branch_num = #{branch_num} and item_num = #{item_num} and basic_option = #{basic_option} 
+		delete phosk_basicoption where branch_num = #{branch_num} and item_num = #{item_num} and basic_option = #{basic_option} 
 	</delete>
 	<delete id="deleteAOption">
-		delete add_option where branch_num = #{branch_num} and item_num = #{item_num} and add_option = #{add_option}
+		delete phosk_addoption where branch_num = #{branch_num} and item_num = #{item_num} and add_option = #{add_option}
 	</delete>
 	
 	

@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.teamproject.phosk.branch.menu.vo.BranchItemInfo;
 import com.teamproject.phosk.branch.menu.vo.CategoryVO;
+import com.teamproject.phosk.branch.menu.vo.ItemOptionVO;
 import com.teamproject.phosk.branch.menu.vo.ItemVO;
 
 public interface ItemService {
@@ -62,4 +63,8 @@ public interface ItemService {
 
 	// 메뉴 선택 삭제
 	public int chkDel(ItemVO itemVO);
+
+	public int deleteAOption(ItemOptionVO optionInfo);
+
+	public int deleteBOption(ItemOptionVO optionInfo);
 }

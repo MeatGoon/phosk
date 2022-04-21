@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import com.teamproject.phosk.branch.menu.vo.BranchItemInfo;
 import com.teamproject.phosk.branch.menu.vo.CategoryVO;
+import com.teamproject.phosk.branch.menu.vo.ItemOptionVO;
 import com.teamproject.phosk.branch.menu.vo.ItemVO;
 
 @Repository
@@ -110,5 +111,15 @@ public class ItemDAOImpl implements ItemDAO {
 	@Override
 	public int deleteBestMenu(ItemVO itemVO) {
 		return session.delete("deleteBestMenu", itemVO);
+	}
+
+	@Override
+	public int deleteAOption(ItemOptionVO optionInfo) {
+		return session.delete("deleteAOption", optionInfo);
+	}
+	
+	@Override
+	public int deleteBOption(ItemOptionVO optionInfo) {
+		return session.delete("deleteBOption", optionInfo);
 	}
 }
