@@ -17,25 +17,55 @@
 </head>
 <body>
 
-<input type="number" id="tablenumber"/>
-<input type="button" value="테이블 추가" onclick="addtable()"/>
+
+<input type="button" id=addtablebtn value="테이블 추가" onclick="addtable()"/>
+
 
  <table id="table_list">
  
  </table>
 
 <script type="text/javascript">
-	const addtable = () => {
+
+
+function addtable(){
+	var i = 1;
+	var tablenum = i + "번 테이블";
+	var tableurl = "http://localhost:8082/jundemo/orderpage?tablenumber="+i;	
+	document.getElementById('tbn').value = tablenum;
+	document.getElementById('tbu').value = tableurl;
+	document.getElementById('updatetable').submit();
+	i
+}
+</script>
+
+
+<form action="/jundemo/tablesetting/tablesetting" id="updatetable" method="get">
+	<input type="hidden" id=tbn value= "" name="tablenumupdb"/>
+	<input type="hidden" id=tbu value= "" name="tableurlupdb"/>
+</form>
+
+
+
+
+
+
+
+
+
+<!--  	const addtable = () => {
 		var i = 1;
 		var tablelist = document.getElementById("table_list");
 		var table_trtd = document.createElement('tr');
 		var tablenum_td = table_trtd.appendChild(document.createElement('td'));
 		var tableinfo_td = table_trtd.appendChild(document.createElement('td'));
 		tablenum_td.id = 'num'+ i +'table'
+		tableinfo_td.id = 'num'+i+'info'
+		
 		tablelist.appendChild(table_trtd);
 		
-	}
-</script>
+	}  -->
+
 
 
 
