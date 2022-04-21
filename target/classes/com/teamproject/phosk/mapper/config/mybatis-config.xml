@@ -10,7 +10,9 @@
 		<typeAlias type="com.teamproject.phosk.branch.menu.vo.ItemVO" alias="itemVO"/>
 		<typeAlias type="com.teamproject.phosk.branch.menu.vo.ItemOptionVO" alias="itemOption"/>
 		<typeAlias type="com.teamproject.phosk.branch.menu.vo.BranchItemInfo" alias="branchItemInfo"/>
-		<typeAlias type="com.teamproject.phosk.user.vo.MemberVO" alias="usermem"/>
-		<typeAlias type="com.teamproject.phosk.user.vo.CardinfoVO" alias="usercard"/>
+		<typeAlias type="com.teamproject.phosk.user.member.vo.MemberVO" alias="usermem"/>
+		<typeAlias type="com.teamproject.phosk.user.member.vo.CardinfoVO" alias="usercard"/>
+		<typeAlias type="com.teamproject.phosk.user.order.vo.OrderVO" alias="itemorder"/>
+		<typeAlias type="com.teamproject.phosk.branch.qr.vo.BranchQRVO" alias="branchQR"/>
 	</typeAliases>
 </configuration>

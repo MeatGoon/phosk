@@ -4,10 +4,10 @@
  
 <!DOCTYPE html>
 <html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset= UTF-8">
+	<meta http-equiv="Content-Type" content="text/html; charset= UTF-8">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<head>
 		<title>회원 정보수정</title>
 </head>
 <style>
@@ -22,25 +22,21 @@
 			<jsp:include page="../userheader.jsp"/>
 </header>
 	<script type="text/javascript">
-		$(document).ready(function(){
+		$(function(){					
 			// 취소
 			$(".cencle").on("click", function(){
-				
 				location.href = "/userForm/usertest";						    
-			})		
-			$("#submit").on("click", function(){
+			});		
+			$("#editt").on("click", function(){		
 				if($("#member_pwd").val()==""){
 					alert("비밀번호를 입력해주세요.");
 					$("#member_pwd").focus();
 					return false;
-				}			
-			});
-		
-		
-		}
+				}
+				});			
+			})
 	
 	//카드 전체삭제시 안내말 +만약 회원탈퇴시 카드정보가 있으면 카드삭제로 focus 주기 
-		
 	</script>
 	<body>
 	<h1>회원수정</h1>
@@ -58,26 +54,25 @@
 				</div>
 						
 				<div class="form-group">
-					<button class="btn" type="submit" id="submit">회원정보수정</button>
+					<button class="btn" type="submit" id="editt">회원정보수정</button>
 					<button class="cencle" type="button">취소</button>
 				</div>
 			</form>
-				<form class = "change_line" autocomplete="off" method = "post">
+			<form class = "change_line" autocomplete="off" method = "post" action="/delete/userdel">
 					<div class= "user_card" >
 						<c:if test="${login != null }" >
 							<table style ='border : 1px solid red; '>
 										<tr><th>은행사</th><th>카드번호</th><th>카드주</th></tr>		
-								<c:forEach items="${mycard}" var = "list">
+								<c:forEach items="${mycard}" var = "list" >
 									<c:if test="${list.member_id eq login.member_id}" >													
-										<tr>	
-										<td><c:out value=" ${list.cardinfo_bank}" /></td>						
+										<tr >	
+										<td><c:out value="${list.cardinfo_bank}" /></td>						
 										<td><c:out value="${list.cardinfo_cardNum}" /></td>								
-										<td><c:out value="${list.cardinfo_holderName}" /></td>
+										<td><c:out value="${list.cardinfo_holderName}" /></td>	
 										<td><input  type="hidden" id="cardinfo_cardNum" name="cardinfo_cardNum" value="${list.cardinfo_cardNum}" /></td>									
-										<td><button type="submit"  onclick="javascript: form.action='/delete/carddel';">카드삭제</button></td>	
-									</tr>
-																					
-							
+										<td><button type="submit"  onclick="javascript: form.action='/delete/carddel';">카드삭제</button></td>										
+										</tr>
+		
 									</c:if>	
 								</c:forEach>
 									<tr>
@@ -90,11 +85,29 @@
 							<div>
 								<input type="button" value="카드등록" onClick = "location.href='/userForm/cardinfo/cardinfoForm'"><br>	
 							</div>
+							
 							<div>
-								
-								<input type="submit" id = "userdel_btn"value="회원탈퇴" onClick = "javascript: form.action='/delete/userdel';">															
+								<input type="submit" id = "userdel_btn" value="회원탈퇴" >
+								<!-- <input type="submit" id = "userdel_btn"value="회원탈퇴" onClick = "javascript: form.action='/delete/userdel';"> -->															
 							</div>
+							<c:forEach items="${mycard}" var = "list" >
+							<c:if test="${list.member_id eq login.member_id}" >	
+							<script>	
+							var data = ${list.member_id};
+							$(function(){					
+								$("#userdel_btn").on("click", function(){
+					
+									if(data != null){
+											alert("카드전체삭제를 먼저 진행해주세요");	
+											return false;
+										}
+									});
+								}) 
 				
+														
+							</script>
+							</c:if>	
+							</c:forEach>
 					</div>
 				</form>
 		</div>

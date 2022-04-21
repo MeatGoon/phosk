@@ -22,7 +22,7 @@
 		</tr>
 		<c:forEach var="info" items="${info}">
 		<tr>
-			<td><input type="radio" name="branch_name" value="${info.branch_name}"></td>
+			<td><input type="radio" name="branch_num" value="${info.branch_num}"></td>
 			<td>${info.branch_name}</td>
 			<td>${info.branch_phone}</td>
 			<td>${info.branch_leaderName}</td>
@@ -43,12 +43,12 @@
 		$("#selectForm button").on("click", function(e) {
 			e.preventDefault();
 			
-			if($("input:radio[name=branch_name]").is(":checked") == false){
+			if($("input:radio[name=branch_num]").is(":checked") == false){
 				alert("지점을 선택해주세요.");
 				return;
 			}
 			
-			var checkvar = $("input:radio[name=branch_name]:checked").val();
+			var checkvar = $("input:radio[name=branch_num]:checked").val();
 			console.log(checkvar);
 			selectForm.attr({
 				"method" : "GET",

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="com.teamproject.phosk.branch.qr.dao.BranchQRDAO">
+	<select id="branchSelectQRinfo" parameterType="String" resultType="branchQR">
+		<!-- select /*+ INDEX_ASC(phosk_QRTable pk_phosk_QRTable_QRTable_Num) */
+			branch_num, QRTable_Num, QRTable_URL 
+		from phosk_QRTable where branch_num = #{branch_num} -->
+		select 
+			branch_num, QRTable_Num, QRTable_URL 
+		from phosk_QRTable where branch_num = #{branch_num} order by QRTable_Num asc
+	</select>
+	
+	<select id="branchSelectOneQRinfo" parameterType="branchQR" resultType="branchQR">
+		select * from phosk_QRTable where branch_num = #{branch_num} and qrTable_num = #{qrTable_num}
+	</select>
+	
+	<update id="branchModifyQRInfo" parameterType="branchQR">
+		update phosk_QRTable
+			set qrTable_num = #{qrTable_num},
+			qrTable_url = #{qrTable_url}
+		where qrTable_index = #{qrTable_index} 			
+	</update>
+	
+	<delete id="branchRemoveQRInfo" parameterType="int">
+		delete from phosk_QRTable where qrTable_index = #{qrTable_index}
+	</delete>
+	
+	<insert id="branchResisterQRInfo" parameterType="branchQR">
+		insert into phosk_QRTable(qrTable_index, branch_num, qrTable_num, qrTable_url) 
+		values (qr_seq.nextval, #{branch_num}, #{qrTable_num}, #{qrTable_url}) 
+	</insert>
+	
+</mapper>
