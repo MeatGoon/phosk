@@ -18,9 +18,8 @@
 	<h2><a href = "/userForm/user/loginpage" style=' color:blue;'>로그인</a></h2>
 	<h2><a href = "/userForm/user/userlist">회원정보조회</a></h2>	
 	<h2><a href = "/user/branchpaging">메인페이지+페이징</a></h2>
-	-------------사용불가 라인 -----
-	<h2><a href = "/user/tablechoice" style=' color:black;'>테이블선택</a></h2>
-	<h2><a href = "/user/usermain" style=' color:black;'>메인페이지</a></h2>
+
+	
 	<div class = "te">
 		<c:if test="${login != null }">						
 				<p>${login.member_id}님 환영 합니다.</p>

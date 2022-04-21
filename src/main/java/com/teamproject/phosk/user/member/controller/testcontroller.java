@@ -34,13 +34,7 @@ public class testcontroller {
 		log.info("testhome 페이지");
 		
 	}
-	 @GetMapping("/user/usermain")
-     public void usermain(Model model) {          
-         log.info("메인페이지 조회");
-         List<BranchInfoVO> branchlist = usermainservice.branchlist();
-         model.addAttribute("branchlist", branchlist);
-
-     }	
+	
 	 
 	 
 
