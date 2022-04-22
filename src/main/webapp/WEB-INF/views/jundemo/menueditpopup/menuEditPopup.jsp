@@ -99,7 +99,7 @@
 
 							<div id="addoption" style="display: none;">
 								<p>추가옵션 등록</p>
-								<form action="/jundemo/menueditpopup/menuEditPopup" method="post">
+								
 								<table>
 									<tr>
 										<td><label>추가 옵션:</label></td>
@@ -193,8 +193,11 @@
 
 
 
-					</div>
-				</div> <script>
+				</div>
+				</div> 
+				
+				
+				<script>
 					var btnOpen = document.getElementById("btnOpen");
 					var btnCheck = document.getElementById("btnCheck");
 					var btnClose = document.getElementById("optionbtnClose");
