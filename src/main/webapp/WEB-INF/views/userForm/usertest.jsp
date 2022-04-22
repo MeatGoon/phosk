@@ -12,13 +12,8 @@
 			<jsp:include page="./userheader.jsp"/>
 </header>
 <body>
-		
-	<h2><a href = "/userForm/cardinfo/cardinfoForm"  style=' color:blue;'>카드등록</a></h2>
-	<h2><a href = "/userForm/user/register">회원가입</a></h2>
-	<h2><a href = "/userForm/user/loginpage" style=' color:blue;'>로그인</a></h2>
-	<h2><a href = "/userForm/user/userlist">회원정보조회</a></h2>	
-	<h2><a href = "/user/branchpaging">메인페이지+페이징</a></h2>
 
+	<h2><a href = "/userForm/user/userlist">회원정보조회</a></h2>	
 	
 	<div class = "te">
 		<c:if test="${login != null }">						

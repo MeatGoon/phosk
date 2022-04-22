@@ -23,17 +23,7 @@ public class testcontroller {
 	@Autowired
 	private UsermainService usermainservice;
 	
-	@GetMapping("/userForm/userQNA")
-	public void qnaGET(@RequestParam("member_id") String member_id , Model model){
-		log.info("qna 페이지");
-		model.addAttribute("member_id" , member_id);
-		
-	}
-	@GetMapping("/userForm/usertest")
-	public void testhome(){
-		log.info("testhome 페이지");
-		
-	}
+	
 	
 	 
 	 

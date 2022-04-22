@@ -14,6 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -33,7 +34,19 @@ public class MemberController {
 	private MemberService memberservice;
 	
 	
-	
+	//삭제무관 test파트
+	@GetMapping("/userForm/userQNA")
+	public void qnaGET(@RequestParam("member_id") String member_id , Model model){
+		log.info("qna 페이지");
+		model.addAttribute("member_id" , member_id);
+		
+	}
+	@GetMapping("/userForm/usertest")
+	public void testhome(){
+		log.info("testhome 페이지");
+		
+	}
+	//---- 여기부터는 아님
 	@GetMapping("/userForm/user/register") 
 	public void getregister(){
 	log.info("get회원가입 페이지"); 
@@ -73,7 +86,7 @@ public class MemberController {
 			return "/userForm/user/loginpage";
 			
 		}		
-		return "/userForm/usertest" ;		
+		return "redirect:/user/branchpaging" ;		
 	}
 	@GetMapping("/logout")
 	public String logout(HttpServletRequest request) {
@@ -82,7 +95,7 @@ public class MemberController {
 		HttpSession session = request.getSession();
 		session.invalidate();
 				
-		return "/userForm/usertest";
+		return "redirect:/user/branchpaging";
 	}
 	
 	 @GetMapping("/userForm/user/userlist")
@@ -97,7 +110,7 @@ public class MemberController {
 		log.info("회원정보수정");
 		memberservice.updatemember(membervo);
 
-		return "redirect:/userForm/usertest";
+		return "redirect:/user/branchpaging";
 		}
 		
 		 //회원탈퇴
@@ -109,7 +122,7 @@ public class MemberController {
 		  memberservice.userdel(member_id);
 		  session.invalidate();
 		 
-		  return "redirect:/userForm/usertest";
+		  return "redirect:/user/branchpaging";
 		 }
 		 
 		@ResponseBody

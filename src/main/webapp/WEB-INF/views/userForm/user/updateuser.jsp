@@ -43,14 +43,14 @@
 		<div id="container">
 			<form action="/userForm/user/updateuser" method="post" class= "update_userlist">						
 				<div class="form-group">
-					<label class="control" for="member_id" ></label>
-					<input class="form" type="hidden" id="member_id" name="member_id" value="${login.member_id}"  readonly="readonly"/>
+					<label class="user_id" for="member_id" ></label>
+					<input class="user_id" type="hidden" id="member_id" name="member_id" value="${login.member_id}"  readonly="readonly"/>
 				</div>
 						
-				<div class="form-groupk">
+				<div class="change_pw">
 					<p>비밀번호변경</p><br>
-					<label class="control" for="member_pwd"></label>
-					<input class="forml" type="password" id="member_pwd" name="member_pwd" />
+					<label class="user_pw" for="member_pwd"></label>
+					<input class="user_pw" type="password" id="member_pwd" name="member_pwd" />
 				</div>
 						
 				<div class="form-group">

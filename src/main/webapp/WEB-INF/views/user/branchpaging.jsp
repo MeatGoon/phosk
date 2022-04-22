@@ -20,6 +20,13 @@
 		border : 1px solid blue;
 		text-align :center;
 	}
+	#paging_deja a{
+		color: red;
+		font-size : 25px;
+	}
+	#paging_deja{
+		text-align :center;
+	}
 
 </style>
 <header>
@@ -44,20 +51,19 @@
 					</tr>
 				</c:forEach>
 			</table>		
-				
-			<div>
-				<p>페이징기능</p>
-				 <ul style =' font-size : 20px; '>
+				<p style = "text-align: center">==========페이징 파트==========</p>				
+			<div id = paging_deja>
+				 <ul >
 				  <c:if test="${pagemaker.prev}">
-				   <li><a href="branchpaging${pagemaker.makeQuery(pagemaker.startPage - 1)}">이전</a></li>
+				   <li><a href="branchpaging${pagemaker.makeQuery(pagemaker.startPage - 1)}"  >이전</a></li>
 				  </c:if> 
 				  
 				  <c:forEach begin="${pagemaker.startPage}" end="${pagemaker.endPage}" var="idx">
-				   <li><a href="branchpaging${pagemaker.makeQuery(idx)}">${idx}</a></li>
+				   <li><a href="branchpaging${pagemaker.makeQuery(idx)}" >${idx}</a></li>
 				  </c:forEach>
 				    
 				  <c:if test="${pagemaker.next && pagemaker.endPage > 0}">
-				   <li><a href="branchpaging${pagemaker.makeQuery(pagemaker.endPage + 1)}">다음</a></li>
+				   <li><a href="branchpaging${pagemaker.makeQuery(pagemaker.endPage + 1)}" >다음</a></li>
 				  </c:if> 
 				 </ul>
 			</div> 

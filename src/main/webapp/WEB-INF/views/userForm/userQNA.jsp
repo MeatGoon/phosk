@@ -11,6 +11,6 @@
 </header>
 <body>
 <p> 문의하세요 (미구현)</p>
-<h1><a href = "/userForm/usertest">테스트페이지</a></h1>
+<h1><a href = "/userForm/usertest">회원정보조회보러가기</a></h1>
 </body>
 </html>
