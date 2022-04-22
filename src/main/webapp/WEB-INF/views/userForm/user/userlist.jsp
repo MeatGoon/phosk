@@ -31,6 +31,7 @@
 							</c:forEach>
 												
 			</table>
+			<h1><a href = "/userForm/usertest">테스트페이지</a></h1>
 	</form>		
 	</div>		
 </body>

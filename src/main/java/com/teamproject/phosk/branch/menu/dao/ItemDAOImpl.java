@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import com.teamproject.phosk.branch.menu.vo.BranchItemInfo;
 import com.teamproject.phosk.branch.menu.vo.CategoryVO;
+import com.teamproject.phosk.branch.menu.vo.ItemOptionVO;
 import com.teamproject.phosk.branch.menu.vo.ItemVO;
 
 @Repository
@@ -18,63 +19,37 @@ public class ItemDAOImpl implements ItemDAO {
 
 	@Override
 	public List<CategoryVO> cateList(String branch_num) {
-		return session.selectList("cateList", branch_num);
+		return session.selectList("getCategory", branch_num);
+	}
+	
+	@Override
+	public int chkDel(ItemVO itemVO) {
+		return session.delete("deleteItem", itemVO);
 	}
 
 	@Override
-	public List<ItemVO> meList() {
-		return session.selectList("meList");
+	public int insrtCategory(CategoryVO cateVo) {
+		return session.insert("insertCategory", cateVo);
 	}
 
 	@Override
-	public ItemVO detailInfo(String menue_name) {
-		return session.selectOne("detailInfo", menue_name);
+	public List<ItemVO> getMenue(BranchItemInfo itemInfo) {
+		return session.selectList("getItem", itemInfo);
 	}
 
 	@Override
-	public int modify(ItemVO menueVO) {
-		return session.update("menueModify", menueVO);
+	public List<ItemVO> menuGetAll(BranchItemInfo itemInfo) {
+		return session.selectList("getItem", itemInfo);
 	}
 
 	@Override
-	public int delete(ItemVO menueVO) {
-		return session.delete("menueDelete", menueVO);
-	}
-
-	@Override
-	public int insert(ItemVO menueVO) {
-		return session.insert("menueInsert", menueVO);
-	}
-
-	@Override
-	public int chkDel(String menueVO) {
-		return session.delete("menueDelete", menueVO);
-	}
-
-	@Override
-	public int insrtCategory(CategoryVO categoryVO) {
-		return session.insert("insrtCategory", categoryVO);
-	}
-
-	@Override
-	public List<ItemVO> getMenue(String cateTest) {
-		System.out.println(cateTest + " 맵퍼의 값");
-		return session.selectList("getMenue", cateTest);
-	}
-
-	@Override
-	public List<ItemVO> menuGetAll(String cateTest) {
-		return session.selectList("menuGetAll", cateTest);
-	}
-
-	@Override
-	public int deleteCategory(CategoryVO cateVO) {
-		return session.delete("deleteCategory", cateVO);
+	public int deleteCategory(BranchItemInfo itemInfo) {
+		return session.delete("deleteCategory", itemInfo);
 	}
 
 	@Override
 	public int updateCateName(CategoryVO cateVO) {
-		return session.update("updateCateName", cateVO);
+		return session.update("updateCategory", cateVO);
 	}
 
 	@Override
@@ -83,19 +58,68 @@ public class ItemDAOImpl implements ItemDAO {
 	}
 
 	@Override
-	public int addBestMenu(String menueVO) {
-		System.out.println(menueVO);
-		return session.insert("addBestMenu", menueVO);
+	public int addBestMenu(ItemVO itemVO) {
+		System.out.println(itemVO);
+		return session.insert("addBestMenu", itemVO);
 	}
 
 	@Override
-	public List<ItemVO> testquery(BranchItemInfo itemInfo) {
-		return session.selectList("itemDetailInfo",itemInfo);
+	public BranchItemInfo menuDetail(BranchItemInfo itemInfo) {
+		return session.selectOne("itemDetailInfo",itemInfo);
 	}
 
 	@Override
-	public int testupdate(BranchItemInfo itemInfo) {
-		return session.update("updateTest", itemInfo);
+	public List<BranchItemInfo> getBOption(BranchItemInfo itemInfo) {
+		return session.selectList("basicItemOption",itemInfo);
 	}
 
+	@Override
+	public List<BranchItemInfo> getAOption(BranchItemInfo itemInfo) {
+		return session.selectList("addItemOption",itemInfo);
+	}
+
+	@Override
+	public int updateBOption(BranchItemInfo itemInfo) {
+		return session.update("updateBOption", itemInfo);
+	}
+
+	@Override
+	public int updateAOption(BranchItemInfo itemInfo) {
+		return session.update("updateAOption", itemInfo);
+	}
+
+	@Override
+	public int updateItem(BranchItemInfo itemInfo) {
+		return session.update("updateItem", itemInfo);
+	}
+
+	@Override
+	public int updateCategory(BranchItemInfo itemInfo) {
+		return session.update("updateCategory", itemInfo);
+	}
+
+	@Override
+	public int deleteItem(BranchItemInfo itemInfo) {
+		return session.update("deleteItem", itemInfo);
+	}
+
+	@Override
+	public List<BranchItemInfo> getItemPrice(BranchItemInfo itemInfo) {
+		return session.selectList("getItemPrice", itemInfo);
+	}
+
+	@Override
+	public int deleteBestMenu(ItemVO itemVO) {
+		return session.delete("deleteBestMenu", itemVO);
+	}
+
+	@Override
+	public int deleteAOption(ItemOptionVO optionInfo) {
+		return session.delete("deleteAOption", optionInfo);
+	}
+	
+	@Override
+	public int deleteBOption(ItemOptionVO optionInfo) {
+		return session.delete("deleteBOption", optionInfo);
+	}
 }

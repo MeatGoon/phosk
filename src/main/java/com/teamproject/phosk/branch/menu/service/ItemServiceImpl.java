@@ -8,96 +8,108 @@ import org.springframework.stereotype.Service;
 import com.teamproject.phosk.branch.menu.dao.ItemDAO;
 import com.teamproject.phosk.branch.menu.vo.BranchItemInfo;
 import com.teamproject.phosk.branch.menu.vo.CategoryVO;
+import com.teamproject.phosk.branch.menu.vo.ItemOptionVO;
 import com.teamproject.phosk.branch.menu.vo.ItemVO;
 
 @Service
 public class ItemServiceImpl implements ItemService {
 
 	@Autowired
-	private ItemDAO testMapper;
+	private ItemDAO itemMapper;
 
 	@Override
 	public List<CategoryVO> cateList(String branch_num) {
-		return testMapper.cateList(branch_num);
+		return itemMapper.cateList(branch_num);
 	}
 
 	@Override
-	public List<ItemVO> meList() {
-		return testMapper.meList();
+	public int chkDel(ItemVO itemVO) {
+		return itemMapper.chkDel(itemVO);
 	}
 
 	@Override
-	public ItemVO detailInfo(String menue_name) {
-		return testMapper.detailInfo(menue_name);
+	public int insrtCategory(CategoryVO cateVo) {
+		return itemMapper.insrtCategory(cateVo);
 	}
 
 	@Override
-	public int modify(ItemVO menueVO) {
-		return testMapper.modify(menueVO);
+	public List<ItemVO> getMenue(BranchItemInfo itemInfo) {
+		return itemMapper.getMenue(itemInfo);
 
-	}
-
-	@Override
-	public int delete(ItemVO menueVO) {
-		return testMapper.delete(menueVO);
-	}
-
-	@Override
-	public int insert(ItemVO menueVO) {
-		return testMapper.insert(menueVO);
-	}
-
-	@Override
-	public int chkDel(String menueVO) {
-		return testMapper.chkDel(menueVO);
-	}
-
-	@Override
-	public int insrtCategory(CategoryVO categoryVO) {
-		return testMapper.insrtCategory(categoryVO);
-	}
-
-	@Override
-	public List<ItemVO> getMenue(String cateTest) {
-		System.out.println(cateTest + " 서비스의 값");
-		return testMapper.getMenue(cateTest);
-
-	}
-
-	@Override
-	public List<ItemVO> menuGetAll(String cateTest) {
-		return testMapper.menuGetAll(cateTest);
-	}
-
-	@Override
-	public int deleteCategory(CategoryVO cateVO) {
-		return testMapper.deleteCategory(cateVO);
 	}
 
 	@Override
 	public int updateCateName(CategoryVO cateVO) {
-		return testMapper.updateCateName(cateVO);
+		return itemMapper.updateCateName(cateVO);
 	}
 
 	@Override
-	public int delBestMenu(String menueVO) {
-		return testMapper.delBestMenu(menueVO);
+	public int addBestMenu(ItemVO itemVO) {
+		return itemMapper.addBestMenu(itemVO);
 	}
 
 	@Override
-	public int addBestMenu(String menueVO) {
-		System.out.println(menueVO);
-		return testMapper.addBestMenu(menueVO);
+	public BranchItemInfo menuDetail(BranchItemInfo itemInfo) {
+		return itemMapper.menuDetail(itemInfo);
 	}
 
 	@Override
-	public List<ItemVO> testquery(BranchItemInfo itemInfo) {
-		return testMapper.testquery(itemInfo);
+	public List<BranchItemInfo> getBOption(BranchItemInfo itemInfo) {
+		return itemMapper.getBOption(itemInfo);
 	}
 
 	@Override
-	public int testupdate(BranchItemInfo itemInfo) {
-		return testMapper.testupdate(itemInfo);
+	public List<BranchItemInfo> getAOption(BranchItemInfo itemInfo) {
+		return itemMapper.getAOption(itemInfo);
 	}
 
+	@Override
+	public int updateBOption(BranchItemInfo itemInfo) {
+		return itemMapper.updateBOption(itemInfo);
+	}
+
+	@Override
+	public int updateAOption(BranchItemInfo itemInfo) {
+		return itemMapper.updateAOption(itemInfo);
+	}
+
+	@Override
+	public int updateItem(BranchItemInfo itemInfo) {
+		return itemMapper.updateItem(itemInfo);
+	}
+
+	@Override
+	public int updateCategory(BranchItemInfo itemInfo) {
+		return itemMapper.updateCategory(itemInfo);
+	}
+
+	@Override
+	public int deleteCategory(BranchItemInfo itemInfo) {
+		return itemMapper.deleteCategory(itemInfo);
+	}
+	
+	@Override
+	public int deleteItem(BranchItemInfo itemInfo) {
+		return itemMapper.deleteItem(itemInfo);
+	}
+
+	@Override
+	public List<BranchItemInfo> getItemPrice(BranchItemInfo itemInfo) {
+		return itemMapper.getItemPrice(itemInfo);
+	}
+
+	@Override
+	public int deleteBestMenu(ItemVO itemVO) {
+		return itemMapper.deleteBestMenu(itemVO);
+	}
+
+	@Override
+	public int deleteAOption(ItemOptionVO optionInfo) {
+		return itemMapper.deleteAOption(optionInfo);
+	}
+	
+	@Override
+	public int deleteBOption(ItemOptionVO optionInfo) {
+		return itemMapper.deleteBOption(optionInfo);
+	}
 }

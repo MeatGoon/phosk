@@ -2,7 +2,6 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html>
 <head></head>
@@ -42,7 +41,7 @@ button {
 	height: 100%;
 }
 
-.category_names {
+#category_names {
 	width: 300px;
 	height: 50px;
 	margin: 0 auto;
@@ -94,37 +93,36 @@ button {
 	<div class="mainContainer">
 		<div class="categoryCon">
 			<c:forEach items="${cateList}" var="cateList">
-				<button value="${cateList.category_num}" class="category_names"
-					onclick="moveCategory(this)" style="color: blue;">${cateList.category_name}</button>
+				<button value="${cateList.category_num}" id="category_names" style="color: blue;">${cateList.category_name}</button>
 			</c:forEach>
 		</div>
 		<div class="menueContainer">
 			<div class="manage_con">
-				<button value="${nowPage.nowCate}" type="button" id="manage_btn">메뉴관리</button>
+				<button value="" type="button" id="manage_btn">메뉴관리</button>
 			</div>
 			<div id="menue_eachform">
 				<c:choose>
-					<c:when test="${!empty cateTest }">
+					<c:when test="${!empty cateTest}">
 						<c:forEach items='${cateTest}' var='cateTest'>
 							<div class='menueInfo_container'>
-								<button name="${cateTest.menue_name}"
-									value="${cateTest.category_num}" id="detailMenue_open">상세보기</button>
+								<button name="${cateTest.item_num}" value="${cateTest.category_num}" id="detailMenue_open">상세보기</button>
 								<div class="menueInfo menueInfo_top">
-									<span class="menue_text menue_text_top menue_info_name">음식명
-										: ${cateTest.menue_name}</span> <span
-										class="menue_text menue_text_top menue_info_price">가격 :
-										<fmt:formatNumber value="${cateTest.menue_price}"></fmt:formatNumber>&nbsp;원
-									</span>
+									<span class="menue_text menue_text_top menue_info_name">음식명 : ${cateTest.item_name}</span>
+									<c:forEach items="${itemPrice}" var="itemPrice">
+										<c:if test="${itemPrice.item_num eq cateTest.item_num}">
+											<span class="menue_text menue_text_top menue_info_price">${itemPrice.basic_option} : <fmt:formatNumber value="${itemPrice.basic_price}"></fmt:formatNumber>&nbsp;원</span>
+										</c:if>
+									</c:forEach>
 								</div>
 								<div class="menueInfo menueInfo_bottom">
-									<span class="menue_text menue_info_detail">${cateTest.etc}</span>
+									<span class="menue_text menue_info_detail">${cateTest.item_info}</span>
 								</div>
 							</div>
 						</c:forEach>
 					</c:when>
 					<c:otherwise>
 						<div>
-							<button value="${nowPage.nowCate}" id="insert_btn">메뉴등록</button>
+							<button value="" id="insert_btn">메뉴등록</button>
 						</div>
 					</c:otherwise>
 				</c:choose>
@@ -132,53 +130,37 @@ button {
 		</div>
 	</div>
 	<form id="moveForm" method="get">
-		<%-- <input type="text" name="branch_num" value="${cateList.branch_num}"/> --%>
+		<input type="hidden" name="branch_num" value="${branchInfo}"/>
+		<input type="hidden" name="category_num" value="${cateNum}"/>
+		<p>${result}</p>
 	</form>
 	<script>
 	let form = $("#moveForm");
-	$('#insert_btn').on(
-			'click',
-			function() {
-				form.attr('method', 'get');
+	$(document).on("click", "#category_names", function() {
+		var cateVal = $(this).val();
+		console.log(cateVal);
+		form.attr("action", "/test/cateList");
+		$("input[name=category_num]").val(cateVal);
+		form.submit();
+	});
+	$('#insert_btn').on('click',function() {
 				form.attr('action', '/test/insertMenue');
-				form.append('<input type="hidden" name="nowCate" value="'
-						+ $(this).val() + '"/>');
 				form.submit();
 			});
-		$(document)
-				.ready(
-						function() {
-							$(document)
-									.on(
-											'click',
-											'button[id="detailMenue_open"]',
-											function(e) {
-
-												var menueName = $(this).attr(
-														'name');
-												console.log(menueName);
-												form
-														.append("<input type='hidden' name='menue_name' value='"+ menueName + "' />");
-												form.attr("action",
-														"/test/detailInfo");
-												form.submit();
-											});
-						});
-		$(document).on(
-				"click",
-				"#manage_btn",
-				function() {
-					form.append(
-							'<input type="text" name="category_num" value="'
-									+ $(this).val() + '"/>');
-					form.attr('action', '/test/menueManage');
-					form.submit();
+		$(document).ready(function() {
+			$(document).on('click', 'button[id="detailMenue_open"]', function(e) {
+				var menueName = $(this).attr('name');
+				console.log(menueName);
+				form.append("<input type='hidden' name='item_num' value='"+ menueName + "' />");
+				form.attr("action", "/test/detailInfo");
+				form.submit();
 				});
-		function moveCategory(e) {
-			var cateVal = $(e).val();
-			location.href = "/test/cateList?cateTest=" + cateVal;
-		};
-		/* ajax를 통해 화면 전환을 시키니 2번씩 실행되어서 ajax를 삭제함. */
+			});
+		$(document).on("click", "#manage_btn", function() {
+			form.append('<input type="hidden" name="category_num" value="' + $(this).val() + '"/>');
+			form.attr('action', '/test/menueManage');
+			form.submit();
+			});	
 	</script>
 </body>
 </html>
