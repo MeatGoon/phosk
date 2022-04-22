@@ -7,6 +7,8 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.teamproject.phosk.option.vo.BasicOptionVO;
+import com.teamproject.phosk.option.vo.AddOptionVO;
+
 
 import lombok.extern.log4j.Log4j;
 
@@ -15,7 +17,7 @@ import lombok.extern.log4j.Log4j;
 @Log4j
 public class InsertTest {
 	
-	@Autowired
+/*	@Autowired
 	BasicoptionDAO optionDao;
 	
 	@Test
@@ -29,6 +31,24 @@ public class InsertTest {
 		vo.setBasic_price(1000);
 		
 		optionDao.insertbasicoption(vo);
+	}*/
+	
+	@Autowired
+	AddoptionDAO optionDao;
+	
+	@Test
+	public void testInsert(){
+		AddOptionVO vo  = new AddOptionVO();
+		
+		vo.setBranch_num("123-45-67890");
+		vo.setCategory_num(2);
+		vo.setItem_num(2);
+		vo.setAdd_option("기본");
+		vo.setAdd_price(1000);
+		
+		optionDao.insertaddoption(vo);
 	}
+	
+	
 	
 }

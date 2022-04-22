@@ -24,8 +24,8 @@
 	</nav>
 	<nav>
 		<ul class = "headul">
-			<li><a href="#" class = "last">로그인</a></li>
-			<li><a href="#" class = "last">호출</a></li>
+			<li><a href="/branch/login/index" class = "last">로그인</a></li>
+			<!-- <li><a href="/" class = "last">호출</a></li> -->
 		</ul>
 	</nav>
 </body>
