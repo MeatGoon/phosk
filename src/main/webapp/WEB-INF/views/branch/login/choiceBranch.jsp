@@ -52,7 +52,7 @@
 			console.log(checkvar);
 			selectForm.attr({
 				"method" : "GET",
-				"action" : "/branch/main/index"
+				"action" : "/test/cateList?branch_num="+checkvar
 			});
 			selectForm.submit();
 		});

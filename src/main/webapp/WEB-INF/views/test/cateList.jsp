@@ -88,6 +88,7 @@ button {
 	float: left;
 }
 </style>
+<jsp:include page="../branch/main/index.jsp"/>
 <body>
 	<h1>카테고리페이지입니다</h1>
 	<div class="mainContainer">

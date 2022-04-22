@@ -29,8 +29,12 @@ public class BranchLoginController {
 	private BranchLoginService service;
 	
 	@GetMapping("/index")
-	public void branchLoginIndex() {
+	public void branchLoginIndex(HttpSession session) {
 		log.info("branchLoginIndex 호출");
+		if(session.getAttribute("loginInfo") != null) {
+			session.removeAttribute("loginInfo"); 
+			log.info("test");
+		}
 	}
 	
 	@PostMapping("/result")

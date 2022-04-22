@@ -1,6 +1,7 @@
 package com.teamproject.phosk.branch.menu.controller;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.expression.spel.ast.OpInc;
@@ -32,9 +33,13 @@ public class ItemController {
 
 	// 메뉴 관리 메인 페이지
 	@GetMapping("/cateList")
-	public void cateList(BranchItemInfo itemInfo, Model model, HttpServletRequest request, NowPage nowPage) {
+	public void cateList(BranchItemInfo itemInfo, Model model, HttpServletRequest request, NowPage nowPage, HttpSession session) {
 		log.info("cate List .....");
 		String branch_num = itemInfo.getBranch_num();
+		if(session.getAttribute("branchNumSession") != null) {
+			session.removeAttribute("branchNumSession");
+		}
+		session.setAttribute("branchNumSession", branch_num);
 		model.addAttribute("branchInfo", branch_num); // 사업자 번호만 반환
 		model.addAttribute("cateNum", itemInfo.getCategory_num()); // 현재 카테고리 위치 반환
 		model.addAttribute("cateTest", service.getMenue(itemInfo));
