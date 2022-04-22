@@ -10,33 +10,44 @@
 <meta charset="UTF-8">
 <title>온라인 메뉴판</title>
 </head>
+<style>
+#food_bnt{
+	color : green;
+	 border:none;
+	 background: none;
+	 padding: 0;
+}
+</style>
 <header>
 			<jsp:include page="../userForm/userheader.jsp"/>
 </header>
 <body>
 <h1>온라인 메뉴판입니다</h1>
+<p>이름을 클릭하면 상세정보가 나타납니다</p>
+<p>미추가 내용 음식클릭시 상세내역 모달창에서 뜨게하기</p>
 	<div>
 		<form action="">
-		<p> 추가옵션부분 삽입해서 가격만 기재하면 마무리</p>
-			<table style = 'float:left; '>
+			<table style = 'float:left; '>	
 				<c:forEach items="${catemenulist}" var = "cmenu">
-					<tr >
-						<td><c:out value="${cmenu.category_name}" /></td>
+				<c:if test="${branch_num eq cmenu.branch_num}" >
+					<tr>
+	
+						<td style = "font-size: 30px; color : red;"><c:out value="${cmenu.category_name}" /></td>
 						<c:forEach items="${itemmenulist}" var = "imenu">
-						<tr>
+						
 						<c:if test="${cmenu.category_num eq imenu.category_num}" >	
-						<td><c:out value="${imenu.item_image}" /></td>
-						<td><c:out value="${imenu.item_name}" /></td>
-						<td><c:out value="${imenu.item_info}" /></td>
+						
+						<td ><input type="button" value="${imenu.item_name}" id ="food_bnt" />,</td>
 						</c:if>
-						</tr>				
+								
 						</c:forEach>							
-					</tr>
+					</tr><br>
+				</c:if>	
 				</c:forEach>
 			</table>
 					<div style ='text-align: center;'>
 			  			<script>function goBack() {window.history.back();}</script>
-						<input type="button" value="테이블 다시선택" onClick= "goBack();">
+						<input type="button" value="테이블 다시선택" onClick= "goBack();" >
 					</div>
 		</form>
 	

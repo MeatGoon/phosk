@@ -23,9 +23,9 @@
 	</select>	
 	
 	<select id="branchpaging" resultType="branchInfo">
-	 select branch_name, branch_phone, branch_detail
+	 select branch_name, branch_phone, branch_detail ,branch_num
         from(
-            select branch_name,branch_phone,branch_detail,
+            select branch_name,branch_phone,branch_detail, branch_num,
                 row_number() over(ORDER by branch_name desc) as rNum
                 from phosk_branch
                 )pb

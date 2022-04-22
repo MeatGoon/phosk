@@ -7,7 +7,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import com.teamproject.phosk.branch.info.vo.BranchInfoVO;
 import com.teamproject.phosk.branch.menu.vo.CategoryVO;
@@ -45,23 +44,28 @@ public class UsermainController {
 		 model.addAttribute("pagemaker",pagemaker);
 	 }
 	 @GetMapping("/user/tablechoice")
-     public void qrlist(@RequestParam("branch_name") String branch_name , Model model) {          
+     public void qrlist(BranchInfoVO branchvo, Model model) {  
+		 
          log.info("테이블 조회");
-         List<BranchQRVO> qrlist = usermainservice.qrlist();
+         String branch_num = branchvo.getBranch_num();
+         List<BranchQRVO> qrlist = usermainservice.qrlist();         
          model.addAttribute("qrlist", qrlist);
-         model.addAttribute("branch_name" , branch_name);
+         model.addAttribute("branch_num" , branch_num);
         
                 
      }	
 	 @GetMapping("/user/usermenue")
-     public void usermenue(Model model, String branch_name , String qrtable_num) {          
+     public void usermenue(Model model, BranchInfoVO branchvo, String qrtable_num) {          
          log.info("메인페이지 조회");
+         
+         String branch_num = branchvo.getBranch_num();
+         
          List<CategoryVO> catemenulist = usermenuservice.catemenulist();
          List<ItemVO> itemmenulist = usermenuservice.itemmenulist();
          
          model.addAttribute("catemenulist",catemenulist);
          model.addAttribute("itemmenulist",itemmenulist);
-         model.addAttribute("branch_name" , branch_name);
+         model.addAttribute("branch_num" , branch_num);
          model.addAttribute("qrtable_num" , qrtable_num);        
      }	
 
