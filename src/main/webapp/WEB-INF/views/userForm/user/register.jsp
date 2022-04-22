@@ -58,7 +58,7 @@
 		
 			<br>			
 			<div class= "test">
-				<input  type="text" name="member_id" id ="member_id" maxlength="11" placeholder="아이디 입력 (숫자만 사용)"/>							
+				<input  type="number" name="member_id" id ="member_id" maxlength="11" placeholder="아이디 입력 (숫자만 사용)"/>							
 			</div>			
 				<button type="button"  class="idchk"  disabled = "disabled">중복확인</button>
 				<p class = "result">
@@ -153,7 +153,7 @@
 			<br>
 			<div>
 				<input type="button" class="cc" value="카드등록" onClick = "location.href='/userForm/cardinfo/cardinfoForm'"><br>
-				<p>회원가입이후 내정보등록에서 이용가능합니다</p>
+				<p>회원가입후 내정보등록</p>
 
 			</div>		
 			<div>

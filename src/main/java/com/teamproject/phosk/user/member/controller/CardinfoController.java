@@ -33,7 +33,7 @@ public class CardinfoController {
 		public String cardinfoPOST(CardinfoVO cardinfovo) {
 			log.info("카드정보 post");
 			cardinfoservice.insertCard(cardinfovo);
-			return "redirect:/userForm/usertest";
+			return "redirect:/userForm/user/updateuser";
 			
 		}	
 

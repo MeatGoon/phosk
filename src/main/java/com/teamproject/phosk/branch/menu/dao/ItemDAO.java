@@ -11,16 +11,6 @@ public interface ItemDAO {
 	
 	List<CategoryVO> cateList(String branch_num);
 
-	List<ItemVO> meList();
-
-	ItemVO detailInfo(String menue_name);
-
-	int modify(ItemVO menueVO);
-
-	int delete(ItemVO menueVO);
-
-	int insert(ItemVO menueVO);
-
 	int chkDel(ItemVO itemVO);
 
 	int insrtCategory(CategoryVO cateVo);
@@ -35,11 +25,9 @@ public interface ItemDAO {
 
 	int delBestMenu(String menueVO);
 
-	int addBestMenu(String menueVO);
+	int addBestMenu(ItemVO itemVO);
 
-	BranchItemInfo testquery(BranchItemInfo itemInfo);
-
-	int testupdate(BranchItemInfo itemInfo);
+	BranchItemInfo menuDetail(BranchItemInfo itemInfo);
 
 	List<BranchItemInfo> getBOption(BranchItemInfo itemInfo);
 
@@ -54,5 +42,13 @@ public interface ItemDAO {
 	int updateCategory(BranchItemInfo itemInfo);
 
 	int deleteItem(BranchItemInfo itemInfo);
+
+	List<BranchItemInfo> getItemPrice(BranchItemInfo itemInfo);
+
+	int deleteBestMenu(ItemVO itemVO);
+
+	int deleteAOption(ItemOptionVO optionInfo);
+
+	int deleteBOption(ItemOptionVO optionInfo);
  
 }

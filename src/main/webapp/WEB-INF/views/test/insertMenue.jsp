@@ -24,7 +24,6 @@
 								<option value="${cateList.category_num}">${cateList.category_name}</option>
 							</c:otherwise>
 						</c:choose>
-
 					</c:forEach>
 				</select>
 			</div>

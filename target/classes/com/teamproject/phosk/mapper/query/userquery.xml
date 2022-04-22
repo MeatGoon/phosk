@@ -55,4 +55,15 @@
 		delete from phosk_member
 			where member_id = #{member_id}
 	</delete>
+	<!-- qr테이블 리스트 -->
+	<select id ="qrlist" resultType="branchQR">
+		select * from phosk_QRTable
+	</select>
+	<!-- 메뉴판 리스트불러오기 -->
+	<select id ="catemenulist" resultType="cateVO">
+		select * from phosk_category
+	</select>
+	<select id ="itemmenulist" resultType="itemVO">
+		select * from phosk_item
+	</select>
 </mapper>

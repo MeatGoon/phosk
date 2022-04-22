@@ -21,32 +21,7 @@ public class ItemDAOImpl implements ItemDAO {
 	public List<CategoryVO> cateList(String branch_num) {
 		return session.selectList("getCategory", branch_num);
 	}
-
-	@Override
-	public List<ItemVO> meList() {
-		return session.selectList("meList");
-	}
-
-	@Override
-	public ItemVO detailInfo(String menue_name) {
-		return session.selectOne("detailInfo", menue_name);
-	}
-
-	@Override
-	public int modify(ItemVO menueVO) {
-		return session.update("menueModify", menueVO);
-	}
-
-	@Override
-	public int delete(ItemVO menueVO) {
-		return session.delete("menueDelete", menueVO);
-	}
-
-	@Override
-	public int insert(ItemVO menueVO) {
-		return session.insert("menueInsert", menueVO);
-	}
-
+	
 	@Override
 	public int chkDel(ItemVO itemVO) {
 		return session.delete("deleteItem", itemVO);
@@ -83,19 +58,14 @@ public class ItemDAOImpl implements ItemDAO {
 	}
 
 	@Override
-	public int addBestMenu(String menueVO) {
-		System.out.println(menueVO);
-		return session.insert("addBestMenu", menueVO);
+	public int addBestMenu(ItemVO itemVO) {
+		System.out.println(itemVO);
+		return session.insert("addBestMenu", itemVO);
 	}
 
 	@Override
-	public BranchItemInfo testquery(BranchItemInfo itemInfo) {
+	public BranchItemInfo menuDetail(BranchItemInfo itemInfo) {
 		return session.selectOne("itemDetailInfo",itemInfo);
-	}
-
-	@Override
-	public int testupdate(BranchItemInfo itemInfo) {
-		return session.update("updateTest", itemInfo);
 	}
 
 	@Override
@@ -131,5 +101,25 @@ public class ItemDAOImpl implements ItemDAO {
 	@Override
 	public int deleteItem(BranchItemInfo itemInfo) {
 		return session.update("deleteItem", itemInfo);
+	}
+
+	@Override
+	public List<BranchItemInfo> getItemPrice(BranchItemInfo itemInfo) {
+		return session.selectList("getItemPrice", itemInfo);
+	}
+
+	@Override
+	public int deleteBestMenu(ItemVO itemVO) {
+		return session.delete("deleteBestMenu", itemVO);
+	}
+
+	@Override
+	public int deleteAOption(ItemOptionVO optionInfo) {
+		return session.delete("deleteAOption", optionInfo);
+	}
+	
+	@Override
+	public int deleteBOption(ItemOptionVO optionInfo) {
+		return session.delete("deleteBOption", optionInfo);
 	}
 }

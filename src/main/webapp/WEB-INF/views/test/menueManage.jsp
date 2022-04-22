@@ -60,13 +60,13 @@ button {
 	height: 100%;
 }
 
-#detailMenue_open, #checked_menue {
+#itemModify, #checked_menue {
 	width: 50px;
 	height: 50px;
 	margin: 5px auto;
 }
 
-#detailMenue_open {
+#itemModify {
 	float: right;
 }
 
@@ -103,98 +103,13 @@ button {
 	width: 550px;
 	float: left;
 }
-
-/* 모달 스타일 */
-#modal {
-	position: relative;
-	width: 100%;
-	height: 100%;
-	z-index: 1;
-}
-
-#modal h2 {
-	margin: 0;
-}
-
-#modal button {
-	display: inline-block;
-	width: 100px;
-	margin-left: calc(100% - 100px - 10px);
-}
-
-#modal .modal_content {
-	width: 300px;
-	margin: 100px auto;
-	padding: 20px 10px;
-	background: #fff;
-	border: 2px solid #666;
-}
-
-#modal .modal_layer {
-	position: fixed;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100%;
-	background: rgba(0, 0, 0, 0.5);
-	z-index: -1;
-}
 </style>
 <body>
-	<script>
-		/* 		$(document)
-		 .ready(
-		 function() {
-		 console.log('레디까지 완료');
-		 $(document)
-		 .on(
-		 "click",
-		 "button[class='category_names']",
-		 function() {
-		 var carNum = $(this).val();
-		 console.log(carNum);
-		 $(".menueInfo_container")
-		 .remove();
-
-		 <c:forEach items='${meList}' var='meList'>
-
-		 var test123 = <c:out value="${meList.category_num}"/>;
-
-		 if (test123 == carNum) {
-		 console.log("아니 여기옴?");
-		 $(".menue_eachform")
-		 .prepend(
-		 "<div class='menueInfo_container'>"
-		 + "<div>"
-		 + "<button name='${meList.menue_name}' value='${meList.category_num}' id='detailMenue_open'>상세보기</button>"
-		 + "</div>"
-		 + "<div>"
-		 + "<input type='checkbox' name='menue_name' id='checked_menue' value='${meList.menue_name}' />"
-		 + "</div>"
-		 + "<div class='menueInfo menueInfo_top'>"
-		 + "<span class='menue_text menue_text_top menue_info_name'>음식명 : ${meList.menue_name}</span> "
-		 + "<span class='menue_text menue_text_top menue_info_price'>가격 : <fmt:formatNumber value='${meList.menue_price}'></fmt:formatNumber>&nbsp;원</span>"
-		 + "</div>"
-		 + "<div class='menueInfo menueInfo_bottom'>"
-		 + "<span class='menue_text menue_info_detail'>${meList.etc}</span>"
-		 + "</div>"
-		 + "</div>");
-		 console.log("분리후실행중");
-		 추후 클릭시 버튼 수정이 아닌 카테고리 번호를 저장하여 상세목록 이동시 같이 값을 보낸후
-		 다시 메뉴 목록으로 돌아올떄 기존 값을 유지할수 있게 해야함.
-		 }
-		 console.log("실행중");
-		 </c:forEach>
-
-		 });
-		 }); */
-	</script>
 	<h1>메뉴관리페이지입니다</h1>
 	<div class="mainContainer">
 		<div class="categoryCon">
 			<div>
-				<button id="add_cate_btn" value="${cateNum}">카테고리
-					추가</button>
+				<button id="add_cate_btn" value="${cateNum}">카테고리 추가</button>
 			</div>
 			<div class="categort_btns">
 				<c:forEach items="${cateList}" var="cateList">
@@ -223,14 +138,19 @@ button {
 				<c:forEach items='${cateTest}' var='cateTest'>
 					<div class='menueInfo_container'>
 						<div>
-							<button name="${cateTest.item_num}" value="${cateTest.category_num}" id="detailMenue_open">상세보기</button>
+							<button name="${cateTest.item_num}" value="${cateTest.category_num}" id="itemModify">수정</button>
 						</div>
 						<div>
 							<input type="checkbox" name="item_num" id="checked_menue" value="${cateTest.item_num}" />
 						</div>
 						<div class="menueInfo menueInfo_top">
 							<span class="menue_text menue_text_top menue_info_name">음식명 : ${cateTest.item_name}</span>
-							<span class="menue_text menue_text_top menue_info_price">${cateTest.basic_option} : <fmt:formatNumber value="${cateTest.basic_price}"></fmt:formatNumber>&nbsp;원</span>
+							<c:forEach items="${itemPrice}" var="itemPrice">
+								<c:if test="${itemPrice.item_num eq cateTest.item_num}">
+									<span class="menue_text menue_text_top menue_info_price">${itemPrice.basic_option} : <fmt:formatNumber value="${itemPrice.basic_price}"></fmt:formatNumber>&nbsp;원</span>
+								</c:if>
+							</c:forEach>
+							
 						</div>
 						<div class="menueInfo menueInfo_bottom">
 							<span class="menue_text menue_info_detail">${cateTest.item_info}</span>
@@ -239,13 +159,13 @@ button {
 				</c:forEach>
 			</div>
 			<div style="position: sticky; bottom: 0; background-color: white;">
-				<c:if test="${categoryName ne '인기메뉴'}">
+				<c:if test="${cateNum ne 0}">
 					<div>
 						<button value="${cateNum}" id="insert_btn">메뉴등록</button>
 					</div>
 				</c:if>
 				<c:choose>
-					<c:when test="${categoryName ne '인기메뉴'}">
+					<c:when test="${cateNum ne 0}">
 						<button id="cheked_btn" class="del_checked_btn">선택 삭제</button>
 						<button id="cheked_btn" class="best_checked_btn">인기 등록</button>
 					</c:when>
@@ -257,21 +177,15 @@ button {
 		</div>
 	</div>
 	<form id="moveForm" method="get">
-		<input type="text" name="branch_num" value="${branchInfo}"/>
-		<input type="text" name="category_num" value="${cateNum}"/>
+		<input type="hidden" name="branch_num" value="${branchInfo}"/>
+		<input type="hidden" name="category_num" value="${cateNum}"/>
 		<p>${delResult}</p>
 	</form>
 	<script>
-		/* 하나의 값만 변경후 복사가 되는 쿼리문이 없을경우 input 태그로 하나하나 입력후 새로 입력 */
-		/* 등원후 해야할것 준현님 쿼림문 적용하기 */
-		var bestNum;
-		bestNum = $("input[name=category_num]").text();
-		console.log(bestNum);
 		let moveForm = $("#moveForm");
 		$(document).on("click", "#category_names", function() {
 			var cateVal = $(this).val();
 			moveForm.attr("action", "/test/menueManage");
-			moveForm.append("<input type='text' name='category_name' value='" + $(this).text() +"'/>");
 			$("input[name=category_num]").val(cateVal);
 			moveForm.submit();
 		});
@@ -295,18 +209,18 @@ button {
 				moveForm.submit();
 				} else {
 					return;
-					}
+				}
 			moveForm.attr('action', '/test/deleteCategory');
 			moveForm.append('<input type="hidden" name="category_num" value="' + $(this).val() + '"/>');
 			moveForm.submit();
 			});
 		
 		$(document).ready(function() {
-			$(document).on('click', 'button[id="detailMenue_open"]', function(e) {
+			$(document).on('click', 'button[id="itemModify"]', function(e) {
 				var item_num = $(this).attr('name');
 				console.log(item_num);
 				moveForm.append("<input type='hidden' name='item_num' value='"+ item_num + "' />");
-				moveForm.attr("action", "/test/detailInfo");
+				moveForm.attr("action", "/test/itemModify");
 				moveForm.submit();
 				});
 			});
@@ -318,14 +232,16 @@ button {
 			moveForm.attr('action', '/test/cateList');
 			moveForm.submit();
 			});
-
+		
+		/* 새 카테고리 추가 */
 		$('#add_cate_btn').on('click', function() {
 			moveForm.attr('method', 'post');
 			moveForm.attr('action', '/test/insrtCategory');
-			moveForm.append("<input type='text' name='category_name' value='새 카테고리'>");
+			moveForm.append("<input type='hidden' name='category_name' value='새 카테고리'>");
 			moveForm.submit();
 			});
 
+		/* 다중 삭제, 등록 ajax */
 		$(document).ready(function() {
 			$(document).on("click", "button[id='cheked_btn']", function() {
 				var checkType = $(this).attr('class');
@@ -367,11 +283,11 @@ button {
 				/* 담아둔 배열을 controller로 보낸다 */
 				},
 				success : function(testdata) {
-					if (url = "/test/deleteChk") {
+					if (url === "/test/deleteChk") {
 						alert(checkedbtn.length + '개 메뉴 삭제.');
-					}else if (url = "/test/addBestMenu") {
+					}else if (url === "/test/addBestMenu") {
 						alert(checkedbtn.length + '개 인기메뉴 등록.');
-					}else if (url = "/test/deleteBestMenu") {
+					}else if (url === "/test/deleteBestMenu") {
 						alert(checkedbtn.length + '개 인기메뉴 해제.');
 					}else {
 						alert("실패");
