@@ -55,7 +55,7 @@
 		insert into phosk_category VALUES(#{branch_num}, CATE_SEQ.nextval, #{category_name})<!-- seq 사용시 변경 필요 -->
 	</insert>
 	<insert id="insertItem">
-		insert into phosk_item VALUES(#{branch_num}, #{category_num}, #{category_name}, #{item_num}, #{item_name}
+		insert into phosk_item VALUES(#{branch_num}, #{category_num}, ITEM_SEQ.nextval, #{item_name}
 		<choose>
 			<when test="item_image != null">
 				, #{item_image}
@@ -74,12 +74,29 @@
 		</choose>
 		, sysdate, sysdate)
 	</insert>
+	<!-- 임의로 item_num = 0 으로 저장해둔 값을 아이템 넘버를 지정해줌 -->
+	<update id="insertUpBOption">
+		update phosk_basicoption set category_num = #{category_num}, item_num = ITEM_SEQ.CURRVAL where branch_num = #{branch_num} and item_num = 0
+	</update>
+	<update id="insertUpAOption">
+		update phosk_addoption set category_num = #{category_num}, item_num = ITEM_SEQ.CURRVAL where branch_num = #{branch_num} and item_num = 0
+	</update>
+	
+	<!-- 옵션 슬롯 추가시 임의로 값을 입력 -->
 	<insert id="insertBOption">
-		insert into phosk_basicOption VALUES(#{branch_num}, #{category_num}, #{item_num}, #{basic_option}, #{basic_price})
+		insert into phosk_basicOption VALUES(#{branch_num}, null, 0, #{basic_option}, #{basic_price})
 	</insert>
 	<insert id="insertAOption">
-		insert into phosk_addOption values(#{branch_num}, #{category_num}, #{item_num}, #{add_option}, #{add_price})
+		insert into phosk_addOption values(#{branch_num}, null, 0, #{add_option}, #{add_price})
 	</insert>
+	
+	<delete id="moveManage">
+		DECLARE
+		BEGIN
+		    delete phosk_basicoption where branch_num = #{branch_num} and item_num = 0;
+		    delete phosk_addoption where branch_num = #{branch_num} and item_num = 0;
+		END;
+	</delete>
 	
 	<!-- upcate 부분 -->
 	<update id="updateCategory">
@@ -109,6 +126,7 @@
 			where branch_num = #{branch_num} and item_num = #{item_num} and add_option = #{add_option}
 		</if>
 	</update>
+	
 	
 	<!-- delete 부분 -->
 	<delete id="deleteCategory">

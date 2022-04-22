@@ -122,4 +122,34 @@ public class ItemDAOImpl implements ItemDAO {
 	public int deleteBOption(ItemOptionVO optionInfo) {
 		return session.delete("deleteBOption", optionInfo);
 	}
+
+	@Override
+	public int insertAOption(ItemOptionVO optionVO) {
+		return session.insert("insertAOption", optionVO);
+	}
+
+	@Override
+	public int insertMenu(BranchItemInfo itemInfo) {
+		return session.insert("insertItem", itemInfo);
+	}
+
+	@Override
+	public int upBOption(BranchItemInfo itemInfo) {
+		return session.update("insertUpBOption", itemInfo);
+	}
+
+	@Override
+	public int upAOption(BranchItemInfo itemInfo) {
+		return session.update("insertUpAOption", itemInfo);
+	}
+
+	@Override
+	public int insertBOption(ItemOptionVO optionVO) {
+		return session.insert("insertBOption", optionVO);
+	}
+
+	@Override
+	public int moveManage(ItemOptionVO optionVO) {
+		return session.insert("moveManage", optionVO);
+	}
 }

@@ -144,7 +144,7 @@ button {
 		form.submit();
 	});
 	$('#insert_btn').on('click',function() {
-				form.attr('action', '/test/insertMenue');
+				form.attr('action', '/test/insertMenu');
 				form.submit();
 			});
 		$(document).ready(function() {

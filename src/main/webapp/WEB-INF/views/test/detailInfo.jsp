@@ -131,7 +131,6 @@
 			$.ajax({
 				url : url, // controller에서 설정해둔 postmapping의 url
 				type : "POST", // controller 의 mapping 타입이 Get 인지 Post 인지 설정
-				traditional : true, // 전통성 ex) true = checkedbtn='볶음밥', false = checkedbtn[]='볶음밥'
 				data : {
 					branchNum : branchNum,
 					cateNum : cateNum,

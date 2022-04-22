@@ -14,8 +14,8 @@
 	<div>
 		<form id="insertForm" method="post">
 			<div class="menu_box">
-				<input type="hidden" name="branch_num" value="${cateTest.branch_num}"/>
-				<select name="category_num">
+				<input type="hidden" name="branch_num" value="${branchInfo}"/>
+				<label for="category_num">카테고리 선택 : </label><select name="category_num">
 					<c:forEach var="cateList" items="${cateList}">
 						<c:choose>
 							<c:when test="${cateList.category_num eq cateNum}">
@@ -36,41 +36,76 @@
 				<label for="item_info">상세설명</label>
 				<textarea class="menue_info" rows="" cols="" name="item_info" ></textarea>
 			</div>
+			<h3>가격</h3>
 			<div class="menu_box BOption">
 				<input type="text" name="basic_option" readonly="readonly" value="가격"/> :
 				<input type="text" name="basic_price"/>
+				<button type="button" id="addBOption">추가</button>
 			</div>
+			<h3>추가 옵션</h3>
 			<div class="menu_box AOption">
 			
+				<button type="button" id="addAOption">추가</button>
 			</div>
 			<!-- 추가 버튼 클릭시 readonly 해제후 임의의 값을 먼저 넣은후 -->
 			<!-- 만약 한번더 추가할시 현재 입력되어있는 옵션명을 비교? try catch? -->
 		</form>
 		<button type="button" id="insert_btn">등록</button>
 		<button type="button" id="list_btn">목록이동</button>
+		${result}
 	</div>
+		<form id="moveForm" method="post">
+		<input type="text" name="branch_num" value="${branchInfo}"/>
+	</form>
 	<script>
+		$(document).ready(function() {
+			$(document).on("click", "#addAOption", function() {
+				var branchNum = "${branchInfo}";
+				var aOpName = $("#add_option").val();
+				var aOpPrice = $("#add_price").val();
+				if (aOpPrice == null) {
+					aOpPrice = 0;
+				}
+				$("#add_price").attr("readonly", "readonly");
+				$("#add_option").attr("readonly", "readonly");
+				$(".AOption").prepend("<button id='deleteOption'>삭제</button>&nbsp;<br />");
+				$(".AOption").prepend("<input type='text' id='add_price' name='add_price'/>");
+				$(".AOption").prepend("<input type='text' id='add_option' name='add_option' placeholder='한글 3자리까지' /> :&nbsp;");
+				
+				console.log(aOpName);
+				console.log(aOpPrice);
+				$.ajax({
+					url : "/test/addOption",
+					type : "post",
+					data : {
+						branchNum : branchNum,
+						aOpName : aOpName,
+						aOpPrice : aOpPrice,	
+					},
+					success : function(testdata) {
+						console.log("전송성공");
+							
+					}
+				});
+			});
+		});
+
+		
+		
 		$("#list_btn").on('click', function() {
-			location.href = "/test/menueManage?branch_num=${branchInfo}&category_num=${cateNum}";
+			$("#moveForm").attr("action", "/test/moveMenueManage");
+			$("#moveForm").submit();
 		});
 		$("#insert_btn").on('click', function() {
- 			var text = $("select[name='category_num']").val();
-			var result = 0 || null || "";
-			if (text == result) {
-				alert("카테고리를 선택해주시기 바랍니다.");
-				console.log('if 여긴가');
+			var aOpName = $("#add_option").val();
+			var result = null || "";
+			if (aOpName == result) {
+				alert("추가옵션에 빈칸이 있습니다.");
+				return;
 			} else {
 				console.log('else 여긴가');
 				$("#insertForm").attr('action', '/test/insertMenu');
 				$("#insertForm").submit();
-				/* 자고 일어나서 왜 작동안하는지 원인 찾기 */
-				
-				/* 
-				Uncaught TypeError: $(...) is not a function
-   				 at HTMLButtonElement.<anonymous> (insertMenue?nowCate=3:111:21)
- 				 at HTMLButtonElement.dispatch (jquery.min.js:2:43064)
-  				 at HTMLButtonElement.v.handle (jquery.min.js:2:41048)
-				*/
 			}
 		});
 	</script>

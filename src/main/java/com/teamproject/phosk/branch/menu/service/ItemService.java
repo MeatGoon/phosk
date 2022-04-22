@@ -67,4 +67,16 @@ public interface ItemService {
 	public int deleteAOption(ItemOptionVO optionInfo);
 
 	public int deleteBOption(ItemOptionVO optionInfo);
+
+	public int insertAOption(ItemOptionVO optionVO);
+
+	public int insertMenu(BranchItemInfo itemInfo);
+
+	public int upBOption(BranchItemInfo itemInfo);
+
+	public int upAOption(BranchItemInfo itemInfo);
+
+	public int insertBOption(ItemOptionVO optionVO);
+
+	public int moveManage(ItemOptionVO optionVO);
 }

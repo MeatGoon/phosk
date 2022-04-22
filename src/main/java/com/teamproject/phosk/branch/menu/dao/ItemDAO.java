@@ -50,5 +50,16 @@ public interface ItemDAO {
 	int deleteAOption(ItemOptionVO optionInfo);
 
 	int deleteBOption(ItemOptionVO optionInfo);
- 
+
+	int insertAOption(ItemOptionVO optionVO);
+
+	int insertMenu(BranchItemInfo itemInfo);
+
+	int upBOption(BranchItemInfo itemInfo);
+
+	int upAOption(BranchItemInfo itemInfo);
+
+	int insertBOption(ItemOptionVO optionVO);
+
+	int moveManage(ItemOptionVO optionVO);
 }
