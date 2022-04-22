@@ -104,8 +104,10 @@ button {
 	float: left;
 }
 </style>
+<header>
+		<jsp:include page="../onerHeader.jsp"/>
+</header>
 <body>
-	<h1>메뉴관리페이지입니다</h1>
 	<div class="mainContainer">
 		<div class="categoryCon">
 			<div>

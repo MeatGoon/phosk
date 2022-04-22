@@ -6,6 +6,9 @@
 <meta charset="UTF-8">
 <title>branch Join index</title>
 </head>
+<header>
+		<jsp:include page="../../onerHeader.jsp"/>
+</header>
 <body>
 	<div class="formDiv">
 		<form id="joinForm">

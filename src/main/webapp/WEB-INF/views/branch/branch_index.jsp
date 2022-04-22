@@ -6,6 +6,9 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
+<header>
+		<jsp:include page="../onerHeader.jsp"/>
+</header>
 <body>
 	<p>사업자페이지</p>
 	<a href="/branch/login/index">로그인</a>

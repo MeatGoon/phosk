@@ -9,8 +9,11 @@
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </head>
+<header>
+		<jsp:include page="../onerHeader.jsp"/>
+</header>
 <body>
-	<h1>등록페이지</h1>
+
 	<div>
 		<form id="insertForm" method="post">
 			<div class="menu_box">

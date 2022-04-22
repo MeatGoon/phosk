@@ -14,7 +14,7 @@
 </head>
 <body>
 	<header>
-		<jsp:include page="../header.jsp"/>
+		<jsp:include page="../../onerHeader.jsp"/>
 	</header>
 	<div class="content">
 		<form id="branchLoginForm" method="post" action="/branch/login/result">
@@ -22,7 +22,7 @@
 			<label for="oner_pwd">점주 패스워드 : </label><input type="text" name="oner_pwd" maxlength="20" onkeyup="enterkey();"/><br/>
 			<input type="checkbox" id="id_save"><label>ID 기억하기</label>
 			<button id="login">LOGIN</button>
-			<button type="button" onclick="location.href='/branch/join/index'">JOIN</button>
+			<button type="button" onclick="location.href='/branch/join/index'">REGISTER</button>
 		</form>
 	</div>
 	

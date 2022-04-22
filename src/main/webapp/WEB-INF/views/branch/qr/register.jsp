@@ -6,7 +6,9 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
-<jsp:include page="../main/index.jsp"/>
+<header>
+		<jsp:include page="../../onerHeader.jsp"/>
+</header>
 <body>
 	<div>
 		<div id="qrcode">

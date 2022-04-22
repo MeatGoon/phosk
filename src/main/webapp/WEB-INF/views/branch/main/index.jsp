@@ -9,10 +9,18 @@
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </head>
+<header>
+		<jsp:include page="../../onerHeader.jsp"/>
+</header>
 <body>
-	<a href="/test/cateList?branch_num=${branchNumSession}">메뉴 관리</a>&nbsp;&nbsp;
-	<a href="/branch/login/choiceBranch">지점선택</a>&nbsp;&nbsp;
-	<a href="/branch/qr/index?branch_num=${branchNumSession}">qr관리</a>&nbsp;&nbsp;
-	<a href="/branch/login/index">로그아웃</a><br/>
+	<h1>감사합니다 PHOSK 입니다</h1>
+	<c:choose>
+	<c:when test = "${loginInfo != null}">
+	<p>좋은 하루 되세요</p>
+	</c:when>
+	<c:when test = "${loginInfo == null}">
+	<p>로그인을 통해여 지점을 관리해주세요</p>
+	</c:when>
+	</c:choose>
 </body>
 </html>

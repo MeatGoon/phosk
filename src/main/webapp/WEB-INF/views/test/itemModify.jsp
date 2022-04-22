@@ -20,6 +20,9 @@
 	padding: 10px;
 }
 </style>
+<header>
+		<jsp:include page="../onerHeader.jsp"/>
+</header>
 <body>
 	<div class="menue_infobox">
 		<button id="accpt_btn">수정완료</button>

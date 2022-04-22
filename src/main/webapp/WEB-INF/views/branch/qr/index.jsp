@@ -11,7 +11,9 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script type="text/javascript" src="/resources/js/qrcode.js"></script>
 </head>
-<jsp:include page="../main/index.jsp"/>
+<header>
+		<jsp:include page="../../onerHeader.jsp"/>
+</header>
 <body>
 	<button type="button" id="register">QR 등록하기</button>
    <c:forEach items="${qrList}" var="qr" varStatus="status">

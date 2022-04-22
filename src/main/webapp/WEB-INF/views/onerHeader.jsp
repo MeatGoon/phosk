@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%--@ page import="com.teamproject.groupone.logincheck.LoginCheck" --%>
 <!DOCTYPE html>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
 <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,38 +13,35 @@
 
 
 <body>
-	<header>
+
+<c:choose>
+	<c:when test = "${loginInfo == null}">
 		<nav>
 			<ul class = "headul">
-				
-				<li><button class = "middle">지점정보</button></li>
-				<li><button class = "middle">QR및테이블</button></li>
-				<li><button class = "middle">메뉴관리</button></li>
-				<li><button class = "middle">예약관리</button></li>
-				<li><button class = "middle">문의</button></li>
+				<a class = "logo" href="/branch/main/index" style="">로고</a>
 			</ul>
 		</nav>
 		<nav>
 			<ul class = "headul">
-				<li><a href="#" class = "last">로그인</a></li>
-				<li><a href="#" class = "last">호출</a></li>
+				<li><a href="/branch/login/index" class = "last">로그인</a></li>
 			</ul>
 		</nav>
-	</header>
-	
-	
-	
-       
-	
-	
-	<footer>
-
-	</footer>
-	
-	
-
+	</c:when>
+	<c:when test = "${loginInfo != null}">
+		<nav>
+			<ul class = "headul">
+				<a class = "logo" href="/branch/main/index">로고</a>
+				<li><button type="button" class = "middle" onclick= "location.href='/branch/login/choiceBranch'">지점정보</button></li>
+				<li><button type="button" class = "middle" onclick= "location.href='/branch/qr/index?branch_num=${branchNumSession}'">QR및테이블</button></li>
+				<li><button type="button" class = "middle" onclick= "location.href='/test/cateList?branch_num=${branchNumSession}'">메뉴관리</button></li>
+			</ul>
+		</nav>
+		<nav>
+			<ul class = "headul">
+				<li><a href="/branch/main/logout" role="button" class= "last">로그아웃</a></li>
+			</ul>
+		</nav>
+	</c:when>	
+</c:choose>	
 </body>
-
-
-
 </html>
