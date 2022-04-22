@@ -179,7 +179,6 @@ button {
 	<form id="moveForm" method="get">
 		<input type="hidden" name="branch_num" value="${branchInfo}"/>
 		<input type="hidden" name="category_num" value="${cateNum}"/>
-		<p>${delResult}</p>
 	</form>
 	<script>
 		let moveForm = $("#moveForm");
@@ -191,8 +190,7 @@ button {
 		});
 		$('#insert_btn').on('click', function() {
 			moveForm.attr('method', 'get');
-			moveForm.attr('action', '/test/insertMenue');
-			moveForm.append('<input type="hidden" name="nowCate" value="' + $(this).val() + '"/>');
+			moveForm.attr('action', '/test/insertMenu');
 			moveForm.submit();
 			});
 		$('#modify_cateName').on('click', function() {

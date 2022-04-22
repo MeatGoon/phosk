@@ -4,7 +4,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.expression.spel.ast.OpInc;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,7 +16,6 @@ import com.teamproject.phosk.branch.menu.vo.BranchItemInfo;
 import com.teamproject.phosk.branch.menu.vo.CategoryVO;
 import com.teamproject.phosk.branch.menu.vo.ItemOptionVO;
 import com.teamproject.phosk.branch.menu.vo.ItemVO;
-import com.teamproject.phosk.branch.menu.vo.NowPage;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
@@ -34,6 +32,7 @@ public class ItemController {
 	// 메뉴 관리 메인 페이지
 	@GetMapping("/cateList")
 	public void cateList(BranchItemInfo itemInfo, Model model, HttpServletRequest request, NowPage nowPage, HttpSession session) {
+	public void cateList(BranchItemInfo itemInfo, Model model, HttpServletRequest request, HttpSession session) {
 		log.info("cate List .....");
 		String branch_num = itemInfo.getBranch_num();
 		if(session.getAttribute("branchNumSession") != null) {
@@ -45,9 +44,87 @@ public class ItemController {
 		model.addAttribute("cateTest", service.getMenue(itemInfo));
 		model.addAttribute("itemPrice", service.getItemPrice(itemInfo));
 		model.addAttribute("cateList", service.cateList(branch_num));
-		/* 필요한부분 */
-		/* cateList = 카테고리 리스트 / cateTest = 메뉴 리스트 */
-		/* 기본가격 따로 불러와야함 */
+	}
+	
+	@GetMapping("/insertMenu")
+	public void insertMenue(BranchItemInfo itemInfo, Model model, HttpServletRequest request) {
+		log.info("insertMenu List .....");
+		String branch_num = itemInfo.getBranch_num();
+		model.addAttribute("branchInfo", branch_num); // 사업자 번호만 반환
+		model.addAttribute("cateNum", itemInfo.getCategory_num()); // 현재 카테고리 위치 반환
+		model.addAttribute("cateList", service.cateList(branch_num));
+	}
+	
+	@PostMapping("/moveMenueManage")
+	public String moveMenueManage(ItemOptionVO optionVO, Model model, HttpServletRequest request) {
+		service.moveManage(optionVO);
+		
+		return "redirect:/test/menueManage?branch_num=123-45-67890&category_num=2";
+	}
+	
+	@PostMapping("/basicOption") // 인서트 구문 사용
+	public String basicOption(ItemOptionVO optionVO, Model model, HttpServletRequest request) {
+		String branchNum = request.getParameter("branchNum");
+		String bOpName = request.getParameter("bOpName");
+		int	bOpPrice = Integer.parseInt(request.getParameter("bOpPrice"));
+		
+		if (bOpName != null && bOpName != "") {
+			
+			optionVO.setBranch_num(branchNum);
+			optionVO.setBasic_option(bOpName);
+			optionVO.setBasic_price(bOpPrice);
+			
+			service.insertBOption(optionVO);
+		} else {
+			System.out.println("전송할 데이터 없음");
+		}
+		
+		return "redirect:/test/insertMenu?branch_num=123-45-67890&category_num=2";
+	}
+	
+	
+	@PostMapping("/addOption") 
+	public String addOption(ItemOptionVO optionVO, Model model, HttpServletRequest request) {
+		String branchNum = request.getParameter("branchNum");
+		String aOpName = request.getParameter("aOpName");
+		int	aOpPrice = Integer.parseInt(request.getParameter("aOpPrice"));
+		
+		if (aOpName != null && aOpName != "") {
+			System.out.println(branchNum);
+			System.out.println(aOpName);
+			System.out.println(aOpPrice);
+			
+			optionVO.setBranch_num(branchNum);
+			optionVO.setAdd_option(aOpName);
+			optionVO.setAdd_price(aOpPrice);
+			
+			service.insertAOption(optionVO);
+		} else {
+			System.out.println("전송할 데이터 없음");
+		}
+		
+		return "redirect:/test/insertMenu?branch_num=123-45-67890&category_num=2";
+	}
+	
+	@PostMapping("/insertMenu") // 옵션들은 업데이트 사용
+	public String insertMenu(BranchItemInfo itemInfo, ItemOptionVO optionVO, RedirectAttributes rttr,  Model model) {
+		System.out.println(itemInfo);
+		String aOption = itemInfo.getAdd_option();
+		String[] ChkBArr = itemInfo.getBasic_option().split(",");
+		String[] ChkAArr = itemInfo.getAdd_option().split(",");
+		if (ChkBArr.length == 1) {
+			service.insertBOption(optionVO);
+		}
+		service.insertMenu(itemInfo);
+		service.upBOption(itemInfo);
+		if (aOption != null && aOption != "") {
+			if (ChkAArr[0] != null && ChkAArr[0] != "") {
+				optionVO.setAdd_option(ChkAArr[0]);
+				service.insertAOption(optionVO);
+			}
+			service.upAOption(itemInfo);
+		}
+		return "redirect:/test/menueManage?branch_num=123-45-67890&category_num=2";
 	}
 
 	// 메뉴 관리 페이지 이동

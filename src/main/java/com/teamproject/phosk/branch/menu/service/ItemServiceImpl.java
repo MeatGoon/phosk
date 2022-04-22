@@ -112,4 +112,34 @@ public class ItemServiceImpl implements ItemService {
 	public int deleteBOption(ItemOptionVO optionInfo) {
 		return itemMapper.deleteBOption(optionInfo);
 	}
+
+	@Override
+	public int insertAOption(ItemOptionVO optionVO) {
+		return itemMapper.insertAOption(optionVO);
+	}
+
+	@Override
+	public int insertMenu(BranchItemInfo itemInfo) {
+		return itemMapper.insertMenu(itemInfo);
+	}
+
+	@Override
+	public int upBOption(BranchItemInfo itemInfo) {
+		return itemMapper.upBOption(itemInfo);
+	}
+
+	@Override
+	public int upAOption(BranchItemInfo itemInfo) {
+		return itemMapper.upAOption(itemInfo);
+	}
+
+	@Override
+	public int insertBOption(ItemOptionVO optionVO) {
+		return itemMapper.insertBOption(optionVO);
+	}
+
+	@Override
+	public int moveManage(ItemOptionVO optionVO) {
+		return itemMapper.moveManage(optionVO);
+	}
 }

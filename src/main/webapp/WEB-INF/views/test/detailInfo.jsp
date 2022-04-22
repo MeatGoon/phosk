@@ -80,7 +80,7 @@
 	<script>
 		let form = $("#updateForm");
 		let moveForm = $("#moveForm");
-		let bOptionLen = ${fn:length(bOptions)};
+		
 		
 		$("#modify_btn").on("click", function() {
 			$(".menue_info").attr("readonly", false);
@@ -88,10 +88,9 @@
 			$("#accpt_btn").attr("hidden", false);
 			$("#delete_btn").attr("hidden", false);
 			$(".add").attr("hidden", false);
-			if (bOptionLen != 1) {
-				$(".basic").attr("hidden", false);
-			}
+
 		});
+
 		
 		$("#accpt_btn").on("click", function() {
 			form.attr("action", "/test/itemUpdate");
@@ -132,7 +131,6 @@
 			$.ajax({
 				url : url, // controller에서 설정해둔 postmapping의 url
 				type : "POST", // controller 의 mapping 타입이 Get 인지 Post 인지 설정
-				traditional : true, // 전통성 ex) true = checkedbtn='볶음밥', false = checkedbtn[]='볶음밥'
 				data : {
 					branchNum : branchNum,
 					cateNum : cateNum,
