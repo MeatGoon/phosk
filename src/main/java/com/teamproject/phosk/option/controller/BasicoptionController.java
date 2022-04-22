@@ -10,7 +10,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 
 import com.teamproject.phosk.option.service.BasicoptionService;
+import com.teamproject.phosk.option.service.AddoptionService;
 import com.teamproject.phosk.option.vo.BasicOptionVO;
+import com.teamproject.phosk.option.vo.AddOptionVO;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
@@ -32,6 +34,7 @@ public class BasicoptionController {
 	 
 	@Autowired
 	private BasicoptionService basicoptionservice;
+	private AddoptionService addoptionservice;
 	
 	/*
 	 * @RequestMapping(value = "/menueditpopup/menuEditOptionPopup") public void
@@ -43,11 +46,13 @@ public class BasicoptionController {
 		log.info("메뉴등록페이지");
 	}
 	@PostMapping("/menueditpopup/menuEditPopup")
-	public String menuupdatePOST(BasicOptionVO basicoptionvo){
-		log.info("사이즈 옵션 post");
+	public String menuupdatePOST(BasicOptionVO basicoptionvo, AddOptionVO addoptionvo){
+		log.info("옵션 post");
 		log.info("BasicOptionVO : " + basicoptionvo);
+		log.info("AddOptionVO : " + addoptionvo);
 		
 		basicoptionservice.insertBasicoption(basicoptionvo);
+		addoptionservice.insertAddoption(addoptionvo);
 		return "redirect:/jundemo/menueditpopup/menuEditPopup";
 	}
 

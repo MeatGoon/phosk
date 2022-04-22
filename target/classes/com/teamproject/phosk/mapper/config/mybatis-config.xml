@@ -12,5 +12,6 @@
 		<typeAlias type="com.teamproject.phosk.user.vo.MemberVO" alias="usermem"/>
 		<typeAlias type="com.teamproject.phosk.user.vo.CardinfoVO" alias="usercard"/>
 		<typeAlias type="com.teamproject.phosk.option.vo.BasicOptionVO" alias="basicoptioninfo"/>
+		<typeAlias type="com.teamproject.phosk.option.vo.AddOptionVO" alias="addoptioninfo"/>
 	</typeAliases>
 </configuration>

@@ -63,8 +63,8 @@
 								</tr>
 							</table>
 							<input type="button" value="추가" onclick="printbasic_optionName()"><br/>
-							<input type="submit" value="등록"/>
-						</form>
+							
+						
 
 
 
@@ -103,19 +103,20 @@
 									<tr>
 										<td><label>추가 옵션:</label></td>
 										<td><input type="text" id="side_option"
-											name="add_option1" /></td>
+											name="add_option" /></td>
 									</tr>
 									<tr>
 										<td><label>가격 입력:</label></td>
 										<td><input type="number" id="side_price"
-											name="add_price1" /></td>
+											name="add_price" /></td>
 									</tr>
 								</table>
 								<input type="button" value="추가" onclick="printside_optionName()" />
-
-
-
 							</div>
+							<input type="submit" value="등록"/>
+							</form>
+
+							
 							
 						<!-- ----------------------------------------------------------------------------------------------------->
 

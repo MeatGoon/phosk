@@ -11,6 +11,9 @@
 <header>
   <a href="http://localhost:8001/"><h1>로고</h1></a>
   <nav>
+  	<ul>
+  		
+  	</ul>
     <ul class = "head_line" >
       <li><a href="#">로그인</a></li>
       <li><a href="#">내정보</a></li>
