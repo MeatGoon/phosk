@@ -63,7 +63,7 @@
 								</tr>
 							</table>
 							<input type="button" value="추가" onclick="printbasic_optionName()"><br/>
-							
+
 						
 
 
@@ -99,6 +99,7 @@
 
 							<div id="addoption" style="display: none;">
 								<p>추가옵션 등록</p>
+								<form action="/jundemo/menueditpopup/menuEditPopup" method="post">
 								<table>
 									<tr>
 										<td><label>추가 옵션:</label></td>
@@ -111,10 +112,12 @@
 											name="add_price" /></td>
 									</tr>
 								</table>
+								
+						
 								<input type="button" value="추가" onclick="printside_optionName()" />
 							</div>
-							<input type="submit" value="등록"/>
-							</form>
+							
+						
 
 							
 							
@@ -183,7 +186,8 @@
 
 
 						<input type="button" value="확인" id="btnCheck" />
-						
+						<input type="submit" value="등록"/>
+					</form>
 
 
 
