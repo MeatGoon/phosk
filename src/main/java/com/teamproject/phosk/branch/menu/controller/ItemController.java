@@ -31,7 +31,6 @@ public class ItemController {
 
 	// 메뉴 관리 메인 페이지
 	@GetMapping("/cateList")
-	public void cateList(BranchItemInfo itemInfo, Model model, HttpServletRequest request, NowPage nowPage, HttpSession session) {
 	public void cateList(BranchItemInfo itemInfo, Model model, HttpServletRequest request, HttpSession session) {
 		log.info("cate List .....");
 		String branch_num = itemInfo.getBranch_num();
