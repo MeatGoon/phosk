@@ -15,12 +15,12 @@
 </header>
 <body>
 	<div>
-	<h1  style= ' text-align: center;'>회원정보조회</h1>
+	<h1  style= ' text-align: center; margin-top : 10%;'>회원정보조회</h1>
 	<form action="/userForm/user/userlist" method="get" name ="formname">
 			<table style ='width:250px; border: 1px; solid pink'>
 							<tr><th>닉네임</th><th>아이디</th><th>비밀번호</th></tr>						
 							<c:forEach items="${register}" var = "list">
-								<tr>	
+								<tr style= 'color : blue;'>	
 									<td><c:out value="${list.member_nic}" /></td>						
 									<td><c:out value="${list.member_id}" /></td>								
 									<td><c:out value="${list.member_pwd}" /></td>													
@@ -28,7 +28,6 @@
 							</c:forEach>
 												
 			</table>
-			<h1><a href = "/userForm/usertest">테스트페이지</a></h1>
 	</form>		
 	</div>		
 </body>
