@@ -57,7 +57,7 @@
 		${result}
 	</div>
 		<form id="moveForm" method="post">
-		<input type="text" name="branch_num" value="${branchInfo}"/>
+		<input type="hidden" name="branch_num" value="${branchInfo}"/>
 	</form>
 	<script>
 		$(document).ready(function() {

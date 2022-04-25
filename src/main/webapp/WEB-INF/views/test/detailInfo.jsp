@@ -77,8 +77,8 @@
 		</form>
 	</div>
 	<form id="moveForm" method="post">
-		<input type="text" name="branch_num" value="${cateTest.branch_num}"/>
-		<input type="text" name="item_num" value="${cateTest.item_num}"/>
+		<input type="hidden" name="branch_num" value="${cateTest.branch_num}"/>
+		<input type="hidden" name="item_num" value="${cateTest.item_num}"/>
 	</form>
 	<script>
 		let form = $("#updateForm");

@@ -114,11 +114,6 @@ public class ItemController {
 		}
 		service.insertMenu(itemInfo);
 		service.upBOption(itemInfo);
-		try {
-			
-		} catch (NullPointerException e) {
-			// TODO: handle exception
-		}
 		if (aOption != null && aOption != "") {
 			String[] ChkAArr = itemInfo.getAdd_option().split(",");
 			if (ChkAArr[0] != null && ChkAArr[0] != "") {
