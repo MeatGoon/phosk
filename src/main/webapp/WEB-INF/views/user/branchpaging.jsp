@@ -21,11 +21,14 @@
 		text-align :center;
 	}
 	#paging_deja a{
-		color: red;
 		font-size : 25px;
+		float : left;
+		border : 1px solid black;
+		width : 25px;
+		text-align :center;
 	}
 	#paging_deja{
-		text-align :center;
+		margin-left : 47%;
 	}
 
 </style>

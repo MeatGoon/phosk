@@ -40,12 +40,14 @@ public class MemberController {
 		log.info("qna 페이지");
 		model.addAttribute("member_id" , member_id);
 		
-	}
-	@GetMapping("/userForm/usertest")
-	public void testhome(){
-		log.info("testhome 페이지");
-		
-	}
+	}		
+	 @GetMapping("/userForm/user/userlist")
+     public void registerlist(Model model) {          
+         log.info("회원정보조회");
+         List<MemberVO> register = memberservice.register();
+         model.addAttribute("register", register);
+
+     }	
 	//---- 여기부터는 아님
 	@GetMapping("/userForm/user/register") 
 	public void getregister(){
@@ -89,22 +91,18 @@ public class MemberController {
 		return "redirect:/user/branchpaging" ;		
 	}
 	@GetMapping("/logout")
-	public String logout(HttpServletRequest request) {
+	public String logout(HttpServletRequest request){
 		log.info("로그아웃");
 		
 		HttpSession session = request.getSession();
+		
+
 		session.invalidate();
 				
 		return "redirect:/user/branchpaging";
 	}
 	
-	 @GetMapping("/userForm/user/userlist")
-     public void registerlist(Model model) {          
-         log.info("회원정보조회");
-         List<MemberVO> register = memberservice.register();
-         model.addAttribute("register", register);
-
-     }		
+		
 		@PostMapping("/userForm/user/updateuser")
 		public String updatemember(MemberVO membervo, HttpSession session) { 
 		log.info("회원정보수정");

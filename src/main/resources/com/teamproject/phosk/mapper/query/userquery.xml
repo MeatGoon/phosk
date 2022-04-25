@@ -10,7 +10,7 @@
 		select * from phosk_cardInfo
 	</select>
 	<select id="login" resultType="usermem">
-		SELECT member_id, member_pwd
+		SELECT member_id, member_pwd , member_nic
 		  FROM phosk_member
 		 WHERE member_id = #{member_id}
 		   AND member_pwd = #{member_pwd}   
