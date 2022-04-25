@@ -43,7 +43,6 @@
 			<div class="menu_box BOption">
 				<input type="text" name="basic_option" readonly="readonly" value="가격"/> :
 				<input type="text" name="basic_price"/>
-				<button type="button" id="addBOption">추가</button>
 			</div>
 			<h3>추가 옵션</h3>
 			<div class="menu_box AOption">

@@ -58,7 +58,7 @@ public class ItemController {
 	public String moveMenueManage(ItemOptionVO optionVO, Model model, HttpServletRequest request) {
 		service.moveManage(optionVO);
 		
-		return "redirect:/test/menueManage?branch_num=123-45-67890&category_num=2";
+		return "redirect:/test/menueManage?branch_num="+ optionVO.getBranch_num() +"&category_num=" + optionVO.getCategory_num();
 	}
 	
 	@PostMapping("/basicOption") // 인서트 구문 사용
@@ -78,17 +78,16 @@ public class ItemController {
 			System.out.println("전송할 데이터 없음");
 		}
 		
-		return "redirect:/test/insertMenu?branch_num=123-45-67890&category_num=2";
+		return "redirect:/test/insertMenu?branch_num="+ optionVO.getBranch_num() +"&category_num=" + optionVO.getCategory_num();
 	}
 	
 	
 	@PostMapping("/addOption") 
 	public String addOption(ItemOptionVO optionVO, Model model, HttpServletRequest request) {
 		String branchNum = request.getParameter("branchNum");
-		String aOpName = request.getParameter("aOpName");
-		int	aOpPrice = Integer.parseInt(request.getParameter("aOpPrice"));
-		
+		String aOpName = request.getParameter("aOpName");		
 		if (aOpName != null && aOpName != "") {
+			int	aOpPrice = Integer.parseInt(request.getParameter("aOpPrice"));
 			System.out.println(branchNum);
 			System.out.println(aOpName);
 			System.out.println(aOpPrice);
@@ -102,7 +101,7 @@ public class ItemController {
 			System.out.println("전송할 데이터 없음");
 		}
 		
-		return "redirect:/test/insertMenu?branch_num=123-45-67890&category_num=2";
+		return "redirect:/test/insertMenu?branch_num="+ optionVO.getBranch_num() +"&category_num=" + optionVO.getCategory_num();
 	}
 	
 	@PostMapping("/insertMenu") // 옵션들은 업데이트 사용
@@ -110,20 +109,25 @@ public class ItemController {
 		System.out.println(itemInfo);
 		String aOption = itemInfo.getAdd_option();
 		String[] ChkBArr = itemInfo.getBasic_option().split(",");
-		String[] ChkAArr = itemInfo.getAdd_option().split(",");
 		if (ChkBArr.length == 1) {
 			service.insertBOption(optionVO);
 		}
 		service.insertMenu(itemInfo);
 		service.upBOption(itemInfo);
+		try {
+			
+		} catch (NullPointerException e) {
+			// TODO: handle exception
+		}
 		if (aOption != null && aOption != "") {
+			String[] ChkAArr = itemInfo.getAdd_option().split(",");
 			if (ChkAArr[0] != null && ChkAArr[0] != "") {
 				optionVO.setAdd_option(ChkAArr[0]);
 				service.insertAOption(optionVO);
 			}
 			service.upAOption(itemInfo);
 		}
-		return "redirect:/test/menueManage?branch_num=123-45-67890&category_num=2";
+		return "redirect:/test/menueManage?branch_num=" + itemInfo.getBranch_num() + "&category_num=" + itemInfo.getCategory_num();
 	}
 
 	// 메뉴 관리 페이지 이동
