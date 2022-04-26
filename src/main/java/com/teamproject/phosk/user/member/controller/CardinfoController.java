@@ -48,7 +48,7 @@ public class CardinfoController {
 			
 		// 카드삭제 post
 		 @PostMapping("/delete/carddel")
-		 public String carddel(int cardinfo_cardNum){
+		 public String carddel(String cardinfo_cardNum){
 		  log.info("post delete");		  		  		      	  
 		  cardinfoservice.carddel(cardinfo_cardNum);
 		  

@@ -44,7 +44,7 @@
 		$(function(){					
 			// 취소
 			$(".cencle").on("click", function(){
-				location.href = "/userForm/usertest";						    
+				location.href = "/user/branchpaging";						    
 			});		
 			$("#editt").on("click", function(){		
 				if($("#member_pwd").val()==""){
@@ -112,18 +112,21 @@
 							</div>
 							<c:forEach items="${mycard}" var = "list" >
 							<c:if test="${list.member_id eq login.member_id}" >	
+							
+							
 							<script>	
-							var data = ${list.member_id};
 							$(function(){					
 								$("#userdel_btn").on("click", function(){
 					
-									if(data != null){
+									if(${list.member_id eq null}){
+											
+										}else{
 											alert("카드전체삭제를 먼저 진행해주세요");	
 											return false;
 										}
 									});
 								}) 
-				
+	
 														
 							</script>
 							</c:if>	

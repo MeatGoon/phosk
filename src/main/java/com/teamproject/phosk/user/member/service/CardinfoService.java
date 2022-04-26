@@ -10,7 +10,7 @@ public interface CardinfoService {
 	
 	List<CardinfoVO> cardinfoForm();
 	
-	public void  carddel(int cardinfo_cardNum);
+	public void  carddel(String cardinfo_cardNum);
 	
 	public void  cardall(String member_id);
 }

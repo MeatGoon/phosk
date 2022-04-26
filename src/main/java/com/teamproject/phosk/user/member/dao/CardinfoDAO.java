@@ -11,7 +11,7 @@ public interface CardinfoDAO {
 	List<CardinfoVO> cardinfoForm();
 	
 	//카드삭제
-	void  carddel(int cardinfo_cardNum);
+	void  carddel(String cardinfo_cardNum);
 	//카드전체삭제
 	void  cardall(String member_id);
 }

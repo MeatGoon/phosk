@@ -25,7 +25,7 @@ public class CardinfoServiceImpl implements CardinfoService{
 		return cardinfodao.cardinfoForm();
 	}
 	@Override
-	public void carddel(int cardinfo_cardNum) {
+	public void carddel(String cardinfo_cardNum) {
 		cardinfodao.carddel(cardinfo_cardNum);
 
 	}

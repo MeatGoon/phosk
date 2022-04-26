@@ -25,7 +25,7 @@ public class CardinfoDAOImpl implements CardinfoDAO{
 		return session.selectList("cardinfoForm");
 	}
 	@Override
-	public void carddel(int cardinfo_cardNum) {
+	public void carddel(String cardinfo_cardNum) {
 		session.delete("carddel",cardinfo_cardNum);
 	}
 	@Override

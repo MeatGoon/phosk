@@ -96,7 +96,7 @@
 						<td><input class="form" type="number" id = "cardinfo_cardNum" name =cardinfo_cardNum  placeholder="카드번호" maxLength="19" oninput="maxLengthCheck(this)"/></td>
 					</tr>
 					<tr>
-						<td><input class="form" type="number" id = "cardinfo_dealine" name ="cardinfo_dealine" placeholder="만기일" maxLength="5" oninput="maxLengthCheck(this)"/></td>
+						<td><input class="form" type="number" id = "cardinfo_dealine" name ="cardinfo_dealine" placeholder="만기일: 년/월" maxLength="4" oninput="maxLengthCheck(this)"/></td>
 					</tr>
 					<tr>
 						<td><input class="form" type="number" id = "cardinfo_cardCVC" name ="cardinfo_cardCVC"  placeholder="cvc" maxLength="3" oninput="maxLengthCheck(this)"/></td>
