@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.teamproject.phosk.option.dao.BasicoptionDAO">
+
+
+	<insert id="insertbasicoption" >
+		insert into phosk_basicOption(branch_num,category_num,item_num,basic_option,basic_price)
+		values(#{branch_num},#{category_num},#{item_num},#{basic_option},#{basic_price})	
+	</insert>
+	
+	
+</mapper>
+
+

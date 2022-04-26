@@ -31,7 +31,7 @@
 	<beans:bean class="org.springframework.web.servlet.view.BeanNameViewResolver" p:order="1"/>     
        
 	       
-	<beans:bean id="qrcodeview" class="com.teamproject.phosk.junoptiondemo.QRCodeView"/>
+
 	
 	
 	

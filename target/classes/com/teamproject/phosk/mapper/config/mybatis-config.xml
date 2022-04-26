@@ -14,5 +14,7 @@
 		<typeAlias type="com.teamproject.phosk.user.member.vo.CardinfoVO" alias="usercard"/>
 		<typeAlias type="com.teamproject.phosk.user.order.vo.OrderVO" alias="itemorder"/>
 		<typeAlias type="com.teamproject.phosk.branch.qr.vo.BranchQRVO" alias="branchQR"/>
+		<typeAlias type="com.teamproject.phosk.option.vo.BasicOptionVO" alias="basicoptioninfo"/>
+		<typeAlias type="com.teamproject.phosk.option.vo.AddOptionVO" alias="addoptioninfo"/>
 	</typeAliases>
 </configuration>
