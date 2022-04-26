@@ -7,11 +7,11 @@
 </head>
 <body>
 <h1>
-	Hello world!  
+	phosk 1team 
 </h1>
 
-<P>  The time on the server is ${serverTime}. </P>
 	<h2><a href = "/branch/main/index"  style=' color:red;'>지점메인메뉴</a></h2>
 	<h2><a href = "/user/branchpaging"  style=' color:blue;'>유저메인메뉴</a></h2>
+	<h2><a href = "/jundemo/junmain"  style=' color:pink;'>도준현님 작업</a></h2>
 </body>
 </html>

@@ -82,7 +82,7 @@ public class MemberController {
 		}else {
 			PrintWriter out = response.getWriter();
 			response.setContentType("text/html; charset=UTF-8");
-			out.println("<script>alert('정보가 틀립니다'); </script>");
+			out.println("<script>alert('정보가 일치하지 않습니다'); </script>");
 			out.flush();
 			log.info("실패");			
 			return "/userForm/user/loginpage";

@@ -9,7 +9,7 @@
 </head>
 <body>
 	<header>
-		 <jsp:include page="./onerHeader.jsp"/>
+		 <jsp:include page="../onerHeader.jsp"/>
 	</header>
 
 

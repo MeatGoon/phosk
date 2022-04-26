@@ -28,7 +28,9 @@
 							</c:forEach>
 												
 			</table>
-	</form>		
+	</form>	
+	<script>function goBack() {window.history.back();}</script>
+	<input class="back" type="button" value="뒤로가기" onClick= "goBack();">	
 	</div>		
 </body>
 </html>
