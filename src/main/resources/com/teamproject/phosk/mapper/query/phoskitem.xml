@@ -112,7 +112,7 @@
 			<if test="item_info != null">
 				, item_info = #{item_info}
 			</if>
-			, item_lastDate = sysdate where branch_num = #{branch_num} and category_num = #{category_num} and item_num = #{item_num}
+			, item_lastDate = sysdate where branch_num = #{branch_num} and item_num = #{item_num}
 	</update>
 	<update id="updateBOption" parameterType="branchItemInfo">
 		update phosk_basicoption set category_num = #{category_num}, basic_option = #{change_basic_option}, basic_price = #{basic_price} where branch_num = #{branch_num} AND item_num = #{item_num} AND basic_option = #{basic_option}
