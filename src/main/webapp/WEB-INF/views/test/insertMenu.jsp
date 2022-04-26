@@ -46,9 +46,9 @@
 			</div>
 			<h3>추가 옵션</h3>
 			<div class="menu_box AOption">
-			
-				<button type="button" id="addAOption">추가</button>
+				<button type="button" id="addAOption">옵션추가</button>
 			</div>
+			<br />
 			<!-- 추가 버튼 클릭시 readonly 해제후 임의의 값을 먼저 넣은후 -->
 			<!-- 만약 한번더 추가할시 현재 입력되어있는 옵션명을 비교? try catch? -->
 		</form>
