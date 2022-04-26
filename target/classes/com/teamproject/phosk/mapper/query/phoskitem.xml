@@ -33,21 +33,19 @@
 	
 	<!-- 메뉴 간략화된 리스트에 출력하기 위해 사용하는 query -->
 	<select id="getItemPrice" resultType="itemOption">
-		select * from phosk_basicOption where branch_num = #{branch_num} and category_num = #{category_num}
+		select * from phosk_basicOption where branch_num = #{branch_num}
 	</select>
 	
 	<!-- 해당 아이템의 기본 가격 불러오기 -->
 	<select id="basicItemOption" resultType="itemOption">
 		select basic_option, basic_price 
-		from phosk_basicoption where branch_num = #{branch_num} and
-		category_num = #{category_num} and item_num = #{item_num}
+		from phosk_basicoption where branch_num = #{branch_num} and item_num = #{item_num}
 	</select>
 	
 	<!-- 해당 아이템의 추가옵션들 불러오기 -->
 	<select id="addItemOption" resultType="itemOption">
 		select add_option, add_price 
-		from phosk_addoption where branch_num = #{branch_num} and
-		category_num = #{category_num} and item_num = #{item_num}
+		from phosk_addoption where branch_num = #{branch_num} and item_num = #{item_num}
 	</select>
 	
 	<!-- Insert 부분 -->
@@ -145,12 +143,7 @@
 	
 	<!-- 인기메뉴 관련 부분 -->
 	<insert id="addBestMenu">
-	 	DECLARE
-		BEGIN
-		    insert into phosk_item SELECT branch_num, 0, item_num, item_name, item_image, item_info, item_lastdate, item_regidate FROM phosk_item where branch_num = #{branch_num} and category_num = #{category_num} and item_num = #{item_num};
-		    insert into phosk_basicoption SELECT branch_num, 0, item_num, basic_option, basic_price FROM phosk_basicoption where branch_num = #{branch_num} and category_num = #{category_num} and item_num = #{item_num};
-		    insert into phosk_addoption SELECT branch_num, 0, item_num, add_option, add_price FROM phosk_addoption where branch_num = #{branch_num} and category_num = #{category_num} and item_num = #{item_num};
-		END;
+		    insert into phosk_item SELECT branch_num, 0, item_num, item_name, item_image, item_info, item_lastdate, item_regidate FROM phosk_item where branch_num = #{branch_num} and category_num = #{category_num} and item_num = #{item_num}
 	</insert>
 	
 	<delete id="deleteBestMenu">
